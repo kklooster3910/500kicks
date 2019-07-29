@@ -11,6 +11,11 @@ class Api::UsersController < ApplicationController
         end
     end
 
+    def show
+        @user = User.find_by(params[:id])
+        render :show
+    end
+
     # def destroy -- maybe implement this at some point in the future
 
     # end
@@ -19,6 +24,7 @@ class Api::UsersController < ApplicationController
 
     def user_params
         params.require(:user).permit(:username, :email, :password)
+
     end
     
 end
