@@ -1,13 +1,13 @@
-
 class Api::UsersController < ApplicationController 
     def create
         @user = User.new(user_params)
-        debugger
+        # debugger
         if @user.save
             login(@user)
-            render :home #unsure on this, figure this out tonight, at the latest
+            render :show
         else
-            json: @user.errors.full_messages, status: 422
+            @errors = @user.errors.full_messages
+            render json: @errors, status: 422
         end
     end
 

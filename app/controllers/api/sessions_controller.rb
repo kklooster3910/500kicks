@@ -5,17 +5,17 @@ class Api::SessionsController < ApplicationController
             login(@user)
             render :create
         else
-            @errors = ['Please check your username and pasword!']
+            render json: @errors = ['Please check your username and pasword!']
         end
     end
 
     def destroy
         if current_user
-            
             logout!
             render :destroy
         else
-            @errors = ['You have to log in, first!']
+            render json: @errors = ['You have to log in, first!']
+        end
     end
 
     private

@@ -5,10 +5,9 @@ import SignupContainer from './session/signup_container'
 const App = () => (
     <div>
         <h2>500kicks</h2>
-        {/* <Switch>
-            <Route exact path='/' component={splashComponent} />
-        </Switch> */}
-        <Route  path='/signup' component={SignupContainer}/>
+        <Switch>
+            <Route  path='/signup' component={SignupContainer}/>
+        </Switch>
     </div>
 )
 
