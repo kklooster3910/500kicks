@@ -6,8 +6,7 @@ class Api::UsersController < ApplicationController
             login(@user)
             render :show
         else
-            @errors = @user.errors.full_messages
-            render json: @errors, status: 422
+            render json: @user.errors.full_messages, status: 422 #always keep errors as arrays, consistent API
         end
     end
 

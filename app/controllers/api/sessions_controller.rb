@@ -1,11 +1,11 @@
 class Api::SessionsController < ApplicationController 
     def create
-        @user = User.find.by_by_credentials(parmas[:user][:username], params[:user][:password])
+        @user = User.find_by_credentials(params[:user][:username], params[:user][:password])
         if @user
             login(@user)
             render :create
         else
-            render json: @errors = ['Please check your username and pasword!']
+            render json: ['Please check your username and pasword!'], status: 402
         end
     end
 
@@ -14,11 +14,12 @@ class Api::SessionsController < ApplicationController
             logout!
             render :destroy
         else
-            render json: @errors = ['You have to log in, first!']
+            render json: ['You have to log in, first!'], status: 402
         end
     end
 
     private
+
 
     def user_params 
         params.require(:user).permit(:username, :password, :email)

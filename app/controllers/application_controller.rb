@@ -9,9 +9,11 @@ class ApplicationController < ActionController::Base
     end
 
     def logout!
+        some_var = current_user
+        # debugger
         current_user.reset_session_token!
         @current_user = nil
-        session[:session_token] = nil
+        session[:session_token] = nil 
     end
 
     def current_user
