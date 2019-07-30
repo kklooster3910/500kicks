@@ -24,10 +24,9 @@ class ApplicationController < ActionController::Base
     end
 
     def require_logged_in
-        redirect_to new_session_url unless logged_in? # do we need this line of code? comment this out to see what happens?
+        unless current_user
+            render json: { errors: ['working on it']}
+        end
     end
 
-    def require_logged_out # do I need this functionaliy, commed this out, figure out what it does, etc ... 
-        redirect_to user_url(current_user) if logged_in?
-    end
 end
