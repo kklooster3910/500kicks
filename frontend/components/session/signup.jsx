@@ -28,7 +28,9 @@ class Signup extends React.Component {
     render () {
         let errors = Object.values(this.props.errors)
         if (errors.length > 0) {
-            errors = errors.join(', ')
+            errors = errors.map( err => (
+                <li>{err}</li>
+            ))
         }
         // debugger;
         return (

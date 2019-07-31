@@ -1,8 +1,8 @@
 .loginform {
     position: fixed;
-    top: 27%;
-    left: 50%;
-    transform: translate(-50%,-50%);
+    top: 75px;
+    left: 38%;
+    // transform: translate(-50%,-50%);
     width: 400px;
     padding: 30px;
     background-color: #CEECEF;
@@ -83,14 +83,8 @@
 }
 
 .loginform-errors {
-    // margin-top: 8px;
-    // width: 100%;
-    // background-color: #2C2F40;
-    // padding: 12px;
-    // text-align: center;
-    // color: #CEECEF;
-    // border: solid 3px;
-    // border-color: #CEECEF;
-    // border-radius: 12px;
-    
+    font-size: 16px;
+    margin-top: 12px;
+    font-family: 'Roboto', sans-serif;
+    color: red;    
 }

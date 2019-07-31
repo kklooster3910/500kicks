@@ -483,7 +483,9 @@ function (_React$Component) {
       var errors = Object.values(this.props.errors);
 
       if (errors.length > 0) {
-        errors = errors.join(', ');
+        errors = errors.map(function (err) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, err);
+        });
       }
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -644,7 +646,9 @@ function (_React$Component) {
       var errors = Object.values(this.props.errors);
 
       if (errors.length > 0) {
-        errors = errors.join(', ');
+        errors = errors.map(function (err) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, err);
+        });
       } // debugger;
 
 

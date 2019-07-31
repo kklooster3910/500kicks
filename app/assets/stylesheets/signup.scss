@@ -1,7 +1,7 @@
 .sessionform {
     position: fixed;
-    top: 250px;
-    left: 50%;
+    top: 75px;
+    left: 38%;
     // transform: translate(-50%,-50%);
     width: 400px;
     padding: 30px;
@@ -62,5 +62,8 @@
 }
 
 .signupform-errors {
-
+    font-size: 16px;
+    margin-top: 12px;
+    font-family: 'Roboto', sans-serif;
+    color: red;
 }
