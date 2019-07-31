@@ -10,11 +10,11 @@ const msp = state => ({
 //takes a component, path we're looking for, and logged in(we're getting from msp)
 // <AuthRoute path='' component={} />
  
-const Auth = ({ loggedIn, path, component: Component }) => {
+const Auth = ({ loggedIn, path, component: Component }) => (
     <Route 
         path={path}
-        render={ props => (loggedIn ? <Redirect to='/' /> : <Component {...props} />) }
+        render={props => (loggedIn ? <Redirect to='/' /> : <Component {...props} />)}
     />
-};
+);
 
 export const AuthRoute = withRouter(connect(msp)(Auth));

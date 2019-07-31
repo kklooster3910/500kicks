@@ -12,7 +12,7 @@ const NavBar = ( { currentUser, logout, errors } ) => {
             <button onClick={logout}>Logout</button>
         </div>   
     ) : (
-        <div>
+        <div className='session-btns'>
             <Link className='button' to='/signup'>Sign Up</Link>
             <Link className='button' to='/login'>Log In</Link>
         </div>
