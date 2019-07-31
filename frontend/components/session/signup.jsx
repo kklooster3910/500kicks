@@ -32,10 +32,10 @@ class Signup extends React.Component {
                     <div className='sessionform-content-container'>
                         <h2 className='sessionform-header'>Sign Up</h2>
                             <input type="text"
-                            value={this.state.username} 
-                            onChange={this.update('username')}
-                            className='sessionform-input'
-                            placeholder='Username'/>
+                                value={this.state.username} 
+                                onChange={this.update('username')}
+                                className='sessionform-input'
+                                placeholder='Username'/>
                             <input type="text"
                                 value={this.state.email}
                                 onChange={this.update('email')} 

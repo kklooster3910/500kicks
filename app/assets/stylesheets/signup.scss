@@ -22,20 +22,22 @@
     border: none;
     padding: 15px;
     width: 100%;
-    font-size: 20px;
+    font-size: 16px;
     border-radius: 5px;
     margin-bottom: 20px;
 }
 
 .sessionform-submit {
     width: 100%;
-    background-color: green;
+    background-color: #2C2F40;
     padding: 12px;
     text-align: center;
-    color: white;
+    color: #CEECEF;
+    border: solid 3px;
+    border-color: #CEECEF;
+    border-radius: 12px;
 }
 
-.home-btn{
+.home-btn {
     padding: 15px;
-
 }

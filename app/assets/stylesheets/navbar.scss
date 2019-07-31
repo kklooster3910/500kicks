@@ -1,14 +1,31 @@
 .nav-bar{
     display: flex;
-    background-color: #73C8A9;
+    background-color: #2C2F40;
     flex-direction: row;
     justify-content: space-between;
     padding-top: 18px;
     padding-bottom: 18px;
     padding-left: 30px;
     padding-right: 30px;
+    color: aliceblue;
+    font-size: 22px;
 }
 
-// .session-btns{
+.session-btns{
 
-// }
+}
+
+.button{ 
+    font-size: 10px; 
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    width: 65%;
+    border: solid 5px;
+    border-color: white;
+    background-color:#2C2F40;
+    border-radius: 25px;
+    margin-left: 8px;
+    margin-right: 8px;
+    margin-bottom: 12px;
+}
