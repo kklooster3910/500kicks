@@ -31,25 +31,22 @@ class Signup extends React.Component {
                 <form className='sessionform' onSubmit={this.handleSubmit}>
                     <div className='sessionform-content-container'>
                         <h2 className='sessionform-header'>Sign Up</h2>
-                        <label className='sessionform-label'>Username
                             <input type="text"
                             value={this.state.username} 
                             onChange={this.update('username')}
-                            className='sessionform-input'/>
-                        </label>
-                        <label className='sessionform-label'>Email
+                            className='sessionform-input'
+                            placeholder='Username'/>
                             <input type="text"
                                 value={this.state.email}
                                 onChange={this.update('email')} 
-                                className='sessionform-input'/>
-                        </label>
-                        <label className='sessionform-label'>Password
+                                className='sessionform-input'
+                                placeholder='Email'/>
                             <input type="password"
                                 value={this.state.password}
                                 onChange={this.update('password')} 
-                                className='sessionform-input'/>
-                        </label>
-                        <button className='sessionform-submit'>Sign Up!</button>
+                                className='sessionform-input'
+                                placeholder='Password'/>
+                           <button className='sessionform-submit'>Sign Up!</button>
                         <Link className='home-btn' to='/'>Home</Link>
                     </div>
                 </form>

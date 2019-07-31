@@ -627,28 +627,25 @@ function (_React$Component) {
         className: "sessionform-content-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
         className: "sessionform-header"
-      }, "Sign Up"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        className: "sessionform-label"
-      }, "Username", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, "Sign Up"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         value: this.state.username,
         onChange: this.update('username'),
-        className: "sessionform-input"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        className: "sessionform-label"
-      }, "Email", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "sessionform-input",
+        placeholder: "Username"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         value: this.state.email,
         onChange: this.update('email'),
-        className: "sessionform-input"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        className: "sessionform-label"
-      }, "Password", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "sessionform-input",
+        placeholder: "Email"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "password",
         value: this.state.password,
         onChange: this.update('password'),
-        className: "sessionform-input"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "sessionform-input",
+        placeholder: "Password"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "sessionform-submit"
       }, "Sign Up!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         className: "home-btn",

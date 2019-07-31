@@ -5,12 +5,12 @@
     transform: translate(-50%,-50%);
     width: 400px;
     padding: 30px;
-    background-color: whitesmoke; 
+    background-color: #CEECEF; 
 }
 
 .sessionform-header {
     text-align: center;
-
+    margin-bottom: 15px;
 }
 
 .sessionform-label {
@@ -18,11 +18,24 @@
 }
 
 .sessionform-input {
+    // border-style: none;
+    border: none;
     padding: 15px;
     width: 100%;
-
+    font-size: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
 }
 
 .sessionform-submit {
+    width: 100%;
+    background-color: green;
+    padding: 12px;
+    text-align: center;
+    color: white;
+}
+
+.home-btn{
+    padding: 15px;
 
 }
