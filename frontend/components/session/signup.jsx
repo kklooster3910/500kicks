@@ -26,8 +26,14 @@ class Signup extends React.Component {
     };
 
     render () {
+        let errors = Object.values(this.props.errors)
+        if (errors.length > 0) {
+            errors = errors.join(', ')
+        }
+        // debugger;
         return (
-            <div className='home-img-container'>
+            <div>
+                <div className='signup-home-img'></div>
                 <form className='sessionform' onSubmit={this.handleSubmit}>
                     <div className='sessionform-content-container'>
                         <h2 className='sessionform-header'>Sign Up</h2>
@@ -46,8 +52,9 @@ class Signup extends React.Component {
                                 onChange={this.update('password')} 
                                 className='sessionform-input'
                                 placeholder='Password'/>
-                           <button className='sessionform-submit'>Sign Up!</button>
-                        <Link className='home-btn' to='/'>Home</Link>
+                        <button className='sessionform-submit'>Sign Up!</button>
+                        <Link to='/'><button className='sessionform-home-btn'>Home</button></Link>
+                        <p className='signupform-errors'>{errors}</p>
                     </div>
                 </form>
             </div>

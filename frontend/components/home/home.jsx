@@ -9,8 +9,10 @@ const Home = props => {
     return (
         <div className='home'>
             <div className='home-img-container'>
-                <h4>Share Your Kix...</h4>
-            
+                <div className=''>
+                    <h4 className='home-logo'>Share Your Kix...</h4>
+                    <h4 className='home-logo-kick'>...Get Kicking</h4>
+                </div>
             </div>
         </div>
 

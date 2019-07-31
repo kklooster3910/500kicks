@@ -25,8 +25,14 @@ class Login extends React.Component {
     };
 
    render() { 
+       let errors = Object.values(this.props.errors)
+
+       if (errors.length > 0) {
+           errors = errors.join(', ')
+       }
         return (
-            <div className='home-img-container'>
+            <div>
+                <div className='login-home-img'></div>
                 <form className='loginform' onSubmit={this.handleSubmit}>
                     <div className='loginform-content-container'>
                         <h2 className='loginform-header'>Log Yourself In</h2>
@@ -41,7 +47,8 @@ class Login extends React.Component {
                                 placeholder='Password'
                                 className='loginform-input'/>
                         <button className='loginform-submit' >Log in!</button>
-                        <Link className='home-btn' to='/'>Home</Link>
+                        <Link to='/'><button className='loginform-home-btn'>Home</button></Link>
+                        <p className='loginform-errors'>{errors}</p>
                     </div>
                 </form>
             </div>

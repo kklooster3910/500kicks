@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const NavBar = ( { currentUser, logout, errors } ) => {
+const NavBar = ( { currentUser, logout } ) => {
     // debugger;
 
     let error;
@@ -13,20 +13,19 @@ const NavBar = ( { currentUser, logout, errors } ) => {
         </div>   
     ) : (
         <div className='session-btns'>
-            <Link className='button' to='/signup'>Sign Up</Link>
-            <Link className='button' to='/login'>Log In</Link>
+                <Link to='/login'><button className='nav-login-button'>Log In</button></Link>
+                <Link to='/signup'><button className='nav-session-button'>Sign Up</button></Link>
         </div>
     )
         
-    if (typeof errors === 'object'){
-        error = Object.values(errors);
-    }    
+    // if (typeof errors === 'object'){
+    //     error = Object.values(errors);
+    // }    
     // debugger;
     return (
         <header className='nav-bar'>
             <h1 className='logo'>500kix!</h1>
             <div>
-                {error}
                 {display}
             </div>
         </header>

@@ -273,7 +273,13 @@ var Home = function Home(props) {
     className: "home"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "home-img-container"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Share Your Kix...")));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: ""
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+    className: "home-logo"
+  }, "Share Your Kix..."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+    className: "home-logo-kick"
+  }, "...Get Kicking"))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Home);
@@ -292,15 +298,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 
 
 
 var NavBar = function NavBar(_ref) {
   var currentUser = _ref.currentUser,
-      logout = _ref.logout,
-      errors = _ref.errors;
+      logout = _ref.logout;
   // debugger;
   var error; // debugger;
 
@@ -309,23 +312,23 @@ var NavBar = function NavBar(_ref) {
   }, "Logout")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "session-btns"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    className: "button",
-    to: "/signup"
-  }, "Sign Up"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    className: "button",
     to: "/login"
-  }, "Log In"));
-
-  if (_typeof(errors) === 'object') {
-    error = Object.values(errors);
-  } // debugger;
-
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "nav-login-button"
+  }, "Log In")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/signup"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "nav-session-button"
+  }, "Sign Up"))); // if (typeof errors === 'object'){
+  //     error = Object.values(errors);
+  // }    
+  // debugger;
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", {
     className: "nav-bar"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
     className: "logo"
-  }, "500kix!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, error, display));
+  }, "500kix!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, display));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (NavBar);
@@ -477,9 +480,15 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "home-img-container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      var errors = Object.values(this.props.errors);
+
+      if (errors.length > 0) {
+        errors = errors.join(', ');
+      }
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "login-home-img"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         className: "loginform",
         onSubmit: this.handleSubmit
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -501,9 +510,12 @@ function (_React$Component) {
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "loginform-submit"
       }, "Log in!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        className: "home-btn",
         to: "/"
-      }, "Home"))));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "loginform-home-btn"
+      }, "Home")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "loginform-errors"
+      }, errors))));
     }
   }]);
 
@@ -629,9 +641,16 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "home-img-container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      var errors = Object.values(this.props.errors);
+
+      if (errors.length > 0) {
+        errors = errors.join(', ');
+      } // debugger;
+
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "signup-home-img"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         className: "sessionform",
         onSubmit: this.handleSubmit
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -659,9 +678,12 @@ function (_React$Component) {
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "sessionform-submit"
       }, "Sign Up!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        className: "home-btn",
         to: "/"
-      }, "Home"))));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "sessionform-home-btn"
+      }, "Home")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "signupform-errors"
+      }, errors))));
     }
   }]);
 
@@ -30285,7 +30307,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
