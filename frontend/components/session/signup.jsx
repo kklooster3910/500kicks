@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class Signup extends React.Component {
     constructor(props){
@@ -26,24 +27,32 @@ class Signup extends React.Component {
 
     render () {
         return (
-            <div className='session-form'>
-                <h2>Sign Up</h2>
-                <label>Username
-                    <input type="text"
-                    value={this.state.username} 
-                    onChange={this.update('username')}/>
-                </label>
-                <label>Email
-                    <input type="text"
-                        value={this.state.email}
-                        onChange={this.update('email')} />
-                </label>
-                <label>Password
-                    <input type="password"
-                        value={this.state.password}
-                        onChange={this.update('password')} />
-                </label>
-                <button onClick={this.handleSubmit}>Sign Up!</button>
+            <div className='home-img-container'>
+                <form className='sessionform' onSubmit={this.handleSubmit}>
+                    <div className='sessionform-content-container'>
+                        <h2 className='sessionform-header'>Sign Up</h2>
+                        <label className='sessionform-label'>Username
+                            <input type="text"
+                            value={this.state.username} 
+                            onChange={this.update('username')}
+                            className='sessionform-input'/>
+                        </label>
+                        <label className='sessionform-label'>Email
+                            <input type="text"
+                                value={this.state.email}
+                                onChange={this.update('email')} 
+                                className='sessionform-input'/>
+                        </label>
+                        <label className='sessionform-label'>Password
+                            <input type="password"
+                                value={this.state.password}
+                                onChange={this.update('password')} 
+                                className='sessionform-input'/>
+                        </label>
+                        <button className='sessionform-submit'>Sign Up!</button>
+                        <Link className='home-btn' to='/'>Home</Link>
+                    </div>
+                </form>
             </div>
         )
     };
