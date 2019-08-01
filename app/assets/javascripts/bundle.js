@@ -228,7 +228,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _session_signup_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./session/signup_container */ "./frontend/components/session/signup_container.js");
 /* harmony import */ var _session_login_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./session/login_container */ "./frontend/components/session/login_container.js");
-/* harmony import */ var _navbar_navbar_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./navbar/navbar_container */ "./frontend/components/navbar/navbar_container.js");
+/* harmony import */ var _navbar_navbar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./navbar/navbar */ "./frontend/components/navbar/navbar.jsx");
 /* harmony import */ var _util_route_util__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../util/route_util */ "./frontend/util/route_util.jsx");
 /* harmony import */ var _home_home__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./home/home */ "./frontend/components/home/home.jsx");
 
@@ -242,7 +242,7 @@ __webpack_require__.r(__webpack_exports__);
 var App = function App() {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/",
-    component: _navbar_navbar_container__WEBPACK_IMPORTED_MODULE_4__["default"]
+    component: _navbar_navbar__WEBPACK_IMPORTED_MODULE_4__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     exact: true,
     path: "/",
@@ -273,6 +273,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
 
 
  // class Home extends React.Component {
@@ -284,12 +286,24 @@ var Home = function Home(_ref) {
   var demoUser = _ref.demoUser,
       demoLogin = _ref.demoLogin,
       currentUser = _ref.currentUser;
-  // const handleClick = (user) => {
-  //     demoLogin(user)
-  // } 
   var maybeDemo;
+  var maybeCreateNewUser;
 
-  if (currentUser.email === 'fight@club.net' && currentUser) {}
+  if (currentUser.id === null) {
+    maybeDemo = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      className: "home-demo-btn",
+      onClick: function onClick() {
+        return demoLogin(demoUser);
+      }
+    }, "Demo Login!");
+    maybeCreateNewUser = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+      to: "/signup"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      className: "home-createnewuser-btn"
+    }, "Create New User"));
+  } else {
+    maybeDemo = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null);
+  }
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "home"
@@ -297,12 +311,7 @@ var Home = function Home(_ref) {
     className: "home-img-container"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "home-interactive"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: "home-demo-btn",
-    onClick: function onClick() {
-      return demoLogin(demoUser);
-    }
-  }, "Demo Login!")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, maybeDemo, maybeCreateNewUser), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
     className: "home-logo"
   }, "Share Your Kix..."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
     className: "home-logo-kick"
@@ -316,7 +325,7 @@ var msp = function msp(state) {
       email: 'fight@club.net',
       password: 'password123'
     },
-    currentUser: state.session.id
+    currentUser: state.session
   };
 };
 
@@ -332,6 +341,58 @@ var mdp = function mdp(dispatch) {
 
 /***/ }),
 
+/***/ "./frontend/components/navbar/dropdown.jsx":
+/*!*************************************************!*\
+  !*** ./frontend/components/navbar/dropdown.jsx ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
+
+
+
+
+
+var DropDown = function DropDown(_ref) {
+  var currentUser = _ref.currentUser,
+      logout = _ref.logout;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "drop-down"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "far fa-user-circle"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "currentUser-banner"
+  }, "Logged in as: ", currentUser.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "loggedin-logout-btn drop-down-item",
+    onClick: logout
+  }, "Logout"));
+};
+
+var msp = function msp(state) {
+  return {
+    currentUser: state.session.id
+  };
+};
+
+var mdp = function mdp(dispatch) {
+  return {
+    logout: function logout() {
+      return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_3__["logout"])());
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(msp, mdp)(DropDown));
+
+/***/ }),
+
 /***/ "./frontend/components/navbar/navbar.jsx":
 /*!***********************************************!*\
   !*** ./frontend/components/navbar/navbar.jsx ***!
@@ -344,6 +405,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _dropdown__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./dropdown */ "./frontend/components/navbar/dropdown.jsx");
+
+
+ // import { logout } from '../../actions/session_actions';
 
 
 
@@ -352,16 +418,7 @@ var NavBar = function NavBar(_ref) {
       logout = _ref.logout;
   var display = currentUser ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "session-btns"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    "class": "far fa-user-circle"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-    className: "currentUser-banner"
-  }, "Logged in as: ", currentUser.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "drop-down"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: "loggedin-logout-btn drop-down-item",
-    onClick: logout
-  }, "Logout"))) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_dropdown__WEBPACK_IMPORTED_MODULE_3__["default"], null)) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "session-btns"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/login"
@@ -379,46 +436,18 @@ var NavBar = function NavBar(_ref) {
   }, "500kix!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, display));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (NavBar);
-
-/***/ }),
-
-/***/ "./frontend/components/navbar/navbar_container.js":
-/*!********************************************************!*\
-  !*** ./frontend/components/navbar/navbar_container.js ***!
-  \********************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _navbar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./navbar */ "./frontend/components/navbar/navbar.jsx");
-/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
-
-
-
-
-
 var msp = function msp(state) {
-  // debugger;
   return {
-    currentUser: state.session.id,
-    errors: state.errors
+    currentUser: state.session.id
   };
 };
 
 var mdp = function mdp(dispatch) {
-  return {
-    logout: function logout() {
-      return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_3__["logout"])());
-    }
+  return {// logout: () => dispatch(logout()),
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(msp, mdp)(_navbar__WEBPACK_IMPORTED_MODULE_2__["default"]));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(msp, mdp)(NavBar)); // export default NavBar;
 
 /***/ }),
 
@@ -30405,7 +30434,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
+/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

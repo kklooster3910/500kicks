@@ -1,14 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+// import { logout } from '../../actions/session_actions';
+import DropDownComponent from './dropdown'
 
 const NavBar = ( { currentUser, logout } ) => {
     const display = currentUser ? (
         <div className='session-btns'>
-            <i class="far fa-user-circle"></i>
+            {/* <div className='drop-down'>
+                <i className="far fa-user-circle"></i>
                 <p className='currentUser-banner'>Logged in as: {currentUser.username}</p>
-            <div className='drop-down'>
                 <button className='loggedin-logout-btn drop-down-item' onClick={logout}>Logout</button>
-            </div>
+            </div> */}
+            <DropDownComponent />
         </div>   
     ) : (
         <div className='session-btns'>
@@ -27,4 +31,14 @@ const NavBar = ( { currentUser, logout } ) => {
     )
 };
 
-export default NavBar;
+const msp = state => ({
+    currentUser: state.session.id,
+});
+
+const mdp = dispatch => ({
+    // logout: () => dispatch(logout()),
+});
+
+export default connect(msp, mdp)(NavBar)
+
+// export default NavBar;
