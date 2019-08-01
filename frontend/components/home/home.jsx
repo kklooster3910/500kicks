@@ -2,18 +2,20 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { login } from '../../actions/session_actions';
 import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router' 
 
 const Home = ({ demoUser, demoLogin, currentUser}) => {
     let maybeDemo;
     let maybeCreateNewUser;
     let kixShowLink;
     
-    // const handleClick = () => {
-    //     demoLogin(demoUser).then(alert('home boi logged'))
-    // }
+    const handleClick = (e) => {
+        e.preventDefault();
+        demoLogin(demoUser).then(alert('home boi logged'))
+    }
 
     if (currentUser.id === null) {
-        maybeDemo = <button className='home-demo-btn' onClick={() => demoLogin(demoUser)}>Demo Login!</button>
+        maybeDemo = <button className='home-demo-btn' onClick={handleClick}>Demo Login!</button>
         maybeCreateNewUser = <Link to='/signup'><button className='home-createnewuser-btn'>Create New User</button></Link>
     } else {
        maybeDemo = <button></button>
@@ -45,10 +47,7 @@ const msp = state => ({
 })
 
 const mdp = dispatch => ({
-    demoLogin: demoUser => {
-        dispatch(login(demoUser));
-        alert('Demo Boi Logged')
-    },
+    demoLogin: demoUser => (dispatch(login(demoUser))),
 })
 
-export default connect(msp, mdp)(Home);
+export default withRouter(connect(msp, mdp)(Home));

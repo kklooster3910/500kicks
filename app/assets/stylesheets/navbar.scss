@@ -57,11 +57,6 @@
 
 }
 
-.drop-down {
-    display: flex;
-    flex-direction: row;
-}
-
 .currentUser-banner {
     background-color: #2C2F40;
     padding: 9px;
@@ -79,11 +74,15 @@
     padding: 9px;
     text-align: center;
     color: #CEECEF;
-    border: solid 2px;
-    border-color: #CEECEF;
-    border-radius: 26px;
+    // border: solid 2px;
+    // border-color: #CEECEF;
+    // border-radius: 26px;
     font-size: 16px;
     margin-left: 12px;
+}
+
+.discover-kix-navbtn:hover {
+    text-decoration: underline;
 }
 
 .logo {

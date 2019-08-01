@@ -1,0 +1,17 @@
+// .far fa-user-circle{
+//     font-size: 30px;
+// }
+
+.drop-down {
+    // display: flex;
+    // flex-direction: row;
+    font-family: 'Permanent Marker', cursive;
+    visibility: hidden;
+}
+
+.drop-down:active {
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 30px;
+} 

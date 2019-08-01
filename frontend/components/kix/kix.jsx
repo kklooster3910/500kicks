@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { withRouter } from 'react-router'
 //going to need a container to do the work of dispatching
 //my ajax request to the back end to fetch all the kix
 //make sure you go back and fix your db/active record queries
@@ -7,10 +7,10 @@ import React from 'react';
 class Kix extends React.Component {
     constructor(props) {
         super(props);
-
     }
 
     render() {
+        // debugger;
         return (
             <div>
                 <img src="https://images.unsplash.com/photo-1509927083803-4bd519298ac4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"/>
@@ -23,4 +23,4 @@ class Kix extends React.Component {
     }
 }
 
-export default Kix;
+export default withRouter(Kix);

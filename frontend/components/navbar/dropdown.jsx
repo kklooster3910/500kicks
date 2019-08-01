@@ -6,11 +6,12 @@ import { logout } from '../../actions/session_actions'
 const DropDown = ({ currentUser, logout }) => {
 
     return (
-        <div className='drop-down'>
-            <i className="far fa-user-circle"></i>
-            <p className='currentUser-banner'>Logged in as: {currentUser.username}</p>
-            <button className='loggedin-logout-btn drop-down-item' onClick={logout}>Logout</button>
-        </div>
+        <i className="far fa-user-circle">
+            <div className='drop-down'>
+                    <p className='currentUser-banner'>Logged in as: {currentUser.username}</p>
+                    <button className='loggedin-logout-btn drop-down-item' onClick={logout}>Logout</button>
+            </div>
+        </i>
     )
 } 
 
