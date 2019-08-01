@@ -3,18 +3,24 @@
 // }
 
 .drop-down {
-    // display: flex;
-    // flex-direction: row;
-    font-family: 'Permanent Marker', cursive;
+    // position: absolute;
+    // // flex-direction: row;
+    // font-family: 'Permanent Marker', cursive;
+    // visibility: hidden;
+    // display: none;
+}
+
+.hide {
     visibility: hidden;
 }
 
-.drop-down:active {
-    display: block;
-    position: absolute;
-    right: 0;
-    top: 30px;
+.drop-down:hover {
+    // display: block;
+    // // position: absolute;
+    // right: 0;
+    // top: 30px;
 } 
 
+.on-click {
 
-// asdfasdf  
+}

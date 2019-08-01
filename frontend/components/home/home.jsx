@@ -11,7 +11,7 @@ const Home = ({ demoUser, demoLogin, currentUser}) => {
     
     const handleClick = (e) => {
         e.preventDefault();
-        demoLogin(demoUser).then(alert('home boi logged'))
+        demoLogin(demoUser).then(alert('Demo User Logged In - try uploading a photo!'))
     }
 
     if (currentUser.id === null) {
