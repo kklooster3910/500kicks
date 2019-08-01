@@ -9,6 +9,8 @@ const msp = state => ({
 //defining a functional component below
 //takes a component, path we're looking for, and logged in(we're getting from msp)
 // <AuthRoute path='' component={} />
+
+//go back and watch the videos when you need to do protected routes, shouldn't be much setup here. 
  
 const Auth = ({ loggedIn, path, component: Component }) => (
     <Route 

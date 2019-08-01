@@ -1,7 +1,7 @@
 .nav-bar {
     display: flex;
     background-color: #2C2F40;
-    // flex-direction: row;
+    flex-direction: row;
     justify-content: space-between;
     padding-top: 18px;
     padding-bottom: 14px;
@@ -39,6 +39,36 @@
     // border-color: #CEECEF;
     // border-radius: 12px;
     margin-right: 12px;
+}
+
+.loggedin-logout-btn {
+    background-color: #2C2F40;
+    padding: 9px;
+    text-align: center;
+    color: #CEECEF;
+    border: solid 2px;
+    border-color: #CEECEF;
+    border-radius: 26px;
+    font-size: 18px;
+    margin-left: 12px;
+}
+
+.drop-down-menu {
+
+}
+
+.drop-down {
+
+}
+
+.currentUser-banner {
+    background-color: #2C2F40;
+    padding: 9px;
+    text-align: center;
+    color: #CEECEF;
+    // border: solid 1px;
+    // border-color: #CEECEF;
+    font-size: 18px;
 }
 
 .logo {

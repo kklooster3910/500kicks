@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { signup } from '../../actions/session_actions';
+import { signup, resetErrors } from '../../actions/session_actions';
 import Signup from './signup'
 
 // we don't need to msp because ...
@@ -12,6 +12,7 @@ const msp = state => ({
 const mdp = dispatch => {
     return ({
     createUser: user => dispatch(signup(user)),
+    resetErrors: () => dispatch(resetErrors())
 })};
 
 export default connect(msp, mdp)(Signup);

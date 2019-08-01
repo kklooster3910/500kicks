@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', function () {
 /*!*********************************************!*\
   !*** ./frontend/actions/session_actions.js ***!
   \*********************************************/
-/*! exports provided: RECEIVE_CURRENT_USER, LOGOUT_CURRENT_USER, RECEIVE_SESSION_ERRORS, signup, login, logout */
+/*! exports provided: RECEIVE_CURRENT_USER, LOGOUT_CURRENT_USER, RECEIVE_SESSION_ERRORS, RECEIVE_RESET_ERRORS, resetErrors, signup, login, logout */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -141,6 +141,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_CURRENT_USER", function() { return RECEIVE_CURRENT_USER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOGOUT_CURRENT_USER", function() { return LOGOUT_CURRENT_USER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_SESSION_ERRORS", function() { return RECEIVE_SESSION_ERRORS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_RESET_ERRORS", function() { return RECEIVE_RESET_ERRORS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "resetErrors", function() { return resetErrors; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "signup", function() { return signup; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "login", function() { return login; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "logout", function() { return logout; });
@@ -149,6 +151,12 @@ __webpack_require__.r(__webpack_exports__);
 var RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER';
 var LOGOUT_CURRENT_USER = 'LOGOUT_CURRENT_USER';
 var RECEIVE_SESSION_ERRORS = 'RECEIVE_SESSION_ERRORS';
+var RECEIVE_RESET_ERRORS = 'RECEIVE_RESET_ERRORS';
+var resetErrors = function resetErrors() {
+  return {
+    type: RECEIVE_RESET_ERRORS
+  };
+};
 var signup = function signup(user) {
   return function (dispatch) {
     // debugger;
@@ -263,26 +271,64 @@ var App = function App() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
+
+
  // class Home extends React.Component {
 //     constructor(props){
 //         super(props);
 //     };
 
-var Home = function Home(props) {
+var Home = function Home(_ref) {
+  var demoUser = _ref.demoUser,
+      demoLogin = _ref.demoLogin,
+      currentUser = _ref.currentUser;
+  // const handleClick = (user) => {
+  //     demoLogin(user)
+  // } 
+  var maybeDemo;
+
+  if (currentUser.email === 'fight@club.net' && currentUser) {}
+
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "home"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "home-img-container"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: ""
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+    className: "home-interactive"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "home-demo-btn",
+    onClick: function onClick() {
+      return demoLogin(demoUser);
+    }
+  }, "Demo Login!")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
     className: "home-logo"
   }, "Share Your Kix..."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
     className: "home-logo-kick"
   }, "...Get Kicking"))));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Home);
+var msp = function msp(state) {
+  return {
+    demoUser: {
+      username: 'Tyler Durden',
+      email: 'fight@club.net',
+      password: 'password123'
+    },
+    currentUser: state.session.id
+  };
+};
+
+var mdp = function mdp(dispatch) {
+  return {
+    demoLogin: function demoLogin(demoUser) {
+      return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_2__["login"])(demoUser));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(msp, mdp)(Home));
 
 /***/ }),
 
@@ -304,12 +350,18 @@ __webpack_require__.r(__webpack_exports__);
 var NavBar = function NavBar(_ref) {
   var currentUser = _ref.currentUser,
       logout = _ref.logout;
-  // debugger;
-  var error; // debugger;
-
-  var display = currentUser ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Logged in as: ", currentUser.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+  var display = currentUser ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "session-btns"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    "class": "far fa-user-circle"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "currentUser-banner"
+  }, "Logged in as: ", currentUser.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "drop-down"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "loggedin-logout-btn drop-down-item",
     onClick: logout
-  }, "Logout")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, "Logout"))) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "session-btns"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/login"
@@ -319,11 +371,7 @@ var NavBar = function NavBar(_ref) {
     to: "/signup"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     className: "nav-session-button"
-  }, "Sign Up"))); // if (typeof errors === 'object'){
-  //     error = Object.values(errors);
-  // }    
-  // debugger;
-
+  }, "Sign Up")));
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", {
     className: "nav-bar"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
@@ -459,14 +507,25 @@ function (_React$Component) {
   }
 
   _createClass(Login, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.resetErrors();
+    }
+  }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       var _this2 = this;
 
+      // debugger;
       e.preventDefault();
       this.props.userLogin(this.state).then(function () {
         return _this2.props.history.push('/');
       });
+      var blankState = {
+        username: '',
+        password: ''
+      };
+      this.setState(blankState);
     }
   }, {
     key: "update",
@@ -480,11 +539,15 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this4 = this;
+
       var errors = Object.values(this.props.errors);
 
       if (errors.length > 0) {
-        errors = errors.map(function (err) {
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, err);
+        errors = errors.map(function (err, i) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+            key: i
+          }, err);
         });
       }
 
@@ -514,6 +577,9 @@ function (_React$Component) {
       }, "Log in!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          return _this4.props.resetErrors();
+        },
         className: "loginform-home-btn"
       }, "Home")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "loginform-errors"
@@ -557,6 +623,9 @@ var mdp = function mdp(dispatch) {
   return {
     userLogin: function userLogin(user) {
       return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_2__["login"])(user));
+    },
+    resetErrors: function resetErrors() {
+      return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_2__["resetErrors"])());
     }
   };
 };
@@ -639,15 +708,30 @@ function (_React$Component) {
       this.props.createUser(this.state).then(function () {
         return _this3.props.history.push('/');
       });
+      var blankState = {
+        username: '',
+        email: '',
+        password: ''
+      };
+      this.setState(blankState);
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.resetErrors();
     }
   }, {
     key: "render",
     value: function render() {
+      var _this4 = this;
+
       var errors = Object.values(this.props.errors);
 
       if (errors.length > 0) {
-        errors = errors.map(function (err) {
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, err);
+        errors = errors.map(function (err, i) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+            key: i
+          }, err);
         });
       } // debugger;
 
@@ -684,6 +768,9 @@ function (_React$Component) {
       }, "Sign Up!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          return _this4.props.resetErrors();
+        },
         className: "sessionform-home-btn"
       }, "Home")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "signupform-errors"
@@ -726,6 +813,9 @@ var mdp = function mdp(dispatch) {
   return {
     createUser: function createUser(user) {
       return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_1__["signup"])(user));
+    },
+    resetErrors: function resetErrors() {
+      return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_1__["resetErrors"])());
     }
   };
 };
@@ -757,6 +847,9 @@ var errorsReducer = function errorsReducer() {
   switch (action.type) {
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_SESSION_ERRORS"]:
       return lodash_merge__WEBPACK_IMPORTED_MODULE_1___default()({}, state, action.errors);
+
+    case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_RESET_ERRORS"]:
+      return [];
 
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CURRENT_USER"]:
       return [];
@@ -889,6 +982,7 @@ var msp = function msp(state) {
 }; //defining a functional component below
 //takes a component, path we're looking for, and logged in(we're getting from msp)
 // <AuthRoute path='' component={} />
+//go back and watch the videos when you need to do protected routes, shouldn't be much setup here. 
 
 
 var Auth = function Auth(_ref) {

@@ -11,11 +11,18 @@ class Login extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);  
     };
 
+    componentDidMount() {
+        this.props.resetErrors();
+    }
+
     handleSubmit(e) {
+        // debugger;
         e.preventDefault();
         this.props.userLogin(this.state)
             .then( () => this.props.history.push('/')
-        );
+        )
+        const blankState = { username: '', password: ''};
+        this.setState(blankState);
     };
 
     update(field) {
@@ -27,8 +34,8 @@ class Login extends React.Component {
    render() { 
        let errors = Object.values(this.props.errors)
        if (errors.length > 0) {
-           errors = errors.map(err => (
-               <li>{err}</li>
+           errors = errors.map( (err, i) => (
+               <li key={i}>{err}</li>
            ))
        }
         return (
@@ -48,7 +55,7 @@ class Login extends React.Component {
                                 placeholder='Password'
                                 className='loginform-input'/>
                         <button className='loginform-submit' >Log in!</button>
-                        <Link to='/'><button className='loginform-home-btn'>Home</button></Link>
+                        <Link to='/'><button onClick={() => this.props.resetErrors()} className='loginform-home-btn'>Home</button></Link>
                         <p className='loginform-errors'>{errors}</p>
                     </div>
                 </form>

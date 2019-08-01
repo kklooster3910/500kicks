@@ -22,14 +22,20 @@ class Signup extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
         this.props.createUser(this.state)
-            .then( () => this.props.history.push('/')); 
+            .then( () => this.props.history.push('/') );
+        const blankState = { username: '', email: '', password: '' };
+        this.setState(blankState);
     };
+
+    componentDidMount() {
+        this.props.resetErrors();
+    }
 
     render () {
         let errors = Object.values(this.props.errors)
         if (errors.length > 0) {
-            errors = errors.map( err => (
-                <li>{err}</li>
+            errors = errors.map( (err, i) => (
+                <li key={i}>{err}</li>
             ))
         }
         // debugger;
@@ -55,7 +61,7 @@ class Signup extends React.Component {
                                 className='sessionform-input'
                                 placeholder='Password'/>
                         <button className='sessionform-submit'>Sign Up!</button>
-                        <Link to='/'><button className='sessionform-home-btn'>Home</button></Link>
+                        <Link to='/'><button onClick={() => this.props.resetErrors()} className='sessionform-home-btn'>Home</button></Link>
                         <p className='signupform-errors'>{errors}</p>
                     </div>
                 </form>

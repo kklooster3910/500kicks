@@ -8,10 +8,7 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link href="https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-    <script type='text/javascript'>
-      window.homepage = <%= image_url('homepage.jpg') %>
-    </script>
-    
+  
     <% if current_user %>
       <script>
         window.currentUser = {

@@ -6,7 +6,7 @@ class Api::SessionsController < ApplicationController
             login(@user)
             render :create
         else
-            render json: ['Please check your username and password!'], status: 402
+            render json: ['Please check your username and password!'], status: 422
         end
     end
 
@@ -15,7 +15,7 @@ class Api::SessionsController < ApplicationController
             logout!
             render :destroy
         else
-            render json: ['You have to log in, first!'], status: 402
+            render json: ['You have to log in, first!'], status: 422
         end
     end
 
