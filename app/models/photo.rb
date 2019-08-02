@@ -14,4 +14,6 @@ class Photo < ApplicationRecord
         class_name: 'User',
         foreign_key: :photographer_id,
         primary_key: :id
+
+    has_one_attached :photo
 end

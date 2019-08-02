@@ -470,12 +470,10 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       var kix = this.props.photos.map(function (photo) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
-          to: "/kix/".concat(photo.id)
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_kix_index_item__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_kix_index_item__WEBPACK_IMPORTED_MODULE_2__["default"], {
           key: photo.id,
           photo: photo
-        }));
+        });
       });
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, kix);
     }
@@ -543,14 +541,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
 
 
 
 var KixIndexItem = function KixIndexItem(_ref) {
   var photo = _ref.photo;
-  return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("li", {
+  return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+    to: "/kix/".concat(photo.id)
+  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("li", {
     key: photo.id
-  }, "Photo id: ", photo.id + ' ', "Photo title: ", photo.title + ' ', "Photographer_id: ", photo.photographer_id + ' ');
+  }, "Photo id: ", photo.id + ' ', "Photo title: ", photo.title + ' ', "Photographer_id: ", photo.photographer_id + ' '));
 }; // const msp = state => { 
 //     debugger;
 //     return ({
@@ -613,6 +615,7 @@ function (_React$Component) {
   _createClass(KixShow, [{
     key: "componentDidMount",
     value: function componentDidMount() {
+      // debugger;
       this.props.fetchPhoto(this.props.match.params.photoId);
     }
   }, {
@@ -629,8 +632,12 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       var kix = this.props.photo;
-      debugger;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "photo_title: ", kix.title + ' ', "photographer_id: ", kix.photographer_id + ' ');
+
+      if (!kix) {
+        return null;
+      }
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "photoId: ", kix.id + ' ', "photo_title: ", kix.title + ' ', "photographer_id: ", kix.photographer_id + ' ');
     }
   }]);
 

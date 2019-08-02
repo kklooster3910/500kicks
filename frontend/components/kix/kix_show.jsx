@@ -8,6 +8,7 @@ class KixShow extends React.Component {
     };
 
     componentDidMount() {
+        // debugger;
         this.props.fetchPhoto(this.props.match.params.photoId);
     };
 
@@ -20,10 +21,12 @@ class KixShow extends React.Component {
     
     render() {
         let kix = this.props.photo
-        debugger;
+        if (!kix) {
+            return null;
+        }
         return (
             <div>
-                {/* photoId: {kix.id + ' '}  */}
+                photoId: {kix.id + ' '} 
                 photo_title: {kix.title + ' '}
                 photographer_id: {kix.photographer_id + ' '}
             </div>

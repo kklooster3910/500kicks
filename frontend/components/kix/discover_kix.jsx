@@ -17,7 +17,7 @@ class DiscoverKix extends React.Component {
     
     render() {
         const kix = this.props.photos.map( photo => (
-            <Link to={`/kix/${photo.id}`}><KixIndexItem key={photo.id} photo={photo} /></Link>
+            <KixIndexItem key={photo.id} photo={photo} />
         ));
 
         return (

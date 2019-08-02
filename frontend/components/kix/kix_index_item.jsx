@@ -1,14 +1,16 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 
 export const KixIndexItem = ({ photo }) => {
     return(
-        <li key={photo.id}>
+        <Link to={`/kix/${photo.id}`}><li key={photo.id}>
             Photo id: {photo.id + ' '}
             Photo title: {photo.title + ' '}
             Photographer_id: {photo.photographer_id + ' '}
-        </li>
+        </li></Link>
     )     
 }
 
