@@ -6,5 +6,9 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+rails db:purge db:migrate db:seed
 demo_user = User.create!(username: 'Tyler Durden', email: 'fight@club.net', password: 'password123')
-# Photo.create!(title; photographer_id: demoUser.id )
+Photo.create!(title: 'first pic' photographer_id: demoUser.id )
+Photo.create!(title: 'second pic' photographer_id: demoUser.id )
+Photo.create!(title: 'third pic' photographer_id: demoUser.id )
+Photo.create!(title: 'fourth pic' photographer_id: demoUser.id )
