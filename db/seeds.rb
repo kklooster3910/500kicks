@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-rails db:reset
+# rails db:drop
 # rails db:migrate 
 # rails db:seed
 demo_user = User.create!(username: 'Tyler Durden', email: 'fight@club.net', password: 'password123')
