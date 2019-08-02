@@ -5,14 +5,14 @@ import SignupContainer from './session/signup_container';
 import LoginContainer from './session/login_container';
 import NavBar from './navbar/navbar';
 import Home from './home/home';
-import Kix from './kix/kix';
+import DiscoverKix from './kix/discover_kix';
 
 const App = () => (
     <div>
         <Route path='/' component={NavBar} />
         <Switch>
             <Route exact path='/' component={Home} />
-            <Route path='/kix' component={Kix} />
+            <Route path='/kix' component={DiscoverKix} />
             <AuthRoute path='/signup' component={SignupContainer}/>
             <AuthRoute path='/login' component={LoginContainer}/>
         </Switch>
