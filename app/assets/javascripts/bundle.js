@@ -106,7 +106,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 document.addEventListener('DOMContentLoaded', function () {
-  // debugger;
   var root = document.getElementById('root');
   var preloadedState;
 
@@ -118,8 +117,7 @@ document.addEventListener('DOMContentLoaded', function () {
     };
   }
 
-  ; // debugger;
-
+  ;
   delete window.currentUser;
   var dispatchedStore = Object(_store_store__WEBPACK_IMPORTED_MODULE_2__["default"])(preloadedState);
   window.store = dispatchedStore;
@@ -484,14 +482,10 @@ function (_React$Component) {
   _createClass(DropDown, [{
     key: "addHiddenClass",
     value: function addHiddenClass() {
-      // debugger;
       this.setState({
         hidden: !this.state.hidden
       });
-    } // componentDidMount() {
-    //     this.setState({hidden: false})
-    // }
-
+    }
   }, {
     key: "renderDropDown",
     value: function renderDropDown() {

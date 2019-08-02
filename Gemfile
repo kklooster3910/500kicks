@@ -55,6 +55,7 @@ group :development do
   gem 'pry-rails'
   # gem 'factory-bot-rails'
   gem 'faker'
+  gem 'annotate'
 end
 
 group :test do

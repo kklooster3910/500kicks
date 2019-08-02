@@ -4,7 +4,6 @@ import store from './store/store';
 import Root from './components/root'
 
 document.addEventListener('DOMContentLoaded', () => {
-    // debugger;
     const root = document.getElementById('root');
     let preloadedState;
     if (window.currentUser) {
@@ -14,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
     } ;
-    // debugger;
+  
     delete window.currentUser;
     const dispatchedStore = store(preloadedState);
     window.store = dispatchedStore

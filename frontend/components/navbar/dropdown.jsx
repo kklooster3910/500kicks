@@ -11,13 +11,8 @@ class DropDown extends React.Component {
     }
 
     addHiddenClass() {
-        // debugger;
         this.setState({hidden: !this.state.hidden});
     }
-
-    // componentDidMount() {
-    //     this.setState({hidden: false})
-    // }
 
     renderDropDown() {
         return (
