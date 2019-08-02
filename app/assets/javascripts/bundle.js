@@ -128,57 +128,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 /***/ }),
 
-/***/ "./frontend/actions/photo_actions.js":
-/*!*******************************************!*\
-  !*** ./frontend/actions/photo_actions.js ***!
-  \*******************************************/
-/*! exports provided: RECEIVE_ALL_PHOTOS, RECEIVE_PHOTO, RECEIVE_RESET_ERRORS, resetErrors, fetchPhotos, fetchPhoto */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_ALL_PHOTOS", function() { return RECEIVE_ALL_PHOTOS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_PHOTO", function() { return RECEIVE_PHOTO; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_RESET_ERRORS", function() { return RECEIVE_RESET_ERRORS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "resetErrors", function() { return resetErrors; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchPhotos", function() { return fetchPhotos; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchPhoto", function() { return fetchPhoto; });
-/* harmony import */ var _util_photo_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/photo_api_util */ "./frontend/util/photo_api_util.js");
-
-var RECEIVE_ALL_PHOTOS = 'RECEIVE_ALL_PHOTOS';
-var RECEIVE_PHOTO = 'RECEIVE_PHOTO';
-var RECEIVE_RESET_ERRORS = 'RECEIVE_RESET_ERRORS';
-var resetErrors = function resetErrors() {
-  //you might not need this, delete if no
-  return {
-    type: RECEIVE_RESET_ERRORS
-  };
-};
-var fetchPhotos = function fetchPhotos() {
-  return function (dispatch) {
-    return _util_photo_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchPhotos"]().then(function (photos) {
-      return dispatch({
-        type: RECEIVE_ALL_PHOTOS,
-        photos: photos
-      });
-    });
-  };
-};
-var fetchPhoto = function fetchPhoto(id) {
-  return function (dispatch) {
-    return _util_photo_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchPhoto"](id).then(function (payload) {
-      return dispatch({
-        type: RECEIVE_PHOTO,
-        payload: payload
-      });
-    });
-  };
-};
-window.fetchPhotos = fetchPhotos;
-window.fetchPhoto = fetchPhoto;
-
-/***/ }),
-
 /***/ "./frontend/actions/session_actions.js":
 /*!*********************************************!*\
   !*** ./frontend/actions/session_actions.js ***!
@@ -411,241 +360,14 @@ var mdp = function mdp(dispatch) {
 
 /***/ }),
 
-/***/ "./frontend/components/kix/discover_kix.jsx":
-/*!**************************************************!*\
-  !*** ./frontend/components/kix/discover_kix.jsx ***!
-  \**************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
-/* harmony import */ var _kix_index_item__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./kix_index_item */ "./frontend/components/kix/kix_index_item.jsx");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-
-
-
- //going to need a container to do the work of dispatching
-//my ajax request to the back end to fetch all the kix
-//make sure you go back and fix your db/active record queries
-
-var DiscoverKix =
-/*#__PURE__*/
-function (_React$Component) {
-  _inherits(DiscoverKix, _React$Component);
-
-  function DiscoverKix(props) {
-    _classCallCheck(this, DiscoverKix);
-
-    return _possibleConstructorReturn(this, _getPrototypeOf(DiscoverKix).call(this, props));
-  }
-
-  _createClass(DiscoverKix, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.props.fetchPhotos();
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var kix = this.props.photos.map(function (photo) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_kix_index_item__WEBPACK_IMPORTED_MODULE_2__["default"], {
-          key: photo.id,
-          photo: photo
-        });
-      });
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, kix);
-    }
-  }]);
-
-  return DiscoverKix;
-}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
-
-;
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_router__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(DiscoverKix));
-
-/***/ }),
-
 /***/ "./frontend/components/kix/kix_container.js":
 /*!**************************************************!*\
   !*** ./frontend/components/kix/kix_container.js ***!
   \**************************************************/
 /*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _discover_kix__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./discover_kix */ "./frontend/components/kix/discover_kix.jsx");
-/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _actions_photo_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/photo_actions */ "./frontend/actions/photo_actions.js");
-
-
-
-
-
-var msp = function msp(state) {
-  return {
-    photos: Object.values(state.entities.photos)
-  };
-};
-
-var mdp = function mdp(dispatch) {
-  return {
-    fetchPhotos: function fetchPhotos() {
-      return dispatch(Object(_actions_photo_actions__WEBPACK_IMPORTED_MODULE_3__["fetchPhotos"])());
-    },
-    fetchPhoto: function fetchPhoto(id) {
-      return dispatch(Object(_actions_photo_actions__WEBPACK_IMPORTED_MODULE_3__["fetchPhoto"])(id));
-    }
-  };
-}; // you might be able to use fetchPhoto when you are going to click on a photo from the discover page
-
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_router__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(msp, mdp)(_discover_kix__WEBPACK_IMPORTED_MODULE_0__["default"])));
-
-/***/ }),
-
-/***/ "./frontend/components/kix/kix_index_item.jsx":
-/*!****************************************************!*\
-  !*** ./frontend/components/kix/kix_index_item.jsx ***!
-  \****************************************************/
-/*! exports provided: KixIndexItem, default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "KixIndexItem", function() { return KixIndexItem; });
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-
-
-
-
-var KixIndexItem = function KixIndexItem(_ref) {
-  var photo = _ref.photo;
-  return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
-    to: "/kix/".concat(photo.id)
-  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("li", {
-    key: photo.id
-  }, "Photo id: ", photo.id + ' ', "Photo title: ", photo.title + ' ', "Photographer_id: ", photo.photographer_id + ' '));
-}; // const msp = state => { 
-//     debugger;
-//     return ({
-//     photo: state.photo
-// })}
-
-var mdp = function mdp(dispatch) {
-  return {//stay tuned, we will probably end up needing something here
-  };
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_router__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(null, mdp)(KixIndexItem)));
-
-/***/ }),
-
-/***/ "./frontend/components/kix/kix_show.jsx":
-/*!**********************************************!*\
-  !*** ./frontend/components/kix/kix_show.jsx ***!
-  \**********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-
-
-
-var KixShow =
-/*#__PURE__*/
-function (_React$Component) {
-  _inherits(KixShow, _React$Component);
-
-  function KixShow(props) {
-    _classCallCheck(this, KixShow);
-
-    return _possibleConstructorReturn(this, _getPrototypeOf(KixShow).call(this, props)); // debugger;
-  }
-
-  _createClass(KixShow, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      // debugger;
-      this.props.fetchPhoto(this.props.match.params.photoId);
-    }
-  }, {
-    key: "componentDidUpdate",
-    value: function componentDidUpdate(prevProps) {
-      // debugger;
-      if (this.props.match.params.photoId !== prevProps.match.params.photoId) {
-        this.props.fetchPhoto(this.props.match.params.photoId);
-      }
-
-      ;
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var kix = this.props.photo;
-
-      if (!kix) {
-        return null;
-      }
-
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "photoId: ", kix.id + ' ', "photo_title: ", kix.title + ' ', "photographer_id: ", kix.photographer_id + ' ');
-    }
-  }]);
-
-  return KixShow;
-}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
-
-;
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_router__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(KixShow));
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nError: ENOENT: no such file or directory, open '/home/klue/Documents/500kicks/500kicks/frontend/components/kix/kix_container.js'");
 
 /***/ }),
 
@@ -654,34 +376,9 @@ function (_React$Component) {
   !*** ./frontend/components/kix/kix_show_container.js ***!
   \*******************************************************/
 /*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _kix_show__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./kix_show */ "./frontend/components/kix/kix_show.jsx");
-/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _actions_photo_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/photo_actions */ "./frontend/actions/photo_actions.js");
-
-
-
-
-
-var msp = function msp(state, ownProps) {
-  return {
-    photo: state.entities.photos[ownProps.match.params.photoId]
-  };
-};
-
-var mdp = function mdp(dispatch) {
-  return {
-    fetchPhoto: function fetchPhoto(id) {
-      return dispatch(Object(_actions_photo_actions__WEBPACK_IMPORTED_MODULE_3__["fetchPhoto"])(id));
-    }
-  };
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_router__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(msp, mdp)(_kix_show__WEBPACK_IMPORTED_MODULE_0__["default"])));
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nError: ENOENT: no such file or directory, open '/home/klue/Documents/500kicks/500kicks/frontend/components/kix/kix_show_container.js'");
 
 /***/ }),
 
@@ -1263,17 +960,9 @@ var mdp = function mdp(dispatch) {
   !*** ./frontend/reducers/entities_reducer.js ***!
   \***********************************************/
 /*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
-/* harmony import */ var _photos_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./photos_reducer */ "./frontend/reducers/photos_reducer.js");
-
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
-  photos: _photos_reducer__WEBPACK_IMPORTED_MODULE_1__["default"]
-}));
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nError: ENOENT: no such file or directory, open '/home/klue/Documents/500kicks/500kicks/frontend/reducers/entities_reducer.js'");
 
 /***/ }),
 
@@ -1313,46 +1002,6 @@ var errorsReducer = function errorsReducer() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (errorsReducer);
-
-/***/ }),
-
-/***/ "./frontend/reducers/photos_reducer.js":
-/*!*********************************************!*\
-  !*** ./frontend/reducers/photos_reducer.js ***!
-  \*********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _actions_photo_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/photo_actions */ "./frontend/actions/photo_actions.js");
-/* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash/merge */ "./node_modules/lodash/merge.js");
-/* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash_merge__WEBPACK_IMPORTED_MODULE_1__);
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
-
-
-var photosReducer = function photosReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  var action = arguments.length > 1 ? arguments[1] : undefined;
-  Object.freeze(state);
-
-  switch (action.type) {
-    case _actions_photo_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_ALL_PHOTOS"]:
-      return lodash_merge__WEBPACK_IMPORTED_MODULE_1___default()({}, state, action.photos);
-
-    case _actions_photo_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_PHOTO"]:
-      return lodash_merge__WEBPACK_IMPORTED_MODULE_1___default()({}, state, _defineProperty({}, action.payload.photo.id, action.payload.photo));
-
-    default:
-      return state;
-  }
-
-  ;
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (photosReducer);
 
 /***/ }),
 
@@ -1448,34 +1097,6 @@ var configureStore = function configureStore() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (configureStore);
-
-/***/ }),
-
-/***/ "./frontend/util/photo_api_util.js":
-/*!*****************************************!*\
-  !*** ./frontend/util/photo_api_util.js ***!
-  \*****************************************/
-/*! exports provided: fetchPhotos, fetchPhoto */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchPhotos", function() { return fetchPhotos; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchPhoto", function() { return fetchPhoto; });
-var fetchPhotos = function fetchPhotos() {
-  return $.ajax({
-    method: 'get',
-    url: '/api/photos'
-  });
-};
-var fetchPhoto = function fetchPhoto(id) {
-  return $.ajax({
-    method: 'get',
-    url: "/api/photos/".concat(id) // data: {photo: photo}
-    // dataType: 'json'
-
-  });
-};
 
 /***/ }),
 
