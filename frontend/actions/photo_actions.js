@@ -15,8 +15,8 @@ export const fetchPhotos = () => dispatch => {
 };
 
 export const fetchPhoto = id => dispatch => {
-    return APIReq.fetchPhoto(id).then( photo => {
-        return dispatch({type: RECEIVE_PHOTO, photo})
+    return APIReq.fetchPhoto(id).then( payload => {
+        return dispatch({type: RECEIVE_PHOTO, payload})
     });
 };
 

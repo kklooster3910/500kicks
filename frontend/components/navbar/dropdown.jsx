@@ -16,8 +16,9 @@ class DropDown extends React.Component {
 
     renderDropDown() {
         return (
-            <ul className={this.state.hidden ? 'drop-down hide' : 'drop-down' }>
-                <p className='currentUser-banner'>Logged in as: {this.props.currentUser.username}</p>
+            <ul className={(this.state.hidden ? 'drop-down hide' : 'drop-down') + ' drop-down-content'}>
+                <p className='logged-in-title'>Logged in as:</p> 
+                <p className='current-user'>{this.props.currentUser.username}</p>
                 <button className='loggedin-logout-btn drop-down-item' onClick={this.props.logout}>Logout</button>   
             </ul>
         )    
@@ -25,7 +26,7 @@ class DropDown extends React.Component {
 
     render () {  
         return (
-            <div >
+            <div className='drop-down-btn-stuff' >
                 <button onClick={this.addHiddenClass}><i className="far fa-user-circle"></i></button>
                 {this.renderDropDown()}
             </div>

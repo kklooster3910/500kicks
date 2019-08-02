@@ -1,26 +1,53 @@
-// .far fa-user-circle{
-//     font-size: 30px;
-// }
+.drop-down-content {
+    position: absolute;
+    top: 30px;
+    left: -50px;
+}
 
-.drop-down {
-    // position: absolute;
-    // // flex-direction: row;
-    // font-family: 'Permanent Marker', cursive;
-    // visibility: hidden;
-    // display: none;
+.drop-down-btn-stuff {
+    position: relative;
 }
 
 .hide {
     visibility: hidden;
 }
 
-.drop-down:hover {
-    // display: block;
-    // // position: absolute;
-    // right: 0;
-    // top: 30px;
-} 
+.drop-down-content p {
+    margin: 5px 0;
+    padding: 5px;
+}
 
-.on-click {
+.drop-down-content .current-user {   //only select username if it's below/contained in drop-down-content tag
+    padding: 3px;
+    color: #2C2F40;
+}
 
+.drop-down-content .logged-in-title {
+    margin-top: 12px;
+    padding: 2px;
+    color: #2C2F40;
+}
+
+.currentUser-banner {
+    background-color: #2C2F40;
+    padding: 9px;
+    text-align: center;
+    color: #CEECEF;
+    // border: solid 2px;
+    // border-color: #CEECEF;
+    // border-radius: 26px;
+    font-size: 18px;
+    margin-left: 12px;
+}
+
+.loggedin-logout-btn {
+    background-color: #2C2F40;
+    padding: 9px;
+    text-align: center;
+    color: #CEECEF;
+    border: solid 2px;
+    border-color: #CEECEF;
+    border-radius: 26px;
+    font-size: 18px;
+    margin-left: 12px;
 }

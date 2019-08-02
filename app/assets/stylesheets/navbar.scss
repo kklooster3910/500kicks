@@ -1,5 +1,6 @@
 .nav-bar {
     display: flex;
+    height: 57px;
     background-color: #2C2F40;
     flex-direction: row;
     justify-content: space-between;
@@ -41,33 +42,12 @@
     margin-right: 12px;
 }
 
-.loggedin-logout-btn {
-    background-color: #2C2F40;
-    padding: 9px;
-    text-align: center;
-    color: #CEECEF;
-    border: solid 2px;
-    border-color: #CEECEF;
-    border-radius: 26px;
-    font-size: 18px;
-    margin-left: 12px;
-}
 
 .drop-down-menu {
 
 }
 
-.currentUser-banner {
-    background-color: #2C2F40;
-    padding: 9px;
-    text-align: center;
-    color: #CEECEF;
-    // border: solid 2px;
-    // border-color: #CEECEF;
-    // border-radius: 26px;
-    font-size: 18px;
-    margin-left: 12px;
-}
+
 
 .discover-kix-navbtn {
     background-color: #2C2F40;
