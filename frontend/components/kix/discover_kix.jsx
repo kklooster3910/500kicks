@@ -19,7 +19,7 @@ class DiscoverKix extends React.Component {
         const kix = this.props.photos.map( photo => (
             <KixIndexItem key={photo.id} photo={photo} />
         ));
-
+        // debugger;
         return (
             <div>
                 {/* <img src="https://images.unsplash.com/photo-1509927083803-4bd519298ac4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"/>

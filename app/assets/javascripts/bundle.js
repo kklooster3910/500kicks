@@ -474,7 +474,8 @@ function (_React$Component) {
           key: photo.id,
           photo: photo
         });
-      });
+      }); // debugger;
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, kix);
     }
   }]);
@@ -548,11 +549,14 @@ __webpack_require__.r(__webpack_exports__);
 
 var KixIndexItem = function KixIndexItem(_ref) {
   var photo = _ref.photo;
+  // debugger;
   return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
     to: "/kix/".concat(photo.id)
   }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("li", {
     key: photo.id
-  }, "Photo id: ", photo.id + ' ', "Photo title: ", photo.title + ' ', "Photographer_id: ", photo.photographer_id + ' '));
+  }, "Photo id: ", photo.id + ' ', "Photo title: ", photo.title + ' ', "Photographer_id: ", photo.photographer_id + ' ', react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("img", {
+    src: photo.image_url
+  })));
 }; // const msp = state => { 
 //     debugger;
 //     return ({
@@ -631,13 +635,16 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      // debugger;
       var kix = this.props.photo;
 
       if (!kix) {
         return null;
       }
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "photoId: ", kix.id + ' ', "photo_title: ", kix.title + ' ', "photographer_id: ", kix.photographer_id + ' ');
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "photoId: ", kix.id + ' ', "photo_title: ", kix.title + ' ', "photographer_id: ", kix.photographer_id + ' ', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: kix.image_url
+      }));
     }
   }]);
 
@@ -30928,7 +30935,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

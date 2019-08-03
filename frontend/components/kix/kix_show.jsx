@@ -20,6 +20,7 @@ class KixShow extends React.Component {
     };
     
     render() {
+        // debugger;
         let kix = this.props.photo
         if (!kix) {
             return null;
@@ -29,6 +30,7 @@ class KixShow extends React.Component {
                 photoId: {kix.id + ' '} 
                 photo_title: {kix.title + ' '}
                 photographer_id: {kix.photographer_id + ' '}
+                <img src={kix.image_url}/>
             </div>
         );
     };

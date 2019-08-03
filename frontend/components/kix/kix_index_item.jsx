@@ -5,11 +5,13 @@ import { Link } from 'react-router-dom';
 
 
 export const KixIndexItem = ({ photo }) => {
+    // debugger;
     return(
         <Link to={`/kix/${photo.id}`}><li key={photo.id}>
             Photo id: {photo.id + ' '}
             Photo title: {photo.title + ' '}
             Photographer_id: {photo.photographer_id + ' '}
+            <img src={photo.image_url}/>
         </li></Link>
     )     
 }
