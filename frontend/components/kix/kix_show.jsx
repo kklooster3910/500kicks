@@ -21,7 +21,7 @@ class KixShow extends React.Component {
     
     render() {
         // debugger;
-        let kix = this.props.photo
+        const kix = this.props.photo
         if (!kix) {
             return null;
         }

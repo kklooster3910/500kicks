@@ -7,6 +7,7 @@ import NavBar from './navbar/navbar';
 import Home from './home/home';
 import DiscoverKixContainer from './kix/kix_container';
 import KixShowContainer from './kix/kix_show_container';
+import UserProfileContainer from './users/user_container';
 
 const App = () => (
     <div>
@@ -15,6 +16,7 @@ const App = () => (
             <Route exact path='/' component={Home} />
             <Route exact path='/kix' component={DiscoverKixContainer} />
             <Route exact path='/kix/:photoId' component={KixShowContainer} />
+            <Route exact path='/users/:userId' component={UserProfileContainer} />
             <AuthRoute path='/signup' component={SignupContainer}/>
             <AuthRoute path='/login' component={LoginContainer}/>
         </Switch>
