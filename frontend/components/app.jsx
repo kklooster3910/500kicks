@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { AuthRoute } from '../util/route_util';
+import { ProtectedRoute } from '../util/route_util';
 import SignupContainer from './session/signup_container';
 import LoginContainer from './session/login_container';
 import NavBar from './navbar/navbar';
@@ -8,6 +9,8 @@ import Home from './home/home';
 import DiscoverKixContainer from './kix/kix_container';
 import KixShowContainer from './kix/kix_show_container';
 import UserProfileContainer from './users/user_container';
+import PhotoFormUploadContainer from './photoform/photoupload_container';
+
 
 const App = () => (
     <div>
@@ -19,6 +22,7 @@ const App = () => (
             <Route exact path='/users/:userId' component={UserProfileContainer} />
             <AuthRoute path='/signup' component={SignupContainer}/>
             <AuthRoute path='/login' component={LoginContainer}/>
+            <ProtectedRoute path='/uploadphoto' component={PhotoFormUploadContainer} /> //make this a protected route before the night is through fam
         </Switch>
     </div>
 )

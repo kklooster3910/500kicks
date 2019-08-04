@@ -1,5 +1,6 @@
 import React from 'react';
 import {withRouter} from 'react-router'
+import KixIndexItem from '../kix/kix_index_item'
 
 class UserProfile extends React.Component {
     constructor(props) {
@@ -7,12 +8,10 @@ class UserProfile extends React.Component {
     };
 
     componentDidMount() {
-        // debugger;
         this.props.fetchUser(this.props.match.params.userId)
     }
 
     componentDidUpdate(prevProps) {
-        // debugger;
         if(this.props.match.params.userId !== prevProps.match.params.userId) {
             this.props.fetchUser(this.props.match.params.userId)
         };
@@ -20,15 +19,25 @@ class UserProfile extends React.Component {
 
     render () {
         const cUser = this.props.user
+        let kix;
         if (!cUser) {
             return null;
         }
-        // debugger;
+        if (cUser.photos !== undefined) {
+            kix = Object.values(cUser.photos).map( photo => (
+                <KixIndexItem key={photo.id} photo={photo} />
+            ));
+        } else {
+            kix = <div></div>
+        }
+
+  
         return (
             <div>
                 cUserId: {cUser.id + ' '}
                 cUserUsername: {cUser.username + ' '}
                 cUserEmail: {cUser.email + ' '}
+                {kix}
             </div>
         )
     }

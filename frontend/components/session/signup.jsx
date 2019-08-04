@@ -2,9 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 class Signup extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        // debugger;
         this.state = {
             username: '',
             email: '',
@@ -38,7 +37,6 @@ class Signup extends React.Component {
                 <li key={i}>{err}</li>
             ))
         }
-        // debugger;
         return (
             <div>
                 <div className='signup-home-img'></div>

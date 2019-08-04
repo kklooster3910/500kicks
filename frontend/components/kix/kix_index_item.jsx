@@ -13,8 +13,7 @@ export const KixIndexItem = ({ photo }) => {
             Photographer_id: {photo.photographer_id + ' '}
             <img src={photo.image_url}/>
         </li></Link>
-    )     
-}
+    )}
 
 // const msp = state => { 
 //     debugger;

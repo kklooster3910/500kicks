@@ -132,7 +132,7 @@ document.addEventListener('DOMContentLoaded', function () {
 /*!*******************************************!*\
   !*** ./frontend/actions/photo_actions.js ***!
   \*******************************************/
-/*! exports provided: RECEIVE_ALL_PHOTOS, RECEIVE_PHOTO, RECEIVE_RESET_ERRORS, resetErrors, fetchPhotos, fetchPhoto */
+/*! exports provided: RECEIVE_ALL_PHOTOS, RECEIVE_PHOTO, RECEIVE_RESET_ERRORS, resetErrors, fetchPhotos, fetchPhoto, createPhoto */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -143,6 +143,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "resetErrors", function() { return resetErrors; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchPhotos", function() { return fetchPhotos; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchPhoto", function() { return fetchPhoto; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createPhoto", function() { return createPhoto; });
 /* harmony import */ var _util_photo_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/photo_api_util */ "./frontend/util/photo_api_util.js");
 
 var RECEIVE_ALL_PHOTOS = 'RECEIVE_ALL_PHOTOS';
@@ -150,6 +151,7 @@ var RECEIVE_PHOTO = 'RECEIVE_PHOTO';
 var RECEIVE_RESET_ERRORS = 'RECEIVE_RESET_ERRORS';
 var resetErrors = function resetErrors() {
   //you might not need this, delete if no
+  //add another cb to .then so that you can receive and handle errors
   return {
     type: RECEIVE_RESET_ERRORS
   };
@@ -167,6 +169,17 @@ var fetchPhotos = function fetchPhotos() {
 var fetchPhoto = function fetchPhoto(id) {
   return function (dispatch) {
     return _util_photo_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchPhoto"](id).then(function (payload) {
+      return dispatch({
+        type: RECEIVE_PHOTO,
+        payload: payload
+      });
+    });
+  };
+};
+var createPhoto = function createPhoto(photo) {
+  return function (dispatch) {
+    debugger;
+    return _util_photo_api_util__WEBPACK_IMPORTED_MODULE_0__["createPhoto"](photo).then(function (payload) {
       return dispatch({
         type: RECEIVE_PHOTO,
         payload: payload
@@ -312,6 +325,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _kix_kix_container__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./kix/kix_container */ "./frontend/components/kix/kix_container.js");
 /* harmony import */ var _kix_kix_show_container__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./kix/kix_show_container */ "./frontend/components/kix/kix_show_container.js");
 /* harmony import */ var _users_user_container__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./users/user_container */ "./frontend/components/users/user_container.js");
+/* harmony import */ var _photoform_photoupload_container__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./photoform/photoupload_container */ "./frontend/components/photoform/photoupload_container.js");
+
+
 
 
 
@@ -349,7 +365,10 @@ var App = function App() {
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_2__["AuthRoute"], {
     path: "/login",
     component: _session_login_container__WEBPACK_IMPORTED_MODULE_4__["default"]
-  })));
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_2__["ProtectedRoute"], {
+    path: "/uploadphoto",
+    component: _photoform_photoupload_container__WEBPACK_IMPORTED_MODULE_10__["default"]
+  }), " //make this a protected route before the night is through fam"));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (App);
@@ -897,6 +916,171 @@ var mdp = function mdp(dispatch) {
 
 /***/ }),
 
+/***/ "./frontend/components/photoform/photoupload_container.js":
+/*!****************************************************************!*\
+  !*** ./frontend/components/photoform/photoupload_container.js ***!
+  \****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_photo_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/photo_actions */ "./frontend/actions/photo_actions.js");
+/* harmony import */ var _photoupload_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./photoupload_form */ "./frontend/components/photoform/photoupload_form.jsx");
+
+
+
+
+
+var msp = function msp(state) {
+  return {
+    errors: state.errors,
+    currentUser: state.session.currentUser
+  };
+};
+
+var mdp = function mdp(dispatch) {
+  return {
+    uploadPhoto: function uploadPhoto(photo) {
+      return dispatch(Object(_actions_photo_actions__WEBPACK_IMPORTED_MODULE_2__["createPhoto"])(photo));
+    },
+    resetErrors: function resetErrors() {
+      return dispatch(_actions_photo_actions__WEBPACK_IMPORTED_MODULE_2__["resetErrors"]);
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router__WEBPACK_IMPORTED_MODULE_0__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(msp, mdp)(_photoupload_form__WEBPACK_IMPORTED_MODULE_3__["default"])));
+
+/***/ }),
+
+/***/ "./frontend/components/photoform/photoupload_form.jsx":
+/*!************************************************************!*\
+  !*** ./frontend/components/photoform/photoupload_form.jsx ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+var PhotoForm =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(PhotoForm, _React$Component);
+
+  function PhotoForm(props) {
+    var _this;
+
+    _classCallCheck(this, PhotoForm);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(PhotoForm).call(this, props));
+    _this.state = {
+      title: '',
+      photoFile: null //other stuffs to go here
+
+    };
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.handleFile = _this.handleFile.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(PhotoForm, [{
+    key: "handleFile",
+    value: function handleFile(e) {
+      this.setState({
+        photoFile: e.target.files[0]
+      });
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit(e) {
+      var _this2 = this;
+
+      e.preventDefault();
+      debugger;
+      var formData = new FormData();
+      formData.append('photo[title]', this.state.title);
+      formData.append('photo[photo]', this.state.photoFile);
+      this.props.uploadPhoto(formData).then(function () {
+        return _this2.props.history.push("/users/".concat(_this2.props.currentUser.id));
+      });
+    }
+  }, {
+    key: "update",
+    // componentDidMount() {
+    //     this.props.resetErrors();
+    // };
+    value: function update(field) {
+      var _this3 = this;
+
+      return function (e) {
+        _this3.setState(_defineProperty({}, field, e.target.value));
+      };
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      console.log(this.state); // let errors = Object.values(this.props) make sure you implement error
+      //handling on the back end as well
+      // you need to implment it for photo show pages, index pages
+      // maybe add some errors for @ not being there in email
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        className: "photoupload-form",
+        onSubmit: this.handleSubmit
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "photoupload-form-content-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+        className: "photoupload-form-header"
+      }, "Upload Your Kix"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        value: this.state.title,
+        onChange: this.update('title'),
+        className: "photupload-title-input",
+        placeholder: "Photo Title!"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "file",
+        onChange: this.handleFile
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Post Kix!")));
+    }
+  }]);
+
+  return PhotoForm;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+;
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(PhotoForm));
+
+/***/ }),
+
 /***/ "./frontend/components/root.jsx":
 /*!**************************************!*\
   !*** ./frontend/components/root.jsx ***!
@@ -1154,8 +1338,7 @@ function (_React$Component) {
 
     _classCallCheck(this, Signup);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Signup).call(this, props)); // debugger;
-
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Signup).call(this, props));
     _this.state = {
       username: '',
       email: '',
@@ -1208,8 +1391,7 @@ function (_React$Component) {
             key: i
           }, err);
         });
-      } // debugger;
-
+      }
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "signup-home-img"
@@ -1311,6 +1493,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var _kix_kix_index_item__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../kix/kix_index_item */ "./frontend/components/kix/kix_index_item.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1332,6 +1515,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var UserProfile =
 /*#__PURE__*/
 function (_React$Component) {
@@ -1346,13 +1530,11 @@ function (_React$Component) {
   _createClass(UserProfile, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      // debugger;
       this.props.fetchUser(this.props.match.params.userId);
     }
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
-      // debugger;
       if (this.props.match.params.userId !== prevProps.match.params.userId) {
         this.props.fetchUser(this.props.match.params.userId);
       }
@@ -1363,13 +1545,24 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       var cUser = this.props.user;
+      var kix;
 
       if (!cUser) {
         return null;
-      } // debugger;
+      }
 
+      if (cUser.photos !== undefined) {
+        kix = Object.values(cUser.photos).map(function (photo) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_kix_kix_index_item__WEBPACK_IMPORTED_MODULE_2__["default"], {
+            key: photo.id,
+            photo: photo
+          });
+        });
+      } else {
+        kix = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
+      }
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "cUserId: ", cUser.id + ' ', "cUserUsername: ", cUser.username + ' ', "cUserEmail: ", cUser.email + ' ');
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "cUserId: ", cUser.id + ' ', "cUserUsername: ", cUser.username + ' ', "cUserEmail: ", cUser.email + ' ', kix);
     }
   }]);
 
@@ -1651,13 +1844,14 @@ var configureStore = function configureStore() {
 /*!*****************************************!*\
   !*** ./frontend/util/photo_api_util.js ***!
   \*****************************************/
-/*! exports provided: fetchPhotos, fetchPhoto */
+/*! exports provided: fetchPhotos, fetchPhoto, createPhoto */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchPhotos", function() { return fetchPhotos; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchPhoto", function() { return fetchPhoto; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createPhoto", function() { return createPhoto; });
 var fetchPhotos = function fetchPhotos() {
   return $.ajax({
     method: 'get',
@@ -1672,6 +1866,17 @@ var fetchPhoto = function fetchPhoto(id) {
 
   });
 };
+var createPhoto = function createPhoto(photo) {
+  return $.ajax({
+    method: 'post',
+    url: "/api/photos",
+    data: {
+      photo: photo
+    },
+    contentType: false,
+    processData: false
+  });
+};
 
 /***/ }),
 
@@ -1679,12 +1884,13 @@ var fetchPhoto = function fetchPhoto(id) {
 /*!**************************************!*\
   !*** ./frontend/util/route_util.jsx ***!
   \**************************************/
-/*! exports provided: AuthRoute */
+/*! exports provided: AuthRoute, ProtectedRoute */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AuthRoute", function() { return AuthRoute; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProtectedRoute", function() { return ProtectedRoute; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
@@ -1704,10 +1910,24 @@ var msp = function msp(state) {
 //go back and watch the videos when you need to do protected routes, shouldn't be much setup here. 
 
 
-var Auth = function Auth(_ref) {
+var Protected = function Protected(_ref) {
   var loggedIn = _ref.loggedIn,
       path = _ref.path,
       Component = _ref.component;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+    path: path,
+    render: function render(props) {
+      return loggedIn ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Component, props) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Redirect"], {
+        to: "/signup"
+      });
+    }
+  });
+};
+
+var Auth = function Auth(_ref2) {
+  var loggedIn = _ref2.loggedIn,
+      path = _ref2.path,
+      Component = _ref2.component;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: path,
     render: function render(props) {
@@ -1719,6 +1939,7 @@ var Auth = function Auth(_ref) {
 };
 
 var AuthRoute = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(msp)(Auth));
+var ProtectedRoute = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(msp)(Protected));
 
 /***/ }),
 
