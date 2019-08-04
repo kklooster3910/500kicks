@@ -412,6 +412,7 @@ var Home = function Home(_ref) {
   var maybeDemo;
   var maybeCreateNewUser;
   var kixShowLink;
+  var uploadPhoto;
 
   var handleClick = function handleClick(e) {
     e.preventDefault();
@@ -429,7 +430,11 @@ var Home = function Home(_ref) {
       className: "home-createnewuser-btn"
     }, "Create New User"));
   } else {
-    maybeDemo = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null);
+    uploadPhoto = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+      to: "/uploadphoto"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      className: "home-upload-photo-button"
+    }, "Upload Kix"));
   }
 
   kixShowLink = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
@@ -443,7 +448,7 @@ var Home = function Home(_ref) {
     className: "home-img-container"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "home-interactive"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, maybeDemo, maybeCreateNewUser, kixShowLink), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, maybeDemo, maybeCreateNewUser, kixShowLink, uploadPhoto), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
     className: "home-logo"
   }, "Share Your Kix..."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
     className: "home-logo-kick"
@@ -536,9 +541,10 @@ function (_React$Component) {
           key: photo.id,
           photo: photo
         });
-      }); // debugger;
-
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, kix);
+      });
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "discoverkix-gallery-container"
+      }, kix);
     }
   }]);
 
@@ -612,13 +618,21 @@ __webpack_require__.r(__webpack_exports__);
 var KixIndexItem = function KixIndexItem(_ref) {
   var photo = _ref.photo;
   // debugger;
-  return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+  return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+    className: "kix-index-item-image-container"
+  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
     to: "/kix/".concat(photo.id)
-  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("li", {
+  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+    className: "kix-index-item",
     key: photo.id
-  }, "Photo id: ", photo.id + ' ', "Photo title: ", photo.title + ' ', "Photographer_id: ", photo.photographer_id + ' ', react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("img", {
+  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+    className: "kix-index-image-container"
+  }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("span", {
+    className: "kix-index-image-title"
+  }, photo.title), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("img", {
+    className: "kix-index-item-image",
     src: photo.image_url
-  })));
+  })))));
 }; // const msp = state => { 
 //     debugger;
 //     return ({
@@ -825,7 +839,11 @@ function (_React$Component) {
         className: "logged-in-title"
       }, "Logged in as:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "current-user"
-      }, this.props.currentUser.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, this.props.currentUser.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/uploadphoto"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "upload-photo-nav-btn drop-down-item"
+      }, "Upload Kix!")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "loggedin-logout-btn drop-down-item",
         onClick: this.props.logout
       }, "Logout"));
@@ -886,6 +904,15 @@ __webpack_require__.r(__webpack_exports__);
 var NavBar = function NavBar(_ref) {
   var currentUser = _ref.currentUser,
       logout = _ref.logout;
+  var uploadPhotoButton = currentUser ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "uploadkix-button-container"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/uploadphoto"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "upload-kix-nav-btn"
+  }, "Upload Some Kix"))) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "uploadkix-button-container"
+  });
   var display = currentUser ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "session-btns"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_dropdown__WEBPACK_IMPORTED_MODULE_3__["default"], null)) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -899,16 +926,22 @@ var NavBar = function NavBar(_ref) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     className: "nav-session-button"
   }, "Sign Up")));
-  var kixShowLink = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+  var discoverKixLink = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/kix"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     className: "discover-kix-navbtn"
   }, "Discover Kix!"));
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", {
     className: "nav-bar"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "logo-links"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "logo"
-  }, "500kix!", kixShowLink), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, display));
+  }, "500kix!")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "discover-kix-link"
+  }, discoverKixLink), uploadPhotoButton), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, display));
 };
 
 var msp = function msp(state) {
@@ -1055,10 +1088,17 @@ function (_React$Component) {
       });
     }
   }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.resetErrors();
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate() {
+      this.props.resetErrors();
+    }
+  }, {
     key: "update",
-    // componentDidMount() {
-    //     this.props.resetErrors();
-    // };
     value: function update(field) {
       var _this4 = this;
 
@@ -1085,9 +1125,12 @@ function (_React$Component) {
 
       ;
       var preview = this.state.photoUrl ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "image-preview",
         src: this.state.photoUrl
       }) : null;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "photoupload-form-img"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         className: "photoupload-form",
         onSubmit: this.handleSubmit
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1102,10 +1145,17 @@ function (_React$Component) {
         placeholder: "Photo Title!"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "file",
+        className: "photofile-upload-input",
         onChange: this.handleFile
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "photoupload-form-errors"
-      }, errors), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Image Preview"), preview), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Post Kix!")));
+      }, errors)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "postkix-btn"
+      }, "Post Kix!")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "image-preview-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "image-preview-title"
+      }, "Image Preview"), preview));
     }
   }]);
 
@@ -1343,8 +1393,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -1385,22 +1433,13 @@ function (_React$Component) {
   }
 
   _createClass(Signup, [{
-    key: "update",
-    value: function update(field) {
-      var _this2 = this;
-
-      return function (e) {
-        _this2.setState(_defineProperty({}, field, e.target.value));
-      };
-    }
-  }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
-      var _this3 = this;
+      var _this2 = this;
 
       e.preventDefault();
       this.props.createUser(this.state).then(function () {
-        return _this3.props.history.push('/');
+        return _this2.props.history.push('/');
       });
       var blankState = {
         username: '',
@@ -1417,7 +1456,7 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this4 = this;
+      var _this3 = this;
 
       var errors = Object.values(this.props.errors);
 
@@ -1445,7 +1484,7 @@ function (_React$Component) {
         className: "sessionform-input",
         placeholder: "Username"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "text",
+        type: "email",
         value: this.state.email,
         onChange: this.update('email'),
         className: "sessionform-input",
@@ -1462,7 +1501,7 @@ function (_React$Component) {
         to: "/"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: function onClick() {
-          return _this4.props.resetErrors();
+          return _this3.props.resetErrors();
         },
         className: "sessionform-home-btn"
       }, "Home")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {

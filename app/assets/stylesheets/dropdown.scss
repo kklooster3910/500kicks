@@ -6,6 +6,7 @@
 
 .drop-down-btn-stuff {
     position: relative;
+    top: 8px;
 }
 
 .hide {
@@ -50,4 +51,24 @@
     border-radius: 26px;
     font-size: 18px;
     margin-left: 12px;
+    opacity: 1;
+    transition: 0.6s;
 }
+
+.loggedin-logout-btn:hover { opacity: 0.6 }
+
+.upload-photo-nav-btn {
+    background-color: #2C2F40;
+    padding: 9px;
+    text-align: center;
+    color: #CEECEF;
+    border: solid 2px;
+    border-color: #CEECEF;
+    border-radius: 26px;
+    font-size: 18px;
+    margin-left: 12px;
+    opacity: 1;
+    transition: 0.6s;
+}
+
+.upload-photo-nav-btn:hover { opacity: 0.6 }

@@ -19,6 +19,7 @@ class DropDown extends React.Component {
             <ul className={(this.state.hidden ? 'drop-down hide' : 'drop-down') + ' drop-down-content'}>
                 <p className='logged-in-title'>Logged in as:</p> 
                 <p className='current-user'>{this.props.currentUser.username}</p>
+                <Link to='/uploadphoto'><button className='upload-photo-nav-btn drop-down-item'>Upload Kix!</button></Link>
                 <button className='loggedin-logout-btn drop-down-item' onClick={this.props.logout}>Logout</button>   
             </ul>
         )    

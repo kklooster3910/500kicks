@@ -31,9 +31,13 @@ class PhotoForm extends React.Component {
         );
     };
     
-    // componentDidMount() {
-    //     this.props.resetErrors();
-    // };
+    componentDidMount() {
+        this.props.resetErrors();
+    };
+
+    componentDidUpdate() {
+        this.props.resetErrors();
+    };
 
 
     update(field) {
@@ -54,25 +58,30 @@ class PhotoForm extends React.Component {
             ));
         };
     
-        const preview = this.state.photoUrl ? <img src={this.state.photoUrl} /> : null;
+        const preview = this.state.photoUrl ? <img className='image-preview' src={this.state.photoUrl} /> : null;
+
         return(
             <div>
+                <div className='photoupload-form-img'></div>
                 <form className='photoupload-form' onSubmit={this.handleSubmit}>
                     <div className='photoupload-form-content-container'>
                         <h2 className='photoupload-form-header'>Upload Your Kix</h2>
-                            <input type='text'
-                                value={this.state.title}
-                                onChange={this.update('title')}
-                                className='photupload-title-input'
-                                placeholder='Photo Title!'/>
-                            <input type='file'
-                                onChange={this.handleFile}/>
-                            <p className='photoupload-form-errors'>{errors}</p>
-                            <h3>Image Preview</h3>
-                            {preview}    
-                    </div>
-                    <button>Post Kix!</button>
+                        <input type='text'
+                            value={this.state.title}
+                            onChange={this.update('title')}
+                            className='photupload-title-input'
+                            placeholder='Photo Title!'/>
+                        <input type='file'
+                            className='photofile-upload-input'
+                            onChange={this.handleFile}/>
+                        <p className='photoupload-form-errors'>{errors}</p>
+                    </div>   
+                    <button className='postkix-btn'>Post Kix!</button>
                 </form>
+                    <div className='image-preview-container'>
+                        <p className='image-preview-title'>Image Preview</p>
+                        {preview}
+                    </div> 
             </div>
         )
     }

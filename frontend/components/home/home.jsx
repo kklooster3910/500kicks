@@ -8,6 +8,7 @@ const Home = ({ demoUser, demoLogin, currentUser}) => {
     let maybeDemo;
     let maybeCreateNewUser;
     let kixShowLink;
+    let uploadPhoto;
     
     const handleClick = (e) => {
         e.preventDefault();
@@ -18,7 +19,7 @@ const Home = ({ demoUser, demoLogin, currentUser}) => {
         maybeDemo = <button className='home-demo-btn' onClick={handleClick}>Demo Login!</button>
         maybeCreateNewUser = <Link to='/signup'><button className='home-createnewuser-btn'>Create New User</button></Link>
     } else {
-       maybeDemo = <button></button>
+        uploadPhoto = <Link to='/uploadphoto'><button className='home-upload-photo-button'>Upload Kix</button></Link>
     }
     
     kixShowLink = <Link to='/kix'><button className='discover-kix-btn'>Discover Kix!</button></Link>
@@ -31,6 +32,7 @@ const Home = ({ demoUser, demoLogin, currentUser}) => {
                         {maybeDemo}
                         {maybeCreateNewUser}
                         {kixShowLink}
+                        {uploadPhoto}
                     </div>
                     <h4 className='home-logo'>Share Your Kix...</h4>
                     <h4 className='home-logo-kick'>...Get Kicking</h4>

@@ -12,12 +12,6 @@ class Signup extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     };
 
-    update(field) {
-        return e => {
-            this.setState({[field]: e.target.value});
-        };
-    };
-
     handleSubmit(e) {
         e.preventDefault();
         this.props.createUser(this.state)
@@ -48,7 +42,7 @@ class Signup extends React.Component {
                                 onChange={this.update('username')}
                                 className='sessionform-input'
                                 placeholder='Username'/>
-                            <input type="text"
+                            <input type="email"
                                 value={this.state.email}
                                 onChange={this.update('email')} 
                                 className='sessionform-input'
