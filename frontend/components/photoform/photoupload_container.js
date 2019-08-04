@@ -5,7 +5,7 @@ import PhotoForm from './photoupload_form';
 
 const msp = state => ({
     errors: state.errors,
-    currentUser: state.session.currentUser
+    currentUser: state.session.id
 });
 
 const mdp = dispatch => ({

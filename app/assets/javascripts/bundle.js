@@ -132,7 +132,7 @@ document.addEventListener('DOMContentLoaded', function () {
 /*!*******************************************!*\
   !*** ./frontend/actions/photo_actions.js ***!
   \*******************************************/
-/*! exports provided: RECEIVE_ALL_PHOTOS, RECEIVE_PHOTO, RECEIVE_RESET_ERRORS, resetErrors, fetchPhotos, fetchPhoto, createPhoto */
+/*! exports provided: RECEIVE_ALL_PHOTOS, RECEIVE_PHOTO, RECEIVE_RESET_ERRORS, RECEIVE_PHOTO_UPLOAD, RECEIVE_CREATE_PHOTO_ERRORS, resetErrors, fetchPhotos, fetchPhoto, createPhoto */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -140,6 +140,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_ALL_PHOTOS", function() { return RECEIVE_ALL_PHOTOS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_PHOTO", function() { return RECEIVE_PHOTO; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_RESET_ERRORS", function() { return RECEIVE_RESET_ERRORS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_PHOTO_UPLOAD", function() { return RECEIVE_PHOTO_UPLOAD; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_CREATE_PHOTO_ERRORS", function() { return RECEIVE_CREATE_PHOTO_ERRORS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "resetErrors", function() { return resetErrors; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchPhotos", function() { return fetchPhotos; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchPhoto", function() { return fetchPhoto; });
@@ -149,6 +151,8 @@ __webpack_require__.r(__webpack_exports__);
 var RECEIVE_ALL_PHOTOS = 'RECEIVE_ALL_PHOTOS';
 var RECEIVE_PHOTO = 'RECEIVE_PHOTO';
 var RECEIVE_RESET_ERRORS = 'RECEIVE_RESET_ERRORS';
+var RECEIVE_PHOTO_UPLOAD = 'RECEIVE_PHOTO_UPLOAD';
+var RECEIVE_CREATE_PHOTO_ERRORS = 'RECEIVE_CREATE_PHOTO_ERRORS';
 var resetErrors = function resetErrors() {
   //you might not need this, delete if no
   //add another cb to .then so that you can receive and handle errors
@@ -176,13 +180,18 @@ var fetchPhoto = function fetchPhoto(id) {
     });
   };
 };
-var createPhoto = function createPhoto(photo) {
+var createPhoto = function createPhoto(formData) {
   return function (dispatch) {
-    debugger;
-    return _util_photo_api_util__WEBPACK_IMPORTED_MODULE_0__["createPhoto"](photo).then(function (payload) {
+    // debugger;
+    return _util_photo_api_util__WEBPACK_IMPORTED_MODULE_0__["createPhoto"](formData).then(function (payload) {
       return dispatch({
-        type: RECEIVE_PHOTO,
+        type: RECEIVE_PHOTO_UPLOAD,
         payload: payload
+      });
+    }, function (err) {
+      return dispatch({
+        type: RECEIVE_CREATE_PHOTO_ERRORS,
+        errors: err.responseJSON
       });
     });
   };
@@ -937,7 +946,7 @@ __webpack_require__.r(__webpack_exports__);
 var msp = function msp(state) {
   return {
     errors: state.errors,
-    currentUser: state.session.currentUser
+    currentUser: state.session.id
   };
 };
 
@@ -1004,8 +1013,8 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(PhotoForm).call(this, props));
     _this.state = {
       title: '',
-      photoFile: null //other stuffs to go here
-
+      photoFile: null,
+      photoUrl: null
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.handleFile = _this.handleFile.bind(_assertThisInitialized(_this));
@@ -1015,22 +1024,34 @@ function (_React$Component) {
   _createClass(PhotoForm, [{
     key: "handleFile",
     value: function handleFile(e) {
-      this.setState({
-        photoFile: e.target.files[0]
-      });
+      var _this2 = this;
+
+      var file = e.target.files[0];
+      var fileReader = new FileReader();
+
+      fileReader.onloadend = function () {
+        _this2.setState({
+          photoFile: file,
+          photoUrl: fileReader.result
+        });
+      };
+
+      if (file) {
+        fileReader.readAsDataURL(file);
+      }
     }
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
-      var _this2 = this;
+      var _this3 = this;
 
       e.preventDefault();
-      debugger;
       var formData = new FormData();
       formData.append('photo[title]', this.state.title);
       formData.append('photo[photo]', this.state.photoFile);
+      formData.append('photo[photographer_id]', this.props.currentUser.id);
       this.props.uploadPhoto(formData).then(function () {
-        return _this2.props.history.push("/users/".concat(_this2.props.currentUser.id));
+        return _this3.props.history.push("/users/".concat(_this3.props.currentUser.id));
       });
     }
   }, {
@@ -1039,20 +1060,33 @@ function (_React$Component) {
     //     this.props.resetErrors();
     // };
     value: function update(field) {
-      var _this3 = this;
+      var _this4 = this;
 
       return function (e) {
-        _this3.setState(_defineProperty({}, field, e.target.value));
+        _this4.setState(_defineProperty({}, field, e.target.value));
       };
     }
   }, {
     key: "render",
     value: function render() {
-      console.log(this.state); // let errors = Object.values(this.props) make sure you implement error
+      // let errors = Object.values(this.props) make sure you implement error
       //handling on the back end as well
       // you need to implment it for photo show pages, index pages
       // maybe add some errors for @ not being there in email
+      var errors = Object.values(this.props.errors);
 
+      if (errors.length > 0) {
+        errors = errors.map(function (err, i) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+            key: i
+          }, err);
+        });
+      }
+
+      ;
+      var preview = this.state.photoUrl ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: this.state.photoUrl
+      }) : null;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         className: "photoupload-form",
         onSubmit: this.handleSubmit
@@ -1069,7 +1103,9 @@ function (_React$Component) {
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "file",
         onChange: this.handleFile
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Post Kix!")));
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "photoupload-form-errors"
+      }, errors), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Image Preview"), preview), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Post Kix!")));
     }
   }]);
 
@@ -1642,8 +1678,10 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/session_actions */ "./frontend/actions/session_actions.js");
-/* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash/merge */ "./node_modules/lodash/merge.js");
-/* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash_merge__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _actions_photo_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/photo_actions */ "./frontend/actions/photo_actions.js");
+/* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash/merge */ "./node_modules/lodash/merge.js");
+/* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash_merge__WEBPACK_IMPORTED_MODULE_2__);
+
 
 
 
@@ -1654,13 +1692,16 @@ var errorsReducer = function errorsReducer() {
 
   switch (action.type) {
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_SESSION_ERRORS"]:
-      return lodash_merge__WEBPACK_IMPORTED_MODULE_1___default()({}, state, action.errors);
+      return lodash_merge__WEBPACK_IMPORTED_MODULE_2___default()({}, state, action.errors);
 
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_RESET_ERRORS"]:
       return [];
 
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CURRENT_USER"]:
       return [];
+
+    case _actions_photo_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_CREATE_PHOTO_ERRORS"]:
+      return lodash_merge__WEBPACK_IMPORTED_MODULE_2___default()({}, state, action.errors);
 
     default:
       return state;
@@ -1691,7 +1732,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var photosReducer = function photosReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
-  Object.freeze(state);
+  Object.freeze(state); // debugger;
 
   switch (action.type) {
     case _actions_photo_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_ALL_PHOTOS"]:
@@ -1699,6 +1740,9 @@ var photosReducer = function photosReducer() {
 
     case _actions_photo_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_PHOTO"]:
       return lodash_merge__WEBPACK_IMPORTED_MODULE_1___default()({}, state, _defineProperty({}, action.payload.photo.id, action.payload.photo));
+
+    case _actions_photo_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_PHOTO_UPLOAD"]:
+      return state;
 
     default:
       return state;
@@ -1866,13 +1910,11 @@ var fetchPhoto = function fetchPhoto(id) {
 
   });
 };
-var createPhoto = function createPhoto(photo) {
+var createPhoto = function createPhoto(formData) {
   return $.ajax({
     method: 'post',
     url: "/api/photos",
-    data: {
-      photo: photo
-    },
+    data: formData,
     contentType: false,
     processData: false
   });
