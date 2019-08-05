@@ -15,23 +15,23 @@ Photo.destroy_all
 demo_user = User.create!(username: 'Tyler Durden', email: 'fight@club.net', password: 'password123')
 # demo_user = User.find_by(email: 'fight@club.net')
 
-file_paths_arr = Dir["/home/klue/Documents/500kicks/pics/*"]
-file_names_arr = Dir.entries("/home/klue/Documents/500kicks/pics/").select { |file| !File.directory? file }
+# file_paths_arr = Dir["/home/klue/Documents/500kicks/pics/*"]
+# file_names_arr = Dir.entries("/home/klue/Documents/500kicks/pics/").select { |file| !File.directory? file }
 
-file_names_arr.length.times do
-    Photo.create!(title: 'Title goes here', photographer_id: demo_user.id )
-end
+# file_names_arr.length.times do
+#     Photo.create!(title: 'Title goes here', photographer_id: demo_user.id )
+# end
 
-all_photos = Photo.all.to_a
+# all_photos = Photo.all.to_a
 
-until all_photos.empty? 
-    photo_post = all_photos.shift
-    file_path = file_paths_arr.shift
-    file_name = file_names_arr.shift
+# until all_photos.empty? 
+#     photo_post = all_photos.shift
+#     file_path = file_paths_arr.shift
+#     file_name = file_names_arr.shift
 
-    photo_post.photo.attach(io: open(file_path), filename: file_name)
+#     photo_post.photo.attach(io: open(file_path), filename: file_name)
     
-end
+# end
 
 # demo_user.photos.first.photo.attach(io: open('/home/klue/Documents/500kicks/pics/photo-1455095692583-a6db7b07d3f3.jpeg'), filename: "photo-1455095692583-a6db7b07d3f3.jpeg" )
 
