@@ -9,7 +9,6 @@
 
 require 'open-uri'
 
-
 User.destroy_all
 Photo.destroy_all
 
