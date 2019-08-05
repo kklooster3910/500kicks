@@ -33,11 +33,15 @@ class UserProfile extends React.Component {
 
   
         return (
-            <div>
-                cUserId: {cUser.id + ' '}
-                cUserUsername: {cUser.username + ' '}
-                cUserEmail: {cUser.email + ' '}
-                {kix}
+            <div className='users-profile-page-container'>
+                <div className='profile-banner-image-container'>
+                    <img className='profile-banner-image' src={Object.values(cUser.photos)[1]}/>
+                </div>
+                <h4 className='profile-page-username'>{cUser.username}</h4>
+                maybe Camera Info?: 'camera info here'
+                <div className='profile-gallery'>
+                    {kix}
+                </div>
             </div>
         )
     }

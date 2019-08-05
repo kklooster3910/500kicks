@@ -53,19 +53,27 @@
 .image-preview-title {
     padding: 30px;
     margin-top: 18px;
+    text-align: center;
+    font-size: 26px;
+    text-decoration: underline;
 }
 
 .image-preview-container {
     position: fixed;
-    top: 230px;
+    top: 82px;
     justify-content: center;
-    left: 51%;
-    width: 100%;
+    justify-items: center;
+    left: 47%;
+    width: 550px;
     padding: 30px;
     margin-top: 18px;
+}
+
+.image-border {
+    display: inline-block;
+    position: absolute;
     border: dotted;
     border-color: #CEECEF;
-    border-radius: 50px;
 }
 
 .image-preview {

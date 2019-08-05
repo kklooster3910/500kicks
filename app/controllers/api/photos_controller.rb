@@ -1,11 +1,11 @@
 class Api::PhotosController < ApplicationController
     def index
-        @photos = Photo.all
+        @photos = Photo.includes(:photographer).all
         render :index
     end
 
     def show
-        @photo = Photo.find_by(id: params[:id])
+        @photo = Photo.includes(:photographer).find_by(id: params[:id])
         if @photo 
             render :show
         else  

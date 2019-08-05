@@ -629,7 +629,9 @@ var KixIndexItem = function KixIndexItem(_ref) {
     className: "kix-index-image-container"
   }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("span", {
     className: "kix-index-image-title"
-  }, photo.title), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("img", {
+  }, photo.title), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("span", {
+    className: "kix-index-image-title"
+  }, photo.photographer), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("img", {
     className: "kix-index-item-image",
     src: photo.image_url
   })))));
@@ -660,6 +662,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -681,6 +684,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var KixShow =
 /*#__PURE__*/
 function (_React$Component) {
@@ -689,19 +693,17 @@ function (_React$Component) {
   function KixShow(props) {
     _classCallCheck(this, KixShow);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(KixShow).call(this, props)); // debugger;
+    return _possibleConstructorReturn(this, _getPrototypeOf(KixShow).call(this, props));
   }
 
   _createClass(KixShow, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      // debugger;
       this.props.fetchPhoto(this.props.match.params.photoId);
     }
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
-      // debugger;
       if (this.props.match.params.photoId !== prevProps.match.params.photoId) {
         this.props.fetchPhoto(this.props.match.params.photoId);
       }
@@ -711,16 +713,32 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      // debugger;
       var kix = this.props.photo;
 
       if (!kix) {
         return null;
       }
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "photoId: ", kix.id + ' ', "photo_title: ", kix.title + ' ', "photographer_id: ", kix.photographer_id + ' ', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "kix-show-page-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "kix-image-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+        to: "/kix"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "discover-page-circle"
+      }, "X")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "kix-photo",
         src: kix.image_url
-      }));
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+        className: "kix-photo-title"
+      }, kix.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+        className: "kix-photographer-name"
+      }, "photo by: ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+        to: "/users/".concat(this.props.photo.photographer_id)
+      }, kix.photographer)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "possible-footer"
+      }, " oi. "));
     }
   }]);
 
@@ -1127,7 +1145,10 @@ function (_React$Component) {
       var preview = this.state.photoUrl ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: "image-preview",
         src: this.state.photoUrl
-      }) : null;
+      }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        height: "540px",
+        width: "540px"
+      });
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "photoupload-form-img"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
@@ -1153,9 +1174,11 @@ function (_React$Component) {
         className: "postkix-btn"
       }, "Post Kix!")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "image-preview-container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
         className: "image-preview-title"
-      }, "Image Preview"), preview));
+      }, "Image Preview"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "image-border"
+      }, preview)));
     }
   }]);
 
@@ -1393,6 +1416,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -1433,13 +1458,22 @@ function (_React$Component) {
   }
 
   _createClass(Signup, [{
+    key: "update",
+    value: function update(field) {
+      var _this2 = this;
+
+      return function (e) {
+        _this2.setState(_defineProperty({}, field, e.target.value));
+      };
+    }
+  }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
-      var _this2 = this;
+      var _this3 = this;
 
       e.preventDefault();
       this.props.createUser(this.state).then(function () {
-        return _this2.props.history.push('/');
+        return _this3.props.history.push('/');
       });
       var blankState = {
         username: '',
@@ -1456,7 +1490,7 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
       var errors = Object.values(this.props.errors);
 
@@ -1501,7 +1535,7 @@ function (_React$Component) {
         to: "/"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: function onClick() {
-          return _this3.props.resetErrors();
+          return _this4.props.resetErrors();
         },
         className: "sessionform-home-btn"
       }, "Home")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
@@ -1637,7 +1671,18 @@ function (_React$Component) {
         kix = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
       }
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "cUserId: ", cUser.id + ' ', "cUserUsername: ", cUser.username + ' ', "cUserEmail: ", cUser.email + ' ', kix);
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "users-profile-page-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "profile-banner-image-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "profile-banner-image",
+        src: Object.values(cUser.photos)[1]
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+        className: "profile-page-username"
+      }, cUser.username), "maybe Camera Info?: 'camera info here'", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "profile-gallery"
+      }, kix));
     }
   }]);
 

@@ -2,6 +2,7 @@
     position: absolute;
     top: 30px;
     left: -50px;
+    z-index: 50;    
 }
 
 .drop-down-btn-stuff {
@@ -15,7 +16,7 @@
 
 .drop-down-content p {
     margin: 5px 0;
-    padding: 5px;
+    padding: 5px; 
 }
 
 .drop-down-content .current-user {   //only select username if it's below/contained in drop-down-content tag

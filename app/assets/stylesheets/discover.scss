@@ -14,13 +14,9 @@
     // max-height: 450px;
 }
 
-.kix-index-item-image-container:hover {
-    transform: scale(1.03);
-}
+.kix-index-item-image-container:hover { transform: scale(1.03) }
 
-.kix-index-item-image-container:hover .kix-index-image-title {
-    opacity: 1;
-}
+.kix-index-item-image-container:hover .kix-index-image-title { opacity: 1 }
 
 .kix-index-item {
     width: 100%;
@@ -49,5 +45,19 @@
     opacity: 0;   
     transition: opacity 0.8s; 
 }
+
+// .kix-index-image-user {
+//     position: absolute;
+//     height: 100%;
+//     width: 100%;
+//     background: rgba(102, 247, 235, 0.4);
+//     color: white;
+//     font-size: 36px;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     opacity: 0;   
+//     transition: opacity 0.8s;
+// }
 
 

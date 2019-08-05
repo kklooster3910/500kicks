@@ -58,7 +58,7 @@ class PhotoForm extends React.Component {
             ));
         };
     
-        const preview = this.state.photoUrl ? <img className='image-preview' src={this.state.photoUrl} /> : null;
+        const preview = this.state.photoUrl ? <img className='image-preview' src={this.state.photoUrl} /> : <img height='540px' width='540px' />;
 
         return(
             <div>
@@ -79,8 +79,8 @@ class PhotoForm extends React.Component {
                     <button className='postkix-btn'>Post Kix!</button>
                 </form>
                     <div className='image-preview-container'>
-                        <p className='image-preview-title'>Image Preview</p>
-                        {preview}
+                        <h3 className='image-preview-title'>Image Preview</h3>
+                        <div className='image-border'>{preview}</div>
                     </div> 
             </div>
         )
