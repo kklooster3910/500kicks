@@ -12,7 +12,8 @@ require 'open-uri'
 User.destroy_all
 Photo.destroy_all
 
-demo_user = User.create!(username: 'Tyler Durden', email: 'fight@club.net', password: 'password123')
+# demo_user = User.create!(username: 'Tyler Durden', email: 'fight@club.net', password: 'password123')
+demo_user = User.find_by(email: 'fight@club.net')
 
 file_paths_arr = Dir["/home/klue/Documents/500kicks/pics/*"]
 file_names_arr = Dir.entries("/home/klue/Documents/500kicks/pics/").select { |file| !File.directory? file }
