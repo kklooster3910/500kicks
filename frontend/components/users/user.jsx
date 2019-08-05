@@ -34,7 +34,7 @@ class UserProfile extends React.Component {
         return (
             <div className='users-profile-page-container'>
                 <div className='profile-banner-image-container'>
-                    <img className='profile-banner-image' src={Object.values(cUser.photos)[1].image_url}/>
+                    {/* <img className='profile-banner-image' src={Object.values(cUser.photos).first.image_url}/> //figure out how to select a user image if they have a pic */}
                 </div>
                 <h4 className='profile-page-username'>{cUser.username}</h4>
                 maybe Camera Info?: 'camera info here'
