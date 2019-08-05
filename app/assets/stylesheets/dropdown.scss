@@ -1,8 +1,18 @@
-.drop-down-content {
+.drop-down-content { 
     position: absolute;
-    top: 30px;
-    left: -50px;
-    z-index: 50;    
+    top: 23px;
+    left: -186px;
+    z-index: 50;
+    border: solid;
+    border: solid;
+    background: #2C2F40;  
+    border: solid #2C2F40;
+    border-radius: 22px;  
+}
+
+.drop-down {
+//    position: relative;
+//    display: inline-block; 
 }
 
 .drop-down-btn-stuff {
@@ -21,14 +31,15 @@
 
 .drop-down-content .current-user {   //only select username if it's below/contained in drop-down-content tag
     padding: 3px;
-    color: #2C2F40;
+    color: #CEECEF;
+    text-align: center;
 }
 
-.drop-down-content .logged-in-title {
-    margin-top: 12px;
-    padding: 2px;
-    color: #2C2F40;
-}
+// .drop-down-content .logged-in-title {
+//     margin-top: 12px;
+//     padding: 2px;
+//     color: #CEECEF;
+// }
 
 .currentUser-banner {
     background-color: #2C2F40;
@@ -47,29 +58,45 @@
     padding: 9px;
     text-align: center;
     color: #CEECEF;
-    border: solid 2px;
-    border-color: #CEECEF;
-    border-radius: 26px;
+    // border: solid 2px;
+    // border-color: #CEECEF;
+    // border-radius: 26px;
     font-size: 18px;
     margin-left: 12px;
     opacity: 1;
     transition: 0.6s;
 }
 
-.loggedin-logout-btn:hover { opacity: 0.6 }
-
-.upload-photo-nav-btn {
+.profile-page-btn {
     background-color: #2C2F40;
     padding: 9px;
     text-align: center;
     color: #CEECEF;
-    border: solid 2px;
-    border-color: #CEECEF;
-    border-radius: 26px;
+    // border: solid 2px;
+    // border-color: #CEECEF;
+    // border-radius: 26px;
     font-size: 18px;
     margin-left: 12px;
     opacity: 1;
     transition: 0.6s;
 }
 
-.upload-photo-nav-btn:hover { opacity: 0.6 }
+.loggedin-logout-btn:hover { opacity: 0.6; text-decoration: underline }
+.profile-page-btn:hover { opacity: 0.6; text-decoration: underline }
+
+.upload-photo-nav-btn {
+    background-color: #2C2F40;
+    // text-align: center;
+    padding: 9px;
+    text-align: center;
+    color: #CEECEF;
+    // border: solid 2px;
+    // border-color: #CEECEF;
+    // border-radius: 26px;
+    font-size: 18px;
+    margin-left: 12px;
+    opacity: 1;
+    transition: 0.6s;
+}
+
+.upload-photo-nav-btn:hover { opacity: 0.6; text-decoration: underline }

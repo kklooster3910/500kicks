@@ -854,14 +854,16 @@ function (_React$Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: (this.state.hidden ? 'drop-down hide' : 'drop-down') + ' drop-down-content'
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        className: "logged-in-title"
-      }, "Logged in as:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "current-user"
       }, this.props.currentUser.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/uploadphoto"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "upload-photo-nav-btn drop-down-item"
-      }, "Upload Kix!")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, "Upload Kix!")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/users/".concat(this.props.currentUser.id)
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "profile-page-btn"
+      }, "Profile")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "loggedin-logout-btn drop-down-item",
         onClick: this.props.logout
       }, "Logout"));
@@ -928,7 +930,11 @@ var NavBar = function NavBar(_ref) {
     to: "/uploadphoto"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     className: "upload-kix-nav-btn"
-  }, "Upload Some Kix"))) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, "Upload Some Kix")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/users/".concat(currentUser.id)
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "profile-nav-btn"
+  }, "Profile"))) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "uploadkix-button-container"
   });
   var display = currentUser ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1677,7 +1683,7 @@ function (_React$Component) {
         className: "profile-banner-image-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: "profile-banner-image",
-        src: Object.values(cUser.photos)[1]
+        src: Object.values(cUser.photos)[1].image_url
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
         className: "profile-page-username"
       }, cUser.username), "maybe Camera Info?: 'camera info here'", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
