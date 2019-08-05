@@ -1,0 +1,70 @@
+.kix-show-page-container {
+
+}
+
+.kix-photo-title {
+    font-family: 'Raleway', sans-serif;
+    position: absolute;
+    font-size: 36px;
+    top: 94%;
+    left: 16%;
+}
+
+.kix-photographer-name {
+    font-family: 'Raleway', sans-serif;
+    position: absolute;
+    font-size: 21px;
+    top: 102%;
+    left: 16%;
+}
+
+.kix-image-container .kix-photo {
+    max-width: 640px;
+    max-height: 640px;
+    padding: 21px;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 9px 9px 26px 0px rgba(0, 200, 214, 0.3);
+}
+
+//  weird shit happens with this .kix-photo:hover { transform: scale(1.03) }
+
+.possible-footer { // this is so I could scroll down on the show
+    //page w/o having comments. need to fix.
+    position: absolute;
+    top: 150%
+};
+
+.kix-image-container {
+    height: 663px;
+    width: 100%;
+    position: relative;
+    align-content: center;
+    background: #CEECEF;
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+    box-shadow: 9px 9px 26px 0px rgba(0,0,0,0.3);
+}
+
+
+.discover-page-circle {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    font-size: 35px;
+    color: #CEECEF;
+    line-height: 63px;
+    text-align: center;
+    background: #2C2F40;
+    position: absolute;
+    top: 14px;
+    left: 1%;
+    opacity: 0.4;
+    transition: 0.8s;
+}
+
+.discover-page-circle:hover { opacity: 1.2 }

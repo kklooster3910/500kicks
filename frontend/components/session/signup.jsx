@@ -2,9 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 class Signup extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        // debugger;
         this.state = {
             username: '',
             email: '',
@@ -15,7 +14,7 @@ class Signup extends React.Component {
 
     update(field) {
         return e => {
-            this.setState({[field]: e.target.value}); 
+            this.setState({[field]: e.target.value});
         };
     };
 
@@ -38,7 +37,6 @@ class Signup extends React.Component {
                 <li key={i}>{err}</li>
             ))
         }
-        // debugger;
         return (
             <div>
                 <div className='signup-home-img'></div>
@@ -50,7 +48,7 @@ class Signup extends React.Component {
                                 onChange={this.update('username')}
                                 className='sessionform-input'
                                 placeholder='Username'/>
-                            <input type="text"
+                            <input type="email"
                                 value={this.state.email}
                                 onChange={this.update('email')} 
                                 className='sessionform-input'

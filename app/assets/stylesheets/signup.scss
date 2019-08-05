@@ -38,7 +38,11 @@
     border: solid 3px;
     border-color: #CEECEF;
     border-radius: 12px;
+    opacity: 1;
+    transition: 0.5s;
 }
+
+.sessionform-submit:hover { opacity: 0.6 }
 
 .sessionform-home-btn {
     width: 100%;
@@ -49,11 +53,15 @@
     border: solid 3px;
     border-color: #CEECEF;
     border-radius: 12px;
+    opacity: 1;
+    transition: 0.6s;   
 }
+
+.sessionform-home-btn:hover { opacity: 0.6 }
 
 .signup-home-img {
     opacity: .4;
-    background-image: image-url('homepage.jpg');
+    background-image: url('homepage.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;

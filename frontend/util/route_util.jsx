@@ -11,6 +11,13 @@ const msp = state => ({
 // <AuthRoute path='' component={} />
 
 //go back and watch the videos when you need to do protected routes, shouldn't be much setup here. 
+
+const Protected =({ loggedIn, path, component: Component}) => (
+    <Route 
+        path={path}
+        render={props => (loggedIn ? <Component {...props} /> : <Redirect to='/signup'/>)}
+    />
+);
  
 const Auth = ({ loggedIn, path, component: Component }) => (
     <Route 
@@ -20,3 +27,4 @@ const Auth = ({ loggedIn, path, component: Component }) => (
 );
 
 export const AuthRoute = withRouter(connect(msp)(Auth));
+export const ProtectedRoute = withRouter(connect(msp)(Protected))

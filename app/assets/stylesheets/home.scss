@@ -4,10 +4,6 @@
     left: 38%;
     transform: translate(-50%, -50%);
     font-size: 42px;
-    // border: 10px solid greenyellow;
-    // margin: auto;
-    // width: 50%;
-    // padding: 13px;
 }
 
 .home-logo-kick {
@@ -16,10 +12,6 @@
     left: 62%;
     transform: translate(-50%, -50%);
     font-size: 42px;
-    // border: 10px solid greenyellow;
-    // margin: auto;
-    // width: 50%;
-    // padding: 13px;
 }
 
 .home-demo-btn {
@@ -35,7 +27,30 @@
     border-radius: 26px;
     font-size: 16px;
     margin-left: 12px;
+    opacity: 1;
+    transition: 0.5s;
 }
+
+.home-demo-btn:hover { opacity: 0.6 }
+
+.home-upload-photo-button {
+    position: absolute;
+    top: 30%;
+    left: 28%;
+    background-color: #2C2F40;
+    padding: 9px;
+    text-align: center;
+    color: #CEECEF;
+    border: solid 2px;
+    border-color: #CEECEF;
+    border-radius: 26px;
+    font-size: 16px;
+    margin-left: 12px;
+    opacity: 1;
+    transition: 0.5s;
+}
+
+.home-upload-photo-button:hover { opacity: 0.6 }
 
 .home-createnewuser-btn {
     position: absolute;
@@ -50,7 +65,11 @@
     border-radius: 26px;
     font-size: 16px;
     margin-left: 12px;
+    opacity: 1;
+    transition: 0.5s;
 }
+
+.home-createnewuser-btn:hover { opacity: 0.6 }
 
 .discover-kix-btn {
     position: absolute;
@@ -65,4 +84,8 @@
     border-radius: 26px;
     font-size: 16px;
     margin-left: 12px;
+    opacity: 1;
+    transition: 0.5s;
 }
+
+.discover-kix-btn:hover { opacity: 0.6 }

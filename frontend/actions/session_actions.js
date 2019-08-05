@@ -16,7 +16,8 @@ export const signup = user => dispatch => {
         return dispatch({ type: RECEIVE_CURRENT_USER, user: user })},
             err => {
                 // debugger;
-                return dispatch({ type: RECEIVE_SESSION_ERRORS, errors: err.responseJSON })}
+                return dispatch({ type: RECEIVE_SESSION_ERRORS, errors: err.responseJSON })
+        }
     )
 }
 
@@ -27,7 +28,8 @@ export const login = user => dispatch => {
         return dispatch({ type: RECEIVE_CURRENT_USER, user: user })},
             err => { 
                 // debugger;
-                return dispatch({ type: RECEIVE_SESSION_ERRORS, errors: err.responseJSON })}
+                return dispatch({ type: RECEIVE_SESSION_ERRORS, errors: err.responseJSON })
+            }
         )
 }
 

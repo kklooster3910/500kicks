@@ -1,11 +1,11 @@
 class Api::PhotosController < ApplicationController
     def index
-        @photos = Photo.all
+        @photos = Photo.includes(:photographer).all
         render :index
     end
 
     def show
-        @photo = Photo.find_by(id: params[:id])
+        @photo = Photo.includes(:photographer).find_by(id: params[:id])
         if @photo 
             render :show
         else  
@@ -14,11 +14,14 @@ class Api::PhotosController < ApplicationController
     end
 
     def create
-
-    end
-
-    def new
-
+        # debugger
+        # @photo_upload.photo.attach(:photo)
+        photo = Photo.new(photo_params)
+        if photo.save
+            render json: ['hopefully we actually go to the users show page']
+        else
+            render json: photo.errors.full_messages, status: 422
+        end
     end
 
     def update
@@ -33,7 +36,9 @@ class Api::PhotosController < ApplicationController
 
     end
 
-    def photo_params
-        params.require(:photo).permit(:title)
-    end
+    private
+
+        def photo_params
+            params.require(:photo).permit(:title, :photo, :photographer_id)
+        end
 end

@@ -5,14 +5,19 @@ import { Link } from 'react-router-dom';
 
 
 export const KixIndexItem = ({ photo }) => {
+    // debugger;
     return(
-        <Link to={`/kix/${photo.id}`}><li key={photo.id}>
-            Photo id: {photo.id + ' '}
-            Photo title: {photo.title + ' '}
-            Photographer_id: {photo.photographer_id + ' '}
-        </li></Link>
-    )     
-}
+        <div className='kix-index-item-image-container'>
+            <Link to={`/kix/${photo.id}`}><div className='kix-index-item' key={photo.id}>
+                <div className='kix-index-image-container'>
+                    <span className='kix-index-image-title'>{photo.title}</span>
+                    <span className='kix-index-image-title'>{photo.photographer}</span>
+                    <img className='kix-index-item-image' src={photo.image_url} />
+                </div>
+                </div>
+            </Link>
+        </div>
+    )}
 
 // const msp = state => { 
 //     debugger;

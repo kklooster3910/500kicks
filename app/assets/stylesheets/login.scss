@@ -15,9 +15,9 @@
     font-size: 24px;
 }
 
-.loginform-label {
+// .loginform-label {
 
-}
+// }
 
 .loginform-input {
     border: none;
@@ -40,26 +40,11 @@
     border: solid 3px;
     border-color: #CEECEF;
     border-radius: 12px;
+    opacity: 1;
+    transition: 0.5s;
 }
 
-// .loginform-submit:hover {
-//     // cursor: pointer;
-// }
-
-// box-shadow: 0 5px 0 darkred;
-
-// .loginform-home-btn {
-//     width: 100%;
-//     margin-top: 10px;
-//     background-color: #2C2F40;
-//     padding: 2px 6px 2px 6px;
-//     // text-decoration: none;
-//     text-align: center;
-//     color: #CEECEF;
-//     // border: solid 3px;
-//     // border-color: #CEECEF;
-//     border-radius: 12px;
-// }
+.loginform-submit:hover { opacity: 0.6 }
 
 .loginform-home-btn {
     width: 100%;
@@ -70,11 +55,15 @@
     border: solid 3px;
     border-color: #CEECEF;
     border-radius: 12px;
+    opacity: 1;
+    transition: 0.5s;
 }
+
+.loginform-home-btn:hover { opacity: 0.6 }
 
 .login-home-img {
     opacity: .4;
-    background-image: image-url('homepage.jpg');
+    background-image: url('homepage.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;

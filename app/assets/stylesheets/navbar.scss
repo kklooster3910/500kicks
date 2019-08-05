@@ -1,6 +1,6 @@
 .nav-bar {
     display: flex;
-    height: 57px;
+    height: 63px;
     background-color: #2C2F40;
     flex-direction: row;
     justify-content: space-between;
@@ -13,11 +13,14 @@
 }
 
 .session-btns {
-
+    display: flex;
+    position: relative;
+    left: 5%;
+    top: -17%;
+    width: 100%; 
 }
 
 .nav-session-button {
-    // width: 72%;
     background-color: #2C2F40;
     padding: 9px;
     text-align: center;
@@ -27,44 +30,68 @@
     border-radius: 26px;
     font-size: 18px;
     margin-left: 12px;
+    opacity: 1;
+    transition: 0.5s;
 }
 
+.nav-session-button:hover { opacity: 0.6 }
+
 .nav-login-button {
-    // width: 72%;
     background-color: #2C2F40;
-    padding: 6px;
+    padding: 9px;
     text-align: center;
     color: #CEECEF;
     font-size: 18px;
-    // border: solid 3px;
-    // border-color: #CEECEF;
-    // border-radius: 12px;
     margin-right: 12px;
 }
 
+.nav-login-button:hover { text-decoration: underline}
 
-.drop-down-menu {
+// .drop-down-menu {
 
-}
-
-
+// }
 
 .discover-kix-navbtn {
     background-color: #2C2F40;
     padding: 9px;
     text-align: center;
     color: #CEECEF;
-    // border: solid 2px;
-    // border-color: #CEECEF;
-    // border-radius: 26px;
     font-size: 16px;
     margin-left: 12px;
 }
 
-.discover-kix-navbtn:hover {
-    text-decoration: underline;
+.upload-kix-nav-btn {
+    background-color: #2C2F40;
+    padding: 9px;
+    text-align: center;
+    color: #CEECEF;
+    font-size: 16px;
+    margin-left: 12px;
+}
+
+.profile-nav-btn {
+    background-color: #2C2F40;
+    padding: 9px;
+    text-align: center;
+    color: #CEECEF;
+    font-size: 16px;
+    margin-left: 12px;
+}
+
+.profile-nav-btn:hover { text-decoration: underline }
+
+.upload-kix-nav-btn:hover { text-decoration: underline }
+
+.discover-kix-navbtn:hover { text-decoration: underline }
+
+.logo-links {
+    display: flex;
+    flex-direction: row;
 }
 
 .logo {
     font-size: 31px;
+    color: #CEECEF;
 }
+
+.logo:hover { text-decoration: underline }

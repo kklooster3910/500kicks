@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
     } ;
-  
+    
     delete window.currentUser;
     const dispatchedStore = store(preloadedState);
     window.store = dispatchedStore
