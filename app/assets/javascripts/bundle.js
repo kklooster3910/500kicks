@@ -865,11 +865,7 @@ function (_React$Component) {
         to: "/kix"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "discover-kix-nav-btn drop-down-item"
-      }, "Discover Kix")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        to: "/users/".concat(this.props.currentUser.id)
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "profile-page-btn"
-      }, "Profile")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, "Discover Kix")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "loggedin-logout-btn drop-down-item",
         onClick: this.props.logout
       }, "Logout"));

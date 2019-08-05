@@ -8,9 +8,7 @@
 
 
 require 'open-uri'
-require 'faker'
 
-# Faker::StarWars.character figure out why this faker gem is not working, yo
 
 User.destroy_all
 Photo.destroy_all
@@ -21,7 +19,7 @@ file_paths_arr = Dir["/home/klue/Documents/500kicks/pics/*"]
 file_names_arr = Dir.entries("/home/klue/Documents/500kicks/pics/").select { |file| !File.directory? file }
 
 file_names_arr.length.times do
-    Photo.create!(title: 'testingthisshitout', photographer_id: demo_user.id )
+    Photo.create!(title: 'Title goes here', photographer_id: demo_user.id )
 end
 
 all_photos = Photo.all.to_a
