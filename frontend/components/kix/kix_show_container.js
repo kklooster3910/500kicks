@@ -5,6 +5,7 @@ import { fetchPhoto } from '../../actions/photo_actions';
 import { fetchLikes, removeLike, createLike } from '../../actions/like_actions'
 
 const msp = (state, ownProps) => {
+    debugger;
     return ({
     photo: state.entities.photos[ownProps.match.params.photoId],
     allLikes: state.entities.likes,

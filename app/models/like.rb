@@ -3,7 +3,6 @@
 # Table name: likes
 #
 #  id              :bigint           not null, primary key
-#  liked           :boolean          default(TRUE)
 #  photo_id        :integer          not null
 #  photographer_id :integer          not null
 #  created_at      :datetime         not null
@@ -11,7 +10,7 @@
 #
 
 class Like < ApplicationRecord
-    validates :photographer_id, uniqueness: { scope: :photo_id}
+    validates :photographer_id, uniqueness: { scope: :photo_id }
 
     belongs_to :photo, required: true,
         class_name: 'Photo',

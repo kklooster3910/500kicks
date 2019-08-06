@@ -15,41 +15,40 @@ class KixShow extends React.Component {
 
     componentDidUpdate(prevProps) {
         if (this.props.match.params.photoId !== prevProps.match.params.photoId) {
-            this.props.fetchPhoto(this.props.match.params.photoId);
             this.props.fetchLikes();
+            this.props.fetchPhoto(this.props.match.params.photoId);
+            this.state = { liked: false }
         };
     };
     
     render() {
-        const kix = this.props.photo    
-        if (!kix) {
+        const kix = this.props.photo
+        let likesCount;
+         
+        if (!kix || !kix.likes) {
             return null;
         }
-
-        let likesCount;
-        // let like;
-
-        if (kix.likes.length > 0) {
+ 
+        if (kix.likes.length >= 0) {
             likesCount = kix.likes.length;
             <div className='likes-count'>{likesCount}</div>
         } else {
             likesCount = <div className='likes-count'></div>
         }
-    
-        // if (this.props.allLikes[this.props.currentUser.id].photo_id === this.props.match.params.photoId) {
-        //     { photo_id: this.props.match.params.photoId, photographer_id: this.props.currentUser.id }
-        // }
-    
-        // if (this.props.allLikes[this.props.currentUser.id].photo_id !== this.props.match.params.photoid) {
-        //     like = {photo_id: this.props.match.params.photoId, photographer_id: this.props.currentUser.id}
+
+        // if (this.state) {
+        //     let cLike = this.props.createLike
+        //     this.setState({liked: true})   
         // } else {
-        //     like = this.props.allLikes[this.props.currentUser.id]
+        //     rLike = this.props.removeLike
+        //     this.setState({ liked: false })
         // }
 
         let likeButton = <LikeButton 
-            createLike={this.props.createLike}
-            updateLike={this.props.removeLike} 
-            currentUser={this.props.currentUser} 
+            createLike={cLike} 
+            removeLike={rLike} 
+            currentUser={this.props.currentUser}
+            photoId={kix.id} 
         /> 
         
         return (
@@ -61,7 +60,7 @@ class KixShow extends React.Component {
                 <h4 className='kix-photo-title'>{kix.title}</h4>
                 <h5 className='kix-photographer-name'>photo by: <Link to={`/users/${this.props.photo.photographer_id}`} >{kix.photographer}</Link></h5>
                 {likesCount}
-                {likeButton}
+                {/* {likeButton} */}
                 <div className='possible-footer'> oi. </div>
             </div>
         );

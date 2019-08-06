@@ -58,7 +58,7 @@ class PhotoForm extends React.Component {
             ));
         };
     
-        const preview = this.state.photoUrl ? <img className='image-preview' src={this.state.photoUrl} /> : <img height='540px' width='540px' />;
+        const preview = this.state.photoUrl ? <img className='image-preview' src={this.state.photoUrl} /> : <img className='image-preview' height='540px' width='540px' />;
 
         return(
             <div>

@@ -2,6 +2,7 @@ import DiscoverKix from './discover_kix';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { fetchPhotos, fetchPhoto } from '../../actions/photo_actions';
+// import { fetchLikes }
 
 const msp = state => ({
     photos: Object.values(state.entities.photos)

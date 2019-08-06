@@ -15,7 +15,7 @@ const Home = ({ demoUser, demoLogin, currentUser}) => {
         demoLogin(demoUser).then(alert('Demo User Logged In - try uploading a photo!'))
     }
 
-    if (currentUser.id === null) {
+    if (!currentUser) {
         maybeDemo = <button className='home-demo-btn' onClick={handleClick}>Demo Login!</button>
         maybeCreateNewUser = <Link to='/signup'><button className='home-createnewuser-btn'>Create New User</button></Link>
     } else {
@@ -43,10 +43,12 @@ const Home = ({ demoUser, demoLogin, currentUser}) => {
     );
 }
 
-const msp = state => ({
+const msp = state => {
+    // debugger;
+    return ({
     demoUser: { username: 'Tyler Durden', email: 'fight@club.net', password: 'password123'},
-    currentUser: state.session
-})
+    currentUser: state.session.id
+})}
 
 const mdp = dispatch => ({
     demoLogin: demoUser => (dispatch(login(demoUser))),

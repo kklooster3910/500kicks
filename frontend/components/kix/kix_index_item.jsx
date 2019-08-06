@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import React from 'react';
 import { Link } from 'react-router-dom';
+// import { fetchLikes } from '../../actions/like_actions' 
 
 
 export const KixIndexItem = ({ photo }) => {
@@ -26,7 +27,7 @@ export const KixIndexItem = ({ photo }) => {
 // })}
 
 const mdp = dispatch => ({
-    //stay tuned, we will probably end up needing something here
+    // fetchLikes: () => dispatch(fetchLikes())
 })
 
 export default withRouter(connect(null, mdp)(KixIndexItem))

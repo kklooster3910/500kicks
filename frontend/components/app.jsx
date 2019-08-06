@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router';
 import { Route, Switch } from 'react-router-dom';
 import { AuthRoute } from '../util/route_util';
 import { ProtectedRoute } from '../util/route_util';
@@ -22,9 +23,9 @@ const App = () => (
             <Route exact path='/users/:userId' component={UserProfileContainer} />
             <AuthRoute path='/signup' component={SignupContainer}/>
             <AuthRoute path='/login' component={LoginContainer}/>
-            <ProtectedRoute path='/uploadphoto' component={PhotoFormUploadContainer} /> //make this a protected route before the night is through fam
+            <ProtectedRoute path='/uploadphoto' component={PhotoFormUploadContainer} /> 
         </Switch>
     </div>
 )
 
-export default App;
+export default withRouter(App);

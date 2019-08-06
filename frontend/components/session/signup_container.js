@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { signup, resetErrors } from '../../actions/session_actions';
-import Signup from './signup'
+import Signup from './signup';
+import { withRouter } from 'react-router'
 
 // we don't need to msp because ...
 // setup doesn't rely on any part of state, EXCEPT FOR MAYBE ERRORS?!
@@ -15,4 +16,4 @@ const mdp = dispatch => {
     resetErrors: () => dispatch(resetErrors())
 })};
 
-export default connect(msp, mdp)(Signup);
+export default withRouter(connect(msp, mdp)(Signup));
