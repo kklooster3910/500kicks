@@ -101,6 +101,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store/store */ "./frontend/store/store.js");
 /* harmony import */ var _components_root__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/root */ "./frontend/components/root.jsx");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -112,7 +114,10 @@ document.addEventListener('DOMContentLoaded', function () {
   if (window.currentUser) {
     preloadedState = {
       session: {
-        id: window.currentUser
+        id: window.currentUser.id
+      },
+      entities: {
+        users: _defineProperty({}, window.currentUser.id, window.currentUser)
       }
     };
   }
@@ -125,6 +130,89 @@ document.addEventListener('DOMContentLoaded', function () {
     store: dispatchedStore
   }), root);
 });
+
+/***/ }),
+
+/***/ "./frontend/actions/like_actions.js":
+/*!******************************************!*\
+  !*** ./frontend/actions/like_actions.js ***!
+  \******************************************/
+/*! exports provided: RECEIVE_ALL_LIKES, RECEIVE_LIKE, REMOVE_LIKE, RECEIVE_RESET_ERRORS, RECEIVE_LIKE_ERRORS, resetErrors, fetchLikes, createLike, removeLike */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_ALL_LIKES", function() { return RECEIVE_ALL_LIKES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_LIKE", function() { return RECEIVE_LIKE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_LIKE", function() { return REMOVE_LIKE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_RESET_ERRORS", function() { return RECEIVE_RESET_ERRORS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_LIKE_ERRORS", function() { return RECEIVE_LIKE_ERRORS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "resetErrors", function() { return resetErrors; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchLikes", function() { return fetchLikes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createLike", function() { return createLike; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeLike", function() { return removeLike; });
+/* harmony import */ var _util_like_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/like_api_util */ "./frontend/util/like_api_util.js");
+
+var RECEIVE_ALL_LIKES = 'RECEIVE_ALL_LIKES';
+var RECEIVE_LIKE = 'RECEIVE_LIKE';
+var REMOVE_LIKE = 'REMOVE_LIKE';
+var RECEIVE_RESET_ERRORS = 'RECEIVE_RESET_ERRORS';
+var RECEIVE_LIKE_ERRORS = 'RECEIVE_LIKE_ERRORS';
+var resetErrors = function resetErrors() {
+  // do I need to export
+  //or have this in every action file? wtf ken
+  return {
+    type: RECEIVE_RESET_ERRORS
+  };
+};
+var fetchLikes = function fetchLikes() {
+  return function (dispatch) {
+    return _util_like_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchLikes"]().then(function (likes) {
+      return dispatch({
+        type: RECEIVE_ALL_LIKES,
+        likes: likes
+      }), function (err) {
+        return dispatch({
+          type: RECEIVE_LIKE_ERRORS,
+          errors: err.responseJSON
+        });
+      };
+    });
+  };
+};
+var createLike = function createLike(like) {
+  return function (dispatch) {
+    return _util_like_api_util__WEBPACK_IMPORTED_MODULE_0__["createLike"](like).then(function (like) {
+      return dispatch({
+        type: RECEIVE_LIKE,
+        like: like
+      }), function (err) {
+        return dispatch({
+          type: RECEIVE_LIKE_ERRORS,
+          errors: err.responseJSON
+        });
+      };
+    });
+  };
+};
+var removeLike = function removeLike(id) {
+  return function (dispatch) {
+    return _util_like_api_util__WEBPACK_IMPORTED_MODULE_0__["removeLike"](id).then(function (like) {
+      return dispatch({
+        type: REMOVE_LIKE,
+        like: like
+      }), function (err) {
+        return dispatch({
+          type: RECEIVE_LIKE_ERRORS,
+          errors: err.responseJSON
+        });
+      };
+    });
+  };
+};
+window.fetchLikes = fetchLikes;
+window.createLike = createLike;
+window.removeLike = removeLike;
 
 /***/ }),
 
@@ -663,6 +751,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _likes_like_button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../likes/like_button */ "./frontend/components/likes/like_button.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -685,6 +774,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var KixShow =
 /*#__PURE__*/
 function (_React$Component) {
@@ -699,6 +789,7 @@ function (_React$Component) {
   _createClass(KixShow, [{
     key: "componentDidMount",
     value: function componentDidMount() {
+      this.props.fetchLikes();
       this.props.fetchPhoto(this.props.match.params.photoId);
     }
   }, {
@@ -706,6 +797,7 @@ function (_React$Component) {
     value: function componentDidUpdate(prevProps) {
       if (this.props.match.params.photoId !== prevProps.match.params.photoId) {
         this.props.fetchPhoto(this.props.match.params.photoId);
+        this.props.fetchLikes();
       }
 
       ;
@@ -719,6 +811,32 @@ function (_React$Component) {
         return null;
       }
 
+      var likesCount; // let like;
+
+      if (kix.likes.length > 0) {
+        likesCount = kix.likes.length;
+        react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "likes-count"
+        }, likesCount);
+      } else {
+        likesCount = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "likes-count"
+        });
+      } // if (this.props.allLikes[this.props.currentUser.id].photo_id === this.props.match.params.photoId) {
+      //     { photo_id: this.props.match.params.photoId, photographer_id: this.props.currentUser.id }
+      // }
+      // if (this.props.allLikes[this.props.currentUser.id].photo_id !== this.props.match.params.photoid) {
+      //     like = {photo_id: this.props.match.params.photoId, photographer_id: this.props.currentUser.id}
+      // } else {
+      //     like = this.props.allLikes[this.props.currentUser.id]
+      // }
+
+
+      var likeButton = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_likes_like_button__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        createLike: this.props.createLike,
+        updateLike: this.props.removeLike,
+        currentUser: this.props.currentUser
+      });
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "kix-show-page-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -736,7 +854,7 @@ function (_React$Component) {
         className: "kix-photographer-name"
       }, "photo by: ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
         to: "/users/".concat(this.props.photo.photographer_id)
-      }, kix.photographer)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, kix.photographer)), likesCount, likeButton, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "possible-footer"
       }, " oi. "));
     }
@@ -763,6 +881,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_photo_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/photo_actions */ "./frontend/actions/photo_actions.js");
+/* harmony import */ var _actions_like_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/like_actions */ "./frontend/actions/like_actions.js");
+
 
 
 
@@ -770,7 +890,9 @@ __webpack_require__.r(__webpack_exports__);
 
 var msp = function msp(state, ownProps) {
   return {
-    photo: state.entities.photos[ownProps.match.params.photoId]
+    photo: state.entities.photos[ownProps.match.params.photoId],
+    allLikes: state.entities.likes,
+    currentUser: state.entities.users[state.session.id]
   };
 };
 
@@ -778,11 +900,88 @@ var mdp = function mdp(dispatch) {
   return {
     fetchPhoto: function fetchPhoto(id) {
       return dispatch(Object(_actions_photo_actions__WEBPACK_IMPORTED_MODULE_3__["fetchPhoto"])(id));
+    },
+    fetchLikes: function fetchLikes() {
+      return dispatch(Object(_actions_like_actions__WEBPACK_IMPORTED_MODULE_4__["fetchLikes"])());
+    },
+    removeLike: function removeLike(id) {
+      return dispatch(Object(_actions_like_actions__WEBPACK_IMPORTED_MODULE_4__["removeLike"])(id));
+    },
+    createLike: function createLike(like) {
+      return dispatch(Object(_actions_like_actions__WEBPACK_IMPORTED_MODULE_4__["createLike"])(like));
     }
   };
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_router__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(msp, mdp)(_kix_show__WEBPACK_IMPORTED_MODULE_0__["default"])));
+
+/***/ }),
+
+/***/ "./frontend/components/likes/like_button.jsx":
+/*!***************************************************!*\
+  !*** ./frontend/components/likes/like_button.jsx ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var _actions_like_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/like_actions */ "./frontend/actions/like_actions.js");
+/* harmony import */ var _util_like_api_util__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../util/like_api_util */ "./frontend/util/like_api_util.js");
+
+
+
+
+ // class LikeButton extends React.Component {
+//     constructor(props) {
+//         super(props);
+//         // this.state = this.props.likes.currentUser.id.liked
+//         // this.state = this.props.likes.photographer_id
+//  handleLike() {
+//     this.props.updateLike()
+//  }
+//     };
+
+var LikeButton = function LikeButton(_ref) {// let likedButtonReturn; 
+  // debugger;
+  // if ((currentUser !== null) && (like !== undefined)) {
+  //     likedButtonReturn = 
+  //     <div>
+  //         <button onClick={() => removeLike(like.id)}>Like Photo</button>
+  //     </div>
+  // } else if ((like === undefined) && (currentUser !== null)) {
+  //     likedButtonReturn = 
+  //     <div>
+  //         <button onClick={() => createLike(like) }>Like Photo</button>
+  //     </div>
+  // } else {
+  //     likedButtonReturn = <div onClick={() => alert('Please Login to Like a Photo')}></div>
+  // }
+  // return (
+  //     <div className='like-button-container'>
+  //         {likedButtonReturn}
+  //     </div>
+  // )
+
+  var currentUser = _ref.currentUser,
+      like = _ref.like,
+      removeLike = _ref.removeLike,
+      createLike = _ref.createLike;
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(LikeButton)); // const msp = state => {
+//     debugger;
+//     return ({
+//     likes: state.entities.likes,
+// })}
+// const mdp = dispatch => ({
+//     updateLike: id => dispatch(updateLike(id))
+// })
+// export default withRouter(connect(msp, mdp)(LikeButton))
 
 /***/ }),
 
@@ -888,7 +1087,7 @@ function (_React$Component) {
 
 var msp = function msp(state) {
   return {
-    currentUser: state.session.id
+    currentUser: state.entities.users[state.session.id]
   };
 };
 
@@ -972,7 +1171,7 @@ var NavBar = function NavBar(_ref) {
 
 var msp = function msp(state) {
   return {
-    currentUser: state.session.id
+    currentUser: state.entities.users[state.session.id]
   };
 };
 
@@ -1683,10 +1882,7 @@ function (_React$Component) {
         className: "users-profile-page-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "profile-banner-image-container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        className: "profile-banner-image",
-        src: Object.values(cUser.photos)[1].image_url
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
         className: "profile-page-username"
       }, cUser.username), "maybe Camera Info?: 'camera info here'", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "profile-gallery"
@@ -1750,12 +1946,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _photos_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./photos_reducer */ "./frontend/reducers/photos_reducer.js");
 /* harmony import */ var _users_prof_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./users_prof_reducer */ "./frontend/reducers/users_prof_reducer.js");
+/* harmony import */ var _likes_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./likes_reducer */ "./frontend/reducers/likes_reducer.js");
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   photos: _photos_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
-  users: _users_prof_reducer__WEBPACK_IMPORTED_MODULE_2__["default"]
+  users: _users_prof_reducer__WEBPACK_IMPORTED_MODULE_2__["default"],
+  likes: _likes_reducer__WEBPACK_IMPORTED_MODULE_3__["default"]
 }));
 
 /***/ }),
@@ -1804,6 +2003,49 @@ var errorsReducer = function errorsReducer() {
 
 /***/ }),
 
+/***/ "./frontend/reducers/likes_reducer.js":
+/*!********************************************!*\
+  !*** ./frontend/reducers/likes_reducer.js ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash/merge */ "./node_modules/lodash/merge.js");
+/* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash_merge__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _actions_like_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/like_actions */ "./frontend/actions/like_actions.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+var likesReducer = function likesReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+
+  switch (action.type) {
+    case _actions_like_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_ALL_LIKES"]:
+      return lodash_merge__WEBPACK_IMPORTED_MODULE_0___default()({}, state, action.likes);
+
+    case _actions_like_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_LIKE"]:
+      return lodash_merge__WEBPACK_IMPORTED_MODULE_0___default()({}, state, _defineProperty({}, action.like.id, action.like));
+
+    case _actions_like_actions__WEBPACK_IMPORTED_MODULE_1__["REMOVE_LIKE"]:
+      var oldLikes = lodash_merge__WEBPACK_IMPORTED_MODULE_0___default()({}, state, _defineProperty({}, action.like.id, action.like));
+      delete oldLikes[action.like.id];
+      return oldLikes;
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (likesReducer);
+
+/***/ }),
+
 /***/ "./frontend/reducers/photos_reducer.js":
 /*!*********************************************!*\
   !*** ./frontend/reducers/photos_reducer.js ***!
@@ -1824,7 +2066,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var photosReducer = function photosReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
-  Object.freeze(state); // debugger;
+  Object.freeze(state);
 
   switch (action.type) {
     case _actions_photo_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_ALL_PHOTOS"]:
@@ -1973,6 +2215,48 @@ var configureStore = function configureStore() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (configureStore);
+
+/***/ }),
+
+/***/ "./frontend/util/like_api_util.js":
+/*!****************************************!*\
+  !*** ./frontend/util/like_api_util.js ***!
+  \****************************************/
+/*! exports provided: fetchLikes, createLike, removeLike */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchLikes", function() { return fetchLikes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createLike", function() { return createLike; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeLike", function() { return removeLike; });
+var fetchLikes = function fetchLikes() {
+  return $.ajax({
+    method: 'get',
+    url: '/api/likes'
+  });
+};
+var createLike = function createLike(like) {
+  return $.ajax({
+    method: 'post',
+    url: '/api/likes',
+    data: {
+      like: like
+    }
+  });
+};
+var removeLike = function removeLike(id) {
+  return $.ajax({
+    method: 'delete',
+    url: "/api/likes/".concat(id)
+  });
+}; // export const fetchLike = id => (
+//     $.ajax({
+//         method: 'get',
+//         url: `/api/likes/${id}`
+//     })
+// );
+// updateLike
 
 /***/ }),
 
@@ -31498,7 +31782,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
