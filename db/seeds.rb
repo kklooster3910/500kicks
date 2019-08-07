@@ -19,7 +19,7 @@ demo_user = User.create!(username: 'Tyler Durden', email: 'fight@club.net', pass
 # file_names_arr = Dir.entries("/home/klue/Documents/500kicks/pics/").select { |file| !File.directory? file }
 
 # file_names_arr.length.times do
-#     Photo.create!(title: 'Title goes here', photographer_id: demo_user.id )
+#     Photo.create!(title: 'Title goes here', photographer_id: demo_user.id, description: 'TEST PHOTO' )
 # end
 
 # all_photos = Photo.all.to_a
