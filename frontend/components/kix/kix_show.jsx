@@ -57,7 +57,7 @@ class KixShow extends React.Component {
         let likeButton = <LikeButton likesCount={this.props.photoLikes}/>
         let uploadedTime = kix.created_at
         uploadedTime = uploadedTime.split(':')[0].split('T')[0]
-        debugger;
+        // debugger;
         // console.log(uploadedTime)   
         return (
             <div className='kix-show-page-container'>
