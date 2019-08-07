@@ -17,7 +17,23 @@
     padding: 30px;
     background-color: #CEECEF;
     margin-top: 18px;
+    border-radius: 23px;
 }
+
+.photofile-upload-input {
+    // width: 100%;
+    // background-color: #2C2F40;
+    // padding: 12px;
+    // text-align: center;
+    // color: #CEECEF;
+    // border: solid 3px;
+    // border-color: #CEECEF;
+    // border-radius: 12px;
+    // opacity: 1;
+    // transition: 0.5s;
+}
+
+// .photofile-upload-input:hover { opacity: 0.6 }
 
 .photoupload-form-header {
     text-align: center;
@@ -67,6 +83,7 @@
     width: 550px;
     padding: 30px;
     margin-top: 18px;
+    border-radius: 23px;
 }
 
 .image-border {
@@ -74,11 +91,13 @@
     position: absolute;
     border: dotted;
     border-color: #CEECEF;
+    border-radius: 23px;
 }
 
 .image-preview {
     max-width: 540px;
     max-height: 540px;
+    border-radius: 23px;
 }
 
 .postkix-btn {

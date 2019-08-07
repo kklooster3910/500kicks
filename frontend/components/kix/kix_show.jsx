@@ -1,6 +1,7 @@
 import React from 'react';
-import {withRouter} from 'react-router';
-import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router';
+import { Link } from 'react-router-dom';
+import LikeButton from '../likes/like_button_container';
 
 class KixShow extends React.Component {
     constructor(props) {
@@ -8,20 +9,56 @@ class KixShow extends React.Component {
     };
 
     componentDidMount() {
+        // this.props.fetchLikes();
+        // this.props.resetErrors();
         this.props.fetchPhoto(this.props.match.params.photoId);
     };
 
     componentDidUpdate(prevProps) {
+        // debugger;
+        // this.props.resetErrors();
         if (this.props.match.params.photoId !== prevProps.match.params.photoId) {
             this.props.fetchPhoto(this.props.match.params.photoId);
-        };
+            // this.props.fetchLikes();
+        }
     };
     
     render() {
         const kix = this.props.photo
-        if (!kix) {
+        // let likesCount = 0;
+        if (!kix || !kix.likes) {
             return null;
         }
+        // debugger;
+        // kix.likes.forEach (like => {
+        //     if (this.props.allLikes[like.id]) {
+        //         likesCount ++
+        //     }
+        // })
+        // let likesCount = kix.likes.length;
+        let likesCount = this.props.photoLikes.length;
+        // let likesCountNotUsed = Object.values(this.props.allLikes).length;
+
+        // if (this.state) {
+        //     let cLike = this.props.createLike
+        //     this.setState({liked: true})   
+        // } else {
+        //     rLike = this.props.removeLike
+        //     this.setState({ liked: false })
+        // }
+
+        // let likeButton = <LikeButton 
+        //     createLike={cLike} 
+        //     removeLike={rLike} 
+        //     currentUser={this.props.currentUser}
+        //     photoId={kix.id} 
+        // /> 
+
+        let likeButton = <LikeButton likesCount={this.props.photoLikes}/>
+        let uploadedTime = kix.created_at
+        uploadedTime = uploadedTime.split(':')[0].split('T')[0]
+        debugger;
+        // console.log(uploadedTime)   
         return (
             <div className='kix-show-page-container'>
                 <div className='kix-image-container'>
@@ -30,6 +67,10 @@ class KixShow extends React.Component {
                 </div>
                 <h4 className='kix-photo-title'>{kix.title}</h4>
                 <h5 className='kix-photographer-name'>photo by: <Link to={`/users/${this.props.photo.photographer_id}`} >{kix.photographer}</Link></h5>
+                <div className='kix-likes-count'>Likes Count: {likesCount}</div>
+                {likeButton}
+                <div className='kix-upload-time'>Uploaded at: {uploadedTime}</div>
+                <div className='kix-photo-description'>{this.props.photo.description}</div>
                 <div className='possible-footer'> oi. </div>
             </div>
         );

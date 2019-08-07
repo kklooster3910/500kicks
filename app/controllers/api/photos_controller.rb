@@ -14,8 +14,6 @@ class Api::PhotosController < ApplicationController
     end
 
     def create
-        # debugger
-        # @photo_upload.photo.attach(:photo)
         photo = Photo.new(photo_params)
         if photo.save
             render json: ['hopefully we actually go to the users show page']
@@ -38,7 +36,7 @@ class Api::PhotosController < ApplicationController
 
     private
 
-        def photo_params
-            params.require(:photo).permit(:title, :photo, :photographer_id)
-        end
+    def photo_params
+        params.require(:photo).permit(:title, :description, :photo, :photographer_id)
+    end
 end

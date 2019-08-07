@@ -1,13 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import DropDownComponent from './dropdown'
+import DropDownComponent from './dropdown';
+import { withRouter } from 'react-router'
 
 const NavBar = ( { currentUser, logout } ) => {
     const uploadPhotoButton = currentUser ? (
         <div className='uploadkix-button-container'>
             <Link to='/uploadphoto'><button className='upload-kix-nav-btn'>Upload Some Kix</button></Link>
-            <Link to={`/users/${currentUser.id}`}><button className='profile-nav-btn'>Profile</button></Link>
+            <Link to={`/users/${currentUser}`}><button className='profile-nav-btn'>Profile</button></Link>
         </div>
     ) : (
         <div className='uploadkix-button-container'></div>
@@ -40,11 +41,13 @@ const NavBar = ( { currentUser, logout } ) => {
     )
 };
 
-const msp = state => ({
+const msp = state => {
+    // debugger;
+    return ({
     currentUser: state.session.id,
-});
+})};
 
 const mdp = dispatch => ({
 });
 
-export default connect(msp, mdp)(NavBar)
+export default withRouter(connect(msp, mdp)(NavBar));

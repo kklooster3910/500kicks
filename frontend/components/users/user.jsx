@@ -9,6 +9,7 @@ class UserProfile extends React.Component {
 
     componentDidMount() {
         this.props.fetchUser(this.props.match.params.userId)
+        this.props.resetErrors();
     }
 
     componentDidUpdate(prevProps) {
@@ -18,13 +19,15 @@ class UserProfile extends React.Component {
     }
 
     render () {
-        const cUser = this.props.user
+        const cProfile = this.props.currentProfile
         let kix;
-        if (!cUser) {
+        // debugger;
+        if (!cProfile || !cProfile.photo_ids) {
             return null;
         }
-        if (cUser.photos !== undefined) {
-            kix = Object.values(cUser.photos).map( photo => (
+        // debugger;
+        if (cProfile.photo_ids.length > 0) {
+            kix = this.props.photos.map( photo => (
                 <KixIndexItem key={photo.id} photo={photo} />
             ));
         } else {
@@ -34,9 +37,9 @@ class UserProfile extends React.Component {
         return (
             <div className='users-profile-page-container'>
                 <div className='profile-banner-image-container'>
-                    {/* <img className='profile-banner-image' src={Object.values(cUser.photos).first.image_url}/> //figure out how to select a user image if they have a pic */}
+                    {/* <img className='profile-banner-image' src={Object.values(cProfile.photos).first.image_url}/> //figure out how to select a user image if they have a pic */}
                 </div>
-                <h4 className='profile-page-username'>{cUser.username}</h4>
+                <h4 className='profile-page-username'>{cProfile.username}</h4>
                 maybe Camera Info?: 'camera info here'
                 <div className='profile-gallery'>
                     {kix}

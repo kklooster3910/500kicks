@@ -1,0 +1,1 @@
+json.extract! @like, :id, :photographer_id, :photo_id

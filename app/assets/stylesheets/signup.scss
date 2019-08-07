@@ -44,6 +44,22 @@
 
 .sessionform-submit:hover { opacity: 0.6 }
 
+.signup-demo-btn {
+    width: 100%;
+    background-color: #2C2F40;
+    padding: 12px;
+    text-align: center;
+    color: #CEECEF;
+    border: solid 3px;
+    border-color: #CEECEF;
+    border-radius: 12px;
+    opacity: 1;
+    transition: 0.5s;
+}
+
+.signup-demo-btn:hover { opacity: 0.6 }
+
+
 .sessionform-home-btn {
     width: 100%;
     background-color: #2C2F40;
