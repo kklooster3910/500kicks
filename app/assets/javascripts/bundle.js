@@ -1683,10 +1683,7 @@ function (_React$Component) {
         className: "users-profile-page-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "profile-banner-image-container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        className: "profile-banner-image",
-        src: Object.values(cUser.photos)[1].image_url
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
         className: "profile-page-username"
       }, cUser.username), "maybe Camera Info?: 'camera info here'", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "profile-gallery"
@@ -31498,7 +31495,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
