@@ -10,7 +10,7 @@ const sessionReducer = (state = nullUser, action) => {
     // debugger;
     switch(action.type) {
         case RECEIVE_CURRENT_USER:
-            return merge({}, state, { id: action.user }); //probs change this ret obj to action.user.id
+            return merge({}, state, { id: action.user.id }); //probs change this ret obj to action.user.id
         case LOGOUT_CURRENT_USER:
             return nullUser;
         default:

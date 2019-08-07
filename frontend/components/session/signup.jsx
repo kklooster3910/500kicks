@@ -11,6 +11,7 @@ class Signup extends React.Component {
             password: ''
         };
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleClick = this.handleClick.bind(this);
     };
 
     update(field) {
@@ -31,6 +32,11 @@ class Signup extends React.Component {
         this.props.resetErrors();
     }
 
+    handleClick (e) {
+        e.preventDefault();
+        this.props.demoLogin(this.props.demoUser).then(alert('Demo User Logged In - try uploading a photo!'))
+    }
+
     render () {
         let errors = Object.values(this.props.errors)
         if (errors.length > 0) {
@@ -38,6 +44,9 @@ class Signup extends React.Component {
                 <li key={i}>{err}</li>
             ))
         }
+
+        let demoLogin = <button className='signup-demo-btn' onClick={this.handleClick}>Demo Login!</button>
+
         return (
             <div>
                 <div className='signup-home-img'></div>
@@ -60,6 +69,7 @@ class Signup extends React.Component {
                                 className='sessionform-input'
                                 placeholder='Password'/>
                         <button className='sessionform-submit'>Sign Up!</button>
+                        {demoLogin}
                         <Link to='/'><button onClick={() => this.props.resetErrors()} className='sessionform-home-btn'>Home</button></Link>
                         <p className='signupform-errors'>{errors}</p>
                     </div>

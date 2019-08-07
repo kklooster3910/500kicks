@@ -16,7 +16,7 @@ class DropDown extends React.Component {
     }
 
     renderDropDown() {
- 
+        // debugger;
         return (
             <ul className={(this.state.hidden ? 'drop-down hide' : 'drop-down') + ' drop-down-content'}>
                 <Link to={`/users/${this.props.currentUser}`}><button className='dropdown-profile-btn'>{this.props.users[this.props.currentUser].username}</button></Link>

@@ -7,7 +7,7 @@ const likesReducer = (state = {}, action) => {
         case RECEIVE_ALL_LIKES:
             return merge({}, state, action.likes);
         case RECEIVE_LIKE:
-            return merge({}, state, { [action.like.id]: action.like });
+            return merge({}, state, {[action.like.photo_id]: action.like });
         case REMOVE_LIKE:
             const oldLikes = merge({}, state, {[action.like.id]: action.like});
             delete oldLikes[action.like.id];

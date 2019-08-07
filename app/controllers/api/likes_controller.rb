@@ -13,6 +13,10 @@ class Api::LikesController < ApplicationController
         end
     end
 
+    # def show
+    #     @like = Like.find_by(id: params[:id])
+    # end
+
     def destroy
         @like = Like.find_by(id: params[:id])
         if @like     
