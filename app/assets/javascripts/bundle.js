@@ -242,8 +242,6 @@ var RECEIVE_RESET_ERRORS = 'RECEIVE_RESET_ERRORS';
 var RECEIVE_PHOTO_UPLOAD = 'RECEIVE_PHOTO_UPLOAD';
 var RECEIVE_CREATE_PHOTO_ERRORS = 'RECEIVE_CREATE_PHOTO_ERRORS';
 var resetErrors = function resetErrors() {
-  //you might not need this, delete if no
-  //add another cb to .then so that you can receive and handle errors
   return {
     type: RECEIVE_RESET_ERRORS
   };
@@ -272,11 +270,13 @@ var createPhoto = function createPhoto(formData) {
   return function (dispatch) {
     // debugger;
     return _util_photo_api_util__WEBPACK_IMPORTED_MODULE_0__["createPhoto"](formData).then(function (payload) {
+      // debugger;
       return dispatch({
         type: RECEIVE_PHOTO_UPLOAD,
         payload: payload
       });
     }, function (err) {
+      //   debugger
       return dispatch({
         type: RECEIVE_CREATE_PHOTO_ERRORS,
         errors: err.responseJSON
@@ -390,10 +390,10 @@ __webpack_require__.r(__webpack_exports__);
 var RECEIVE_USER_PROFILE = 'RECEIVE_USER_PROFILE';
 var fetchUser = function fetchUser(id) {
   return function (dispatch) {
-    return _util_user_profile_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchUser"](id).then(function (user) {
+    return _util_user_profile_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchUser"](id).then(function (payload) {
       return dispatch({
         type: RECEIVE_USER_PROFILE,
-        user: user
+        payload: payload
       });
     });
   };
@@ -622,7 +622,9 @@ function (_React$Component) {
   _createClass(DiscoverKix, [{
     key: "componentDidMount",
     value: function componentDidMount() {
+      // debugger;
       this.props.fetchPhotos();
+      this.props.resetErrors();
     }
   }, {
     key: "render",
@@ -678,6 +680,9 @@ var mdp = function mdp(dispatch) {
     },
     fetchPhoto: function fetchPhoto(id) {
       return dispatch(Object(_actions_photo_actions__WEBPACK_IMPORTED_MODULE_3__["fetchPhoto"])(id));
+    },
+    resetErrors: function resetErrors() {
+      return dispatch(Object(_actions_photo_actions__WEBPACK_IMPORTED_MODULE_3__["resetErrors"])());
     }
   };
 }; // you might be able to use fetchPhoto when you are going to click on a photo from the discover page
@@ -794,12 +799,14 @@ function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       // this.props.fetchLikes();
+      // this.props.resetErrors();
       this.props.fetchPhoto(this.props.match.params.photoId);
     }
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
       // debugger;
+      // this.props.resetErrors();
       if (this.props.match.params.photoId !== prevProps.match.params.photoId) {
         this.props.fetchPhoto(this.props.match.params.photoId); // this.props.fetchLikes();
       }
@@ -914,15 +921,12 @@ var mdp = function mdp(dispatch) {
     fetchPhoto: function fetchPhoto(id) {
       return dispatch(Object(_actions_photo_actions__WEBPACK_IMPORTED_MODULE_3__["fetchPhoto"])(id));
     },
-    fetchLikes: function fetchLikes() {
-      return dispatch(Object(_actions_like_actions__WEBPACK_IMPORTED_MODULE_4__["fetchLikes"])());
-    },
-    removeLike: function removeLike(id) {
-      return dispatch(Object(_actions_like_actions__WEBPACK_IMPORTED_MODULE_4__["removeLike"])(id));
-    },
-    createLike: function createLike(like) {
-      return dispatch(Object(_actions_like_actions__WEBPACK_IMPORTED_MODULE_4__["createLike"])(like));
-    }
+    resetErrors: function resetErrors() {
+      return dispatch(Object(_actions_photo_actions__WEBPACK_IMPORTED_MODULE_3__["resetErrors"])());
+    } // fetchLikes: () => dispatch(fetchLikes()),
+    // removeLike: id => dispatch(removeLike(id)),
+    // createLike: like => dispatch(createLike(like))
+
   };
 };
 
@@ -978,49 +982,15 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(LikeButton).call(this, props));
     _this.state = {
       liked: true
-    }; // addHiddenClass() {
-    //     this.setState({ hidden: !this.state.hidden });
-    // }
-    // this.state = { photo_id: undefined, photographer_id: undefined };
-    // debugger;
-    // if (this.props.currentUser.id) {
-    //     this.state = { photo_id: this.props.photo.id, photographer_id: this.props.currentUser.id };
-    // }
-    // this.setState({ photo_id: this.props.photo.id, photographer_id: this.props.currentUser.id })
-
+    };
     return _this;
-  } // componentDidMount() {
-  //     this.props.fetchLikes()
-  // }
-  // componentDidUpdate(prevProps) {
-  // }
-  // if (this.state) {
-  //     let cLike = this.props.createLike
-  //     this.setState({liked: true})   
-  // } else {
-  //     rLike = this.props.removeLike
-  //     this.setState({ liked: false })
-  // }
-  // let likeButton = <div
-  //     createLike={cLike}
-  //     removeLike={rLike}
-  //     currentUser={this.props.currentUser}
-  //     photoId={kix.id}
-  // /> 
-
+  }
 
   _createClass(LikeButton, [{
     key: "render",
     value: function render() {
       var _this2 = this;
 
-      // if (!this.props.photo) {
-      //     return null;
-      // }
-      // if (this.state === null) {
-      //     this.setState({ photo_id: this.props.photoId, photographer_id: this.props.currentUser.id })
-      // }  
-      // this.setState({ photo_id: this.props.photo.id, photographer_id: this.props.currentUser.id })
       var likedButton;
 
       if (!this.props.currentUser) {
@@ -1099,16 +1069,14 @@ var msp = function msp(state, ownProps) {
   return {
     // currentUser: state.entities.users[state.session.id],
     currentUser: state.session.id,
-    photo: state.entities.photos[ownProps.match.params.photoId],
-    allLikes: state.entities.likes
+    photo: state.entities.photos[ownProps.match.params.photoId] // allLikes: state.entities.likes
+
   };
 };
 
 var mdp = function mdp(dispatch) {
   return {
-    fetchLikes: function fetchLikes() {
-      return dispatch(Object(_actions_like_actions__WEBPACK_IMPORTED_MODULE_3__["fetchLikes"])());
-    },
+    // fetchLikes: () => dispatch(fetchLikes()),
     removeLike: function removeLike(id) {
       return dispatch(Object(_actions_like_actions__WEBPACK_IMPORTED_MODULE_3__["removeLike"])(id));
     },
@@ -1193,10 +1161,10 @@ function (_React$Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: (this.state.hidden ? 'drop-down hide' : 'drop-down') + ' drop-down-content'
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        to: "/users/".concat(this.props.currentUser)
+        to: "/users/".concat(this.props.currentUser.id)
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "dropdown-profile-btn"
-      }, this.props.users[this.props.currentUser].username)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      }, this.props.currentUser.username)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/uploadphoto"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "upload-photo-nav-btn drop-down-item"
@@ -1212,6 +1180,9 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      // debugger;
+      if (!this.props.currentUser) return null; // debugger;
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "drop-down-btn-stuff"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
@@ -1228,8 +1199,8 @@ function (_React$Component) {
 var msp = function msp(state) {
   // debugger;
   return {
-    currentUser: state.session.id,
-    users: state.entities.users
+    currentUser: state.entities.users[state.session.id] // users: state.entities.users
+
   };
 };
 
@@ -1347,6 +1318,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var msp = function msp(state) {
+  // debugger;
   return {
     errors: state.errors,
     currentUser: state.entities.users[state.session.id]
@@ -1359,7 +1331,7 @@ var mdp = function mdp(dispatch) {
       return dispatch(Object(_actions_photo_actions__WEBPACK_IMPORTED_MODULE_2__["createPhoto"])(photo));
     },
     resetErrors: function resetErrors() {
-      return dispatch(_actions_photo_actions__WEBPACK_IMPORTED_MODULE_2__["resetErrors"]);
+      return dispatch(Object(_actions_photo_actions__WEBPACK_IMPORTED_MODULE_2__["resetErrors"])());
     }
   };
 };
@@ -1458,22 +1430,18 @@ function (_React$Component) {
       });
     }
   }, {
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.props.resetErrors();
-    }
-  }, {
-    key: "componentDidUpdate",
-    value: function componentDidUpdate() {
-      this.props.resetErrors();
-    }
-  }, {
     key: "update",
+    //     componentDidMount() {
+    //     };
+    //     componentDidUpdate() {        
+    //    };
     value: function update(field) {
       var _this4 = this;
 
       return function (e) {
         _this4.setState(_defineProperty({}, field, e.target.value));
+
+        _this4.props.resetErrors();
       };
     }
   }, {
@@ -2020,6 +1988,7 @@ function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.props.fetchUser(this.props.match.params.userId);
+      this.props.resetErrors();
     }
   }, {
     key: "componentDidUpdate",
@@ -2033,15 +2002,16 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var cUser = this.props.user;
-      var kix;
+      var cProfile = this.props.currentProfile;
+      var kix; // debugger;
 
-      if (!cUser) {
+      if (!cProfile || !cProfile.photo_ids) {
         return null;
-      }
+      } // debugger;
 
-      if (cUser.photos !== undefined) {
-        kix = Object.values(cUser.photos).map(function (photo) {
+
+      if (cProfile.photo_ids.length > 0) {
+        kix = this.props.photos.map(function (photo) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_kix_kix_index_item__WEBPACK_IMPORTED_MODULE_2__["default"], {
             key: photo.id,
             photo: photo
@@ -2057,7 +2027,7 @@ function (_React$Component) {
         className: "profile-banner-image-container"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
         className: "profile-page-username"
-      }, cUser.username), "maybe Camera Info?: 'camera info here'", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, cProfile.username), "maybe Camera Info?: 'camera info here'", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "profile-gallery"
       }, kix));
     }
@@ -2082,16 +2052,35 @@ function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _user__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./user */ "./frontend/components/users/user.jsx");
 /* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/user_actions */ "./frontend/actions/user_actions.js");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var _actions_photo_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/photo_actions */ "./frontend/actions/photo_actions.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var _reducers_selectors__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../reducers/selectors */ "./frontend/reducers/selectors.js");
+
+
 
 
 
 
 
 var msp = function msp(state, ownProps) {
+  // let photos;
+  // debugger;
+  // debugger;
+  var user = state.entities.users[ownProps.match.params.userId]; // debugger;
+  // if (user.photo_id !== undefined) {
+  //         photos = user.photo_ids.map(id => state.entities.photos[id]);
+  //         // debugger;
+  // } else { 
+  //         photos = [];
+  // }
+  // user ? photos = user.photo_ids.map( id => state.entities.photos[id] ) : [];
+  // photos: photos
+  // debugger;
+
   return {
-    user: state.entities.users[ownProps.match.params.userId]
+    currentProfile: user,
+    photos: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_5__["fetchProfilePhotos"])(state, user)
   };
 };
 
@@ -2099,11 +2088,14 @@ var mdp = function mdp(dispatch) {
   return {
     fetchUser: function fetchUser(id) {
       return dispatch(Object(_actions_user_actions__WEBPACK_IMPORTED_MODULE_1__["fetchUser"])(id));
+    },
+    resetErrors: function resetErrors() {
+      return dispatch(Object(_actions_photo_actions__WEBPACK_IMPORTED_MODULE_2__["resetErrors"])());
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_router__WEBPACK_IMPORTED_MODULE_3__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(msp, mdp)(_user__WEBPACK_IMPORTED_MODULE_0__["default"])));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router__WEBPACK_IMPORTED_MODULE_4__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(msp, mdp)(_user__WEBPACK_IMPORTED_MODULE_0__["default"])));
 
 /***/ }),
 
@@ -2152,7 +2144,8 @@ __webpack_require__.r(__webpack_exports__);
 var errorsReducer = function errorsReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
-  Object.freeze(state); // debugger;
+  // debugger;
+  Object.freeze(state);
 
   switch (action.type) {
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_SESSION_ERRORS"]:
@@ -2165,7 +2158,11 @@ var errorsReducer = function errorsReducer() {
       return [];
 
     case _actions_photo_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_CREATE_PHOTO_ERRORS"]:
-      return lodash_merge__WEBPACK_IMPORTED_MODULE_2___default()({}, state, action.errors);
+      if (!action.errors) {
+        return ["Please Choose a Photo First"];
+      } else {
+        return lodash_merge__WEBPACK_IMPORTED_MODULE_2___default()({}, state, action.errors);
+      }
 
     default:
       return state;
@@ -2232,7 +2229,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash/merge */ "./node_modules/lodash/merge.js");
 /* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash_merge__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _actions_like_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/like_actions */ "./frontend/actions/like_actions.js");
+/* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/user_actions */ "./frontend/actions/user_actions.js");
+/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../actions/session_actions */ "./frontend/actions/session_actions.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
 
 
 
@@ -2261,17 +2263,10 @@ var photosReducer = function photosReducer() {
       nLikes.push(action.like);
       newState[action.like.photo_id].likes = nLikes;
       return newState;
-    // return merge({}, state, { [action.like.photo_id]: { likes: [action.like] }});
 
     case _actions_like_actions__WEBPACK_IMPORTED_MODULE_2__["REMOVE_LIKE"]:
       var oLikes = state[action.like.photo_id].likes;
-      nLikes = []; // oLikes.forEach( like => {
-      //     // debugger;
-      //     // debugger;
-      //     if (like.photographer_id !== action.like.photographer_id) {
-      //        nLikes.push(like)
-      //     }
-      // })
+      nLikes = [];
 
       for (var i = 0; i < oLikes.length; i++) {
         if (oLikes[i].photographer_id !== action.like.photographer_id) {
@@ -2283,9 +2278,17 @@ var photosReducer = function photosReducer() {
 
       ;
       newState = lodash_merge__WEBPACK_IMPORTED_MODULE_1___default()({}, state);
-      newState[action.like.photo_id].likes = nLikes; // debugger;
-
+      newState[action.like.photo_id].likes = nLikes;
       return newState;
+    // case RECEIVE_RESET_ERRORS:
+    //     return [];
+
+    case _actions_user_actions__WEBPACK_IMPORTED_MODULE_3__["RECEIVE_USER_PROFILE"]:
+      return action.payload.photos;
+    // return merge({}, state, { [action.payload.user.id]: action.payload.user })
+
+    case _actions_session_actions__WEBPACK_IMPORTED_MODULE_4__["RECEIVE_CURRENT_USER"]:
+      return action.user.photos;
 
     default:
       return state;
@@ -2323,6 +2326,25 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./frontend/reducers/selectors.js":
+/*!****************************************!*\
+  !*** ./frontend/reducers/selectors.js ***!
+  \****************************************/
+/*! exports provided: fetchProfilePhotos */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchProfilePhotos", function() { return fetchProfilePhotos; });
+var fetchProfilePhotos = function fetchProfilePhotos(state, user) {
+  // debugger;
+  return user ? user.photo_ids.map(function (id) {
+    return state.entities.photos[id];
+  }) : [];
+};
+
+/***/ }),
+
 /***/ "./frontend/reducers/session_reducer.js":
 /*!**********************************************!*\
   !*** ./frontend/reducers/session_reducer.js ***!
@@ -2349,7 +2371,7 @@ var sessionReducer = function sessionReducer() {
   switch (action.type) {
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CURRENT_USER"]:
       return lodash_merge__WEBPACK_IMPORTED_MODULE_1___default()({}, state, {
-        id: action.user.id
+        id: action.user.user.id
       });
     //probs change this ret obj to action.user.id
 
@@ -2388,12 +2410,14 @@ var usersReducer = function usersReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
+  // debugger;
   switch (action.type) {
     case _actions_user_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_USER_PROFILE"]:
-      return lodash_merge__WEBPACK_IMPORTED_MODULE_2___default()({}, state, _defineProperty({}, action.user.id, action.user));
+      return lodash_merge__WEBPACK_IMPORTED_MODULE_2___default()({}, state, _defineProperty({}, action.payload.user.id, action.payload.user));
 
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_CURRENT_USER"]:
-      return lodash_merge__WEBPACK_IMPORTED_MODULE_2___default()({}, state, _defineProperty({}, action.user.id, action.user));
+      // debugger;
+      return lodash_merge__WEBPACK_IMPORTED_MODULE_2___default()({}, state, _defineProperty({}, action.user.user.id, action.user.user));
 
     default:
       return state;

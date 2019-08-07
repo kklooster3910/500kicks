@@ -19,7 +19,7 @@ class DropDown extends React.Component {
         // debugger;
         return (
             <ul className={(this.state.hidden ? 'drop-down hide' : 'drop-down') + ' drop-down-content'}>
-                <Link to={`/users/${this.props.currentUser}`}><button className='dropdown-profile-btn'>{this.props.users[this.props.currentUser].username}</button></Link>
+                <Link to={`/users/${this.props.currentUser.id}`}><button className='dropdown-profile-btn'>{this.props.currentUser.username}</button></Link>
                 <Link to='/uploadphoto'><button className='upload-photo-nav-btn drop-down-item'>Upload Kix!</button></Link>
                 <Link to='/kix'><button className='discover-kix-nav-btn drop-down-item'>Discover Kix</button></Link>
                 <button className='loggedin-logout-btn drop-down-item' onClick={this.props.logout}>Logout</button>   
@@ -28,7 +28,9 @@ class DropDown extends React.Component {
     }
 
     render () { 
-
+        // debugger;
+        if (!this.props.currentUser) return null;
+        // debugger;
         return (
             <div className='drop-down-btn-stuff' >
                 <button onClick={this.addHiddenClass}><i className="far fa-user-circle"></i></button>
@@ -41,8 +43,8 @@ class DropDown extends React.Component {
 const msp = state => {
     // debugger;
     return ({
-    currentUser: state.session.id,
-    users: state.entities.users
+    currentUser: state.entities.users[state.session.id]
+    // users: state.entities.users
 })}
 
 const mdp = dispatch => ({

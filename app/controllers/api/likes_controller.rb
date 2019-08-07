@@ -23,7 +23,7 @@ class Api::LikesController < ApplicationController
             @like.destroy
             render :destroy
         else
-            render json:['this was not a success bruh']
+            render json: ['this was not a success bruh']
         end
     end
 

@@ -10,12 +10,13 @@ class KixShow extends React.Component {
 
     componentDidMount() {
         // this.props.fetchLikes();
+        // this.props.resetErrors();
         this.props.fetchPhoto(this.props.match.params.photoId);
     };
 
     componentDidUpdate(prevProps) {
         // debugger;
-
+        // this.props.resetErrors();
         if (this.props.match.params.photoId !== prevProps.match.params.photoId) {
             this.props.fetchPhoto(this.props.match.params.photoId);
             // this.props.fetchLikes();

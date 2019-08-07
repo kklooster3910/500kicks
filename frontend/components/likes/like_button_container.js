@@ -7,11 +7,11 @@ const msp = (state, ownProps) => ({
     // currentUser: state.entities.users[state.session.id],
     currentUser: state.session.id,
     photo: state.entities.photos[ownProps.match.params.photoId],
-    allLikes: state.entities.likes
+    // allLikes: state.entities.likes
 })
 
 const mdp = dispatch => ({
-    fetchLikes: () => dispatch(fetchLikes()),
+    // fetchLikes: () => dispatch(fetchLikes()),
     removeLike: id => dispatch(removeLike(id)),
     createLike: like => dispatch(createLike(like))
 })

@@ -12,7 +12,9 @@ class DiscoverKix extends React.Component {
     };
     
     componentDidMount() {
+        // debugger;
         this.props.fetchPhotos();
+        this.props.resetErrors();
     };
     
     render() {

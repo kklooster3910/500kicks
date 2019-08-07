@@ -6,8 +6,8 @@ import { RECEIVE_CREATE_PHOTO_ERRORS } from '../actions/photo_actions';
 import merge from 'lodash/merge';
 
 const errorsReducer = (state = {}, action) => {
-    Object.freeze(state);
     // debugger;
+    Object.freeze(state);
     switch(action.type) {
         case RECEIVE_SESSION_ERRORS:
             return merge({}, state, action.errors)
@@ -16,7 +16,11 @@ const errorsReducer = (state = {}, action) => {
         case RECEIVE_CURRENT_USER:
             return [];
         case RECEIVE_CREATE_PHOTO_ERRORS:
-            return merge({}, state, action.errors)
+            if (!action.errors) {
+                return ["Please Choose a Photo First"]
+            } else {
+                return merge({}, state, action.errors)
+            }
         default:
             return state;
     }

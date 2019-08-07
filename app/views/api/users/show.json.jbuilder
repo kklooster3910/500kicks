@@ -1,10 +1,13 @@
-json.extract! @user, :id, :username
-
-@user.photos.each do |photo|
-    json.photos do
+json.user do
+    json.extract! @user, :id, :username, :photo_ids
+end
+json.photos do
+    @user.photos.each do |photo|
         json.set! photo.id do
             json.extract! photo, :id, :title
             json.image_url url_for(photo.photo)
         end
     end
 end
+
+# json.extract! @user, :id, :username

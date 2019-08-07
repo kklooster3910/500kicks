@@ -31,18 +31,16 @@ class PhotoForm extends React.Component {
         );
     };
     
-    componentDidMount() {
-        this.props.resetErrors();
-    };
-
-    componentDidUpdate() {
-        this.props.resetErrors();
-    };
-
+//     componentDidMount() {
+//     };
+    
+//     componentDidUpdate() {        
+//    };
 
     update(field) {
         return e => {
-            this.setState({[field]: e.target.value});
+            this.setState({[field]: e.target.value})
+            this.props.resetErrors();
         };
     };
     
@@ -69,8 +67,8 @@ class PhotoForm extends React.Component {
                         <input type='text'
                             value={this.state.title}
                             onChange={this.update('title')}
-                            className='photupload-title-input'
-                            placeholder='Photo Title!'/>
+                        className='photupload-title-input'
+                        placeholder='Photo Title!'/>
                         <input type='file'
                             className='photofile-upload-input'
                             onChange={this.handleFile}/>
