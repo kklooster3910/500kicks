@@ -138,9 +138,81 @@ document.addEventListener('DOMContentLoaded', function () {
   !*** ./frontend/actions/like_actions.js ***!
   \******************************************/
 /*! exports provided: RECEIVE_ALL_LIKES, RECEIVE_LIKE, REMOVE_LIKE, RECEIVE_RESET_ERRORS, RECEIVE_LIKE_ERRORS, resetErrors, fetchLikes, createLike, removeLike */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nError: ENOENT: no such file or directory, open '/home/klue/Documents/500kicks/500kicks/frontend/actions/like_actions.js'");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_ALL_LIKES", function() { return RECEIVE_ALL_LIKES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_LIKE", function() { return RECEIVE_LIKE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_LIKE", function() { return REMOVE_LIKE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_RESET_ERRORS", function() { return RECEIVE_RESET_ERRORS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_LIKE_ERRORS", function() { return RECEIVE_LIKE_ERRORS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "resetErrors", function() { return resetErrors; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchLikes", function() { return fetchLikes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createLike", function() { return createLike; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeLike", function() { return removeLike; });
+/* harmony import */ var _util_like_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/like_api_util */ "./frontend/util/like_api_util.js");
+
+var RECEIVE_ALL_LIKES = 'RECEIVE_ALL_LIKES';
+var RECEIVE_LIKE = 'RECEIVE_LIKE';
+var REMOVE_LIKE = 'REMOVE_LIKE';
+var RECEIVE_RESET_ERRORS = 'RECEIVE_RESET_ERRORS';
+var RECEIVE_LIKE_ERRORS = 'RECEIVE_LIKE_ERRORS';
+var resetErrors = function resetErrors() {
+  // do I need to export
+  //or have this in every action file? wtf ken
+  return {
+    type: RECEIVE_RESET_ERRORS
+  };
+};
+var fetchLikes = function fetchLikes() {
+  return function (dispatch) {
+    return _util_like_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchLikes"]().then(function (likes) {
+      return dispatch({
+        type: RECEIVE_ALL_LIKES,
+        likes: likes
+      }), function (err) {
+        return dispatch({
+          type: RECEIVE_LIKE_ERRORS,
+          errors: err.responseJSON
+        });
+      };
+    });
+  };
+};
+var createLike = function createLike(like) {
+  return function (dispatch) {
+    return _util_like_api_util__WEBPACK_IMPORTED_MODULE_0__["createLike"](like).then(function (like) {
+      return dispatch({
+        type: RECEIVE_LIKE,
+        like: like
+      }), function (err) {
+        return dispatch({
+          type: RECEIVE_LIKE_ERRORS,
+          errors: err.responseJSON
+        });
+      };
+    });
+  };
+};
+var removeLike = function removeLike(id) {
+  return function (dispatch) {
+    return _util_like_api_util__WEBPACK_IMPORTED_MODULE_0__["removeLike"](id).then(function (like) {
+      return dispatch({
+        type: REMOVE_LIKE,
+        like: like
+      }), function (err) {
+        return dispatch({
+          type: RECEIVE_LIKE_ERRORS,
+          errors: err.responseJSON
+        });
+      };
+    });
+  };
+};
+window.fetchLikes = fetchLikes;
+window.createLike = createLike;
+window.removeLike = removeLike;
 
 /***/ }),
 
@@ -402,14 +474,169 @@ var App = function App() {
 
 /***/ }),
 
+/***/ "./frontend/components/home/home.jsx":
+/*!*******************************************!*\
+  !*** ./frontend/components/home/home.jsx ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+
+var Home =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(Home, _React$Component);
+
+  function Home(props) {
+    var _this;
+
+    _classCallCheck(this, Home);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Home).call(this, props));
+    _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(Home, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      // console.log(this.props.currentUser);
+      if (this.props.currentUser) {
+        this.props.fetchUser(this.props.currentUser);
+      }
+    }
+  }, {
+    key: "handleClick",
+    value: function handleClick(e) {
+      e.preventDefault();
+      this.props.demoLogin(this.props.demoUser).then(alert('Demo User Logged In - try uploading a photo!'));
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var maybeDemo;
+      var maybeCreateNewUser;
+      var kixShowLink;
+      var uploadPhoto;
+
+      if (!this.props.currentUser) {
+        maybeDemo = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          className: "home-demo-btn",
+          onClick: this.handleClick
+        }, "Demo Login!");
+        maybeCreateNewUser = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+          to: "/signup"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          className: "home-createnewuser-btn"
+        }, "Create New User"));
+      } else {
+        uploadPhoto = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+          to: "/uploadphoto"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          className: "home-upload-photo-button"
+        }, "Upload Kix"));
+      }
+
+      kixShowLink = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+        to: "/kix"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "discover-kix-btn"
+      }, "Discover Kix!"));
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "home"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "home-img-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "home-interactive"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, maybeDemo, maybeCreateNewUser, kixShowLink, uploadPhoto), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+        className: "home-logo"
+      }, "Share Your Kix..."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+        className: "home-logo-kick"
+      }, "...Get Kicking"))));
+    }
+  }]);
+
+  return Home;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router__WEBPACK_IMPORTED_MODULE_3__["withRouter"])(Home));
+
+/***/ }),
+
 /***/ "./frontend/components/home/home_conatiner.js":
 /*!****************************************************!*\
   !*** ./frontend/components/home/home_conatiner.js ***!
   \****************************************************/
 /*! exports provided: default */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nError: ENOENT: no such file or directory, open '/home/klue/Documents/500kicks/500kicks/frontend/components/home/home_conatiner.js'");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _home__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./home */ "./frontend/components/home/home.jsx");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
+/* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/user_actions */ "./frontend/actions/user_actions.js");
+
+
+
+
+
+
+var msp = function msp(state) {
+  // debugger;
+  return {
+    demoUser: {
+      username: "Tyler Durden",
+      email: "fight@club.net",
+      password: "password123"
+    },
+    currentUser: state.session.id // loggedinUser: state.session.users[state.session.id]
+
+  };
+};
+
+var mdp = function mdp(dispatch) {
+  return {
+    demoLogin: function demoLogin(demoUser) {
+      return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_3__["login"])(demoUser));
+    },
+    fetchUser: function fetchUser(user) {
+      return dispatch(Object(_actions_user_actions__WEBPACK_IMPORTED_MODULE_4__["fetchUser"])(user));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(msp, mdp)(_home__WEBPACK_IMPORTED_MODULE_0__["default"])));
 
 /***/ }),
 
@@ -787,14 +1014,162 @@ var mdp = function mdp(dispatch) {
 
 /***/ }),
 
+/***/ "./frontend/components/likes/like_button.jsx":
+/*!***************************************************!*\
+  !*** ./frontend/components/likes/like_button.jsx ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var _actions_like_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/like_actions */ "./frontend/actions/like_actions.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+var LikeButton =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(LikeButton, _React$Component);
+
+  function LikeButton(props) {
+    var _this;
+
+    _classCallCheck(this, LikeButton);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(LikeButton).call(this, props));
+    _this.state = {
+      liked: true
+    };
+    return _this;
+  }
+
+  _createClass(LikeButton, [{
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      var likedButton;
+
+      if (!this.props.currentUser) {
+        likedButton = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "kix-lik-btn",
+          onClick: function onClick() {
+            return alert('Please Login to Like a Photo');
+          }
+        }, "Like!!");
+      } else {
+        (function () {
+          var that = _this2.props;
+
+          var _loop = function _loop(i) {
+            if (that.likesCount[i].photographer_id === that.currentUser) {
+              likedButton = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+                className: "kix-lik-btn",
+                onClick: function onClick() {
+                  return that.removeLike(that.likesCount[i].id);
+                }
+              }, "Like!!");
+              return "break";
+            }
+          };
+
+          for (var i = 0; i < that.likesCount.length; i++) {
+            var _ret = _loop(i);
+
+            if (_ret === "break") break;
+          }
+
+          if (likedButton === undefined) {
+            likedButton = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "kix-lik-btn",
+              onClick: function onClick() {
+                return _this2.props.createLike({
+                  photo_id: _this2.props.photo.id,
+                  photographer_id: _this2.props.currentUser
+                });
+              }
+            }, "Like!!");
+          }
+        })();
+      }
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "kix-like-btn-container"
+      }, likedButton);
+    }
+  }]);
+
+  return LikeButton;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+;
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(LikeButton));
+
+/***/ }),
+
 /***/ "./frontend/components/likes/like_button_container.js":
 /*!************************************************************!*\
   !*** ./frontend/components/likes/like_button_container.js ***!
   \************************************************************/
 /*! exports provided: default */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nError: ENOENT: no such file or directory, open '/home/klue/Documents/500kicks/500kicks/frontend/components/likes/like_button_container.js'");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _like_button__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./like_button */ "./frontend/components/likes/like_button.jsx");
+/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_like_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/like_actions */ "./frontend/actions/like_actions.js");
+
+
+
+
+
+var msp = function msp(state, ownProps) {
+  return {
+    // currentUser: state.entities.users[state.session.id],
+    currentUser: state.session.id,
+    photo: state.entities.photos[ownProps.match.params.photoId] // allLikes: state.entities.likes
+
+  };
+};
+
+var mdp = function mdp(dispatch) {
+  return {
+    // fetchLikes: () => dispatch(fetchLikes()),
+    removeLike: function removeLike(id) {
+      return dispatch(Object(_actions_like_actions__WEBPACK_IMPORTED_MODULE_3__["removeLike"])(id));
+    },
+    createLike: function createLike(like) {
+      return dispatch(Object(_actions_like_actions__WEBPACK_IMPORTED_MODULE_3__["createLike"])(like));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(msp, mdp)(_like_button__WEBPACK_IMPORTED_MODULE_0__["default"])));
 
 /***/ }),
 
@@ -1896,9 +2271,41 @@ var errorsReducer = function errorsReducer() {
   !*** ./frontend/reducers/likes_reducer.js ***!
   \********************************************/
 /*! exports provided: default */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nError: ENOENT: no such file or directory, open '/home/klue/Documents/500kicks/500kicks/frontend/reducers/likes_reducer.js'");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash/merge */ "./node_modules/lodash/merge.js");
+/* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash_merge__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _actions_like_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/like_actions */ "./frontend/actions/like_actions.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+var likesReducer = function likesReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+
+  switch (action.type) {
+    case _actions_like_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_ALL_LIKES"]:
+      return lodash_merge__WEBPACK_IMPORTED_MODULE_0___default()({}, state, action.likes);
+
+    case _actions_like_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_LIKE"]:
+      return lodash_merge__WEBPACK_IMPORTED_MODULE_0___default()({}, state, _defineProperty({}, action.like.photo_id, action.like));
+
+    case _actions_like_actions__WEBPACK_IMPORTED_MODULE_1__["REMOVE_LIKE"]:
+      var oldLikes = lodash_merge__WEBPACK_IMPORTED_MODULE_0___default()({}, state, _defineProperty({}, action.like.id, action.like));
+      delete oldLikes[action.like.id];
+      return oldLikes;
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (likesReducer);
 
 /***/ }),
 
@@ -2028,9 +2435,17 @@ __webpack_require__.r(__webpack_exports__);
   !*** ./frontend/reducers/selectors.js ***!
   \****************************************/
 /*! exports provided: fetchProfilePhotos */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nError: ENOENT: no such file or directory, open '/home/klue/Documents/500kicks/500kicks/frontend/reducers/selectors.js'");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchProfilePhotos", function() { return fetchProfilePhotos; });
+var fetchProfilePhotos = function fetchProfilePhotos(state, user) {
+  // debugger;
+  return user.photo_ids ? user.photo_ids.map(function (id) {
+    return state.entities.photos[id];
+  }) : [];
+};
 
 /***/ }),
 
@@ -2142,6 +2557,48 @@ var configureStore = function configureStore() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (configureStore);
+
+/***/ }),
+
+/***/ "./frontend/util/like_api_util.js":
+/*!****************************************!*\
+  !*** ./frontend/util/like_api_util.js ***!
+  \****************************************/
+/*! exports provided: fetchLikes, createLike, removeLike */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchLikes", function() { return fetchLikes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createLike", function() { return createLike; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeLike", function() { return removeLike; });
+var fetchLikes = function fetchLikes() {
+  return $.ajax({
+    method: 'get',
+    url: '/api/likes'
+  });
+};
+var createLike = function createLike(like) {
+  return $.ajax({
+    method: 'post',
+    url: '/api/likes',
+    data: {
+      like: like
+    }
+  });
+};
+var removeLike = function removeLike(id) {
+  return $.ajax({
+    method: 'delete',
+    url: "/api/likes/".concat(id)
+  });
+}; // export const fetchLike = id => (
+//     $.ajax({
+//         method: 'get',
+//         url: `/api/likes/${id}`
+//     })
+// );
+// updateLike
 
 /***/ }),
 
