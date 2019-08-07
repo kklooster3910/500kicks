@@ -917,8 +917,8 @@ function (_React$Component) {
         likesCount: this.props.photoLikes
       });
       var uploadedTime = kix.created_at;
-      uploadedTime = uploadedTime.split(':')[0].split('T')[0];
-      debugger; // console.log(uploadedTime)   
+      uploadedTime = uploadedTime.split(':')[0].split('T')[0]; // debugger;
+      // console.log(uploadedTime)   
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "kix-show-page-container"
