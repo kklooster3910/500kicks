@@ -6,7 +6,7 @@ import { ProtectedRoute } from '../util/route_util';
 import SignupContainer from './session/signup_container';
 import LoginContainer from './session/login_container';
 import NavBar from './navbar/navbar';
-import Home from './home/home';
+import HomeContainer from './home/home_conatiner';
 import DiscoverKixContainer from './kix/kix_container';
 import KixShowContainer from './kix/kix_show_container';
 import UserProfileContainer from './users/user_container';
@@ -17,7 +17,7 @@ const App = () => (
     <div>
         <Route path='/' component={NavBar} />
         <Switch>
-            <Route exact path='/' component={Home} />
+            <Route exact path='/' component={HomeContainer} />
             <Route exact path='/kix' component={DiscoverKixContainer} />
             <Route exact path='/kix/:photoId' component={KixShowContainer} />
             <Route exact path='/users/:userId' component={UserProfileContainer} />

@@ -10,6 +10,7 @@ const msp = (state, ownProps) => {
     // let photos;
     // debugger;
     // debugger;
+
     const user = state.entities.users[ownProps.match.params.userId];
     // debugger;
     // if (user.photo_id !== undefined) {

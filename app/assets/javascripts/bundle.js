@@ -419,7 +419,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _session_signup_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./session/signup_container */ "./frontend/components/session/signup_container.js");
 /* harmony import */ var _session_login_container__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./session/login_container */ "./frontend/components/session/login_container.js");
 /* harmony import */ var _navbar_navbar__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./navbar/navbar */ "./frontend/components/navbar/navbar.jsx");
-/* harmony import */ var _home_home__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./home/home */ "./frontend/components/home/home.jsx");
+/* harmony import */ var _home_home_conatiner__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./home/home_conatiner */ "./frontend/components/home/home_conatiner.js");
 /* harmony import */ var _kix_kix_container__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./kix/kix_container */ "./frontend/components/kix/kix_container.js");
 /* harmony import */ var _kix_kix_show_container__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./kix/kix_show_container */ "./frontend/components/kix/kix_show_container.js");
 /* harmony import */ var _users_user_container__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./users/user_container */ "./frontend/components/users/user_container.js");
@@ -445,7 +445,7 @@ var App = function App() {
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     exact: true,
     path: "/",
-    component: _home_home__WEBPACK_IMPORTED_MODULE_7__["default"]
+    component: _home_home_conatiner__WEBPACK_IMPORTED_MODULE_7__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     exact: true,
     path: "/kix",
@@ -486,86 +486,157 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
 
 
 
 
-var Home = function Home(_ref) {
-  var demoUser = _ref.demoUser,
-      demoLogin = _ref.demoLogin,
-      currentUser = _ref.currentUser;
-  var maybeDemo;
-  var maybeCreateNewUser;
-  var kixShowLink;
-  var uploadPhoto;
+var Home =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(Home, _React$Component);
 
-  var handleClick = function handleClick(e) {
-    e.preventDefault();
-    demoLogin(demoUser).then(alert('Demo User Logged In - try uploading a photo!'));
-  };
+  function Home(props) {
+    var _this;
 
-  if (!currentUser) {
-    maybeDemo = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-      className: "home-demo-btn",
-      onClick: handleClick
-    }, "Demo Login!");
-    maybeCreateNewUser = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
-      to: "/signup"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-      className: "home-createnewuser-btn"
-    }, "Create New User"));
-  } else {
-    uploadPhoto = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
-      to: "/uploadphoto"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-      className: "home-upload-photo-button"
-    }, "Upload Kix"));
+    _classCallCheck(this, Home);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Home).call(this, props));
+    _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
-  kixShowLink = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
-    to: "/kix"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: "discover-kix-btn"
-  }, "Discover Kix!"));
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "home"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "home-img-container"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "home-interactive"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, maybeDemo, maybeCreateNewUser, kixShowLink, uploadPhoto), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
-    className: "home-logo"
-  }, "Share Your Kix..."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
-    className: "home-logo-kick"
-  }, "...Get Kicking"))));
-};
+  _createClass(Home, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      // console.log(this.props.currentUser);
+      if (this.props.currentUser) {
+        this.props.fetchUser(this.props.currentUser);
+      }
+    }
+  }, {
+    key: "handleClick",
+    value: function handleClick(e) {
+      e.preventDefault();
+      this.props.demoLogin(this.props.demoUser).then(alert('Demo User Logged In - try uploading a photo!'));
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var maybeDemo;
+      var maybeCreateNewUser;
+      var kixShowLink;
+      var uploadPhoto;
+
+      if (!this.props.currentUser) {
+        maybeDemo = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          className: "home-demo-btn",
+          onClick: this.handleClick
+        }, "Demo Login!");
+        maybeCreateNewUser = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+          to: "/signup"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          className: "home-createnewuser-btn"
+        }, "Create New User"));
+      } else {
+        uploadPhoto = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+          to: "/uploadphoto"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          className: "home-upload-photo-button"
+        }, "Upload Kix"));
+      }
+
+      kixShowLink = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+        to: "/kix"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "discover-kix-btn"
+      }, "Discover Kix!"));
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "home"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "home-img-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "home-interactive"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, maybeDemo, maybeCreateNewUser, kixShowLink, uploadPhoto), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+        className: "home-logo"
+      }, "Share Your Kix..."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+        className: "home-logo-kick"
+      }, "...Get Kicking"))));
+    }
+  }]);
+
+  return Home;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router__WEBPACK_IMPORTED_MODULE_3__["withRouter"])(Home));
+
+/***/ }),
+
+/***/ "./frontend/components/home/home_conatiner.js":
+/*!****************************************************!*\
+  !*** ./frontend/components/home/home_conatiner.js ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _home__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./home */ "./frontend/components/home/home.jsx");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
+/* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/user_actions */ "./frontend/actions/user_actions.js");
+
+
+
+
+
 
 var msp = function msp(state) {
   // debugger;
   return {
     demoUser: {
-      username: 'Tyler Durden',
-      email: 'fight@club.net',
-      password: 'password123'
+      username: "Tyler Durden",
+      email: "fight@club.net",
+      password: "password123"
     },
-    currentUser: state.session.id
+    currentUser: state.session.id // loggedinUser: state.session.users[state.session.id]
+
   };
 };
 
 var mdp = function mdp(dispatch) {
   return {
     demoLogin: function demoLogin(demoUser) {
-      return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_2__["login"])(demoUser));
+      return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_3__["login"])(demoUser));
+    },
+    fetchUser: function fetchUser(user) {
+      return dispatch(Object(_actions_user_actions__WEBPACK_IMPORTED_MODULE_4__["fetchUser"])(user));
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_router__WEBPACK_IMPORTED_MODULE_4__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(msp, mdp)(Home)));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(msp, mdp)(_home__WEBPACK_IMPORTED_MODULE_0__["default"])));
 
 /***/ }),
 
@@ -727,7 +798,7 @@ var KixIndexItem = function KixIndexItem(_ref) {
   }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("span", {
     className: "kix-index-image-title"
   }, photo.title), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("span", {
-    className: "kix-index-image-title"
+    className: "kix-index-image-photographer"
   }, photo.photographer), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("img", {
     className: "kix-index-item-image",
     src: photo.image_url
@@ -844,7 +915,10 @@ function (_React$Component) {
 
       var likeButton = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_likes_like_button_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
         likesCount: this.props.photoLikes
-      }); // debugger;    
+      });
+      var uploadedTime = kix.created_at;
+      uploadedTime = uploadedTime.split(':')[0].split('T')[0];
+      debugger; // console.log(uploadedTime)   
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "kix-show-page-container"
@@ -863,7 +937,13 @@ function (_React$Component) {
         className: "kix-photographer-name"
       }, "photo by: ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
         to: "/users/".concat(this.props.photo.photographer_id)
-      }, kix.photographer)), likesCount, likeButton, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, kix.photographer)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "kix-likes-count"
+      }, "Likes Count: ", likesCount), likeButton, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "kix-upload-time"
+      }, "Uploaded at: ", uploadedTime), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "kix-photo-description"
+      }, this.props.photo.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "possible-footer"
       }, " oi. "));
     }
@@ -994,22 +1074,24 @@ function (_React$Component) {
       var likedButton;
 
       if (!this.props.currentUser) {
-        likedButton = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        likedButton = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "kix-lik-btn",
           onClick: function onClick() {
             return alert('Please Login to Like a Photo');
           }
-        }, "LIKE ME!");
+        }, "Like!!");
       } else {
         (function () {
           var that = _this2.props;
 
           var _loop = function _loop(i) {
             if (that.likesCount[i].photographer_id === that.currentUser) {
-              likedButton = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+              likedButton = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+                className: "kix-lik-btn",
                 onClick: function onClick() {
                   return that.removeLike(that.likesCount[i].id);
                 }
-              }, "LIKE ME!");
+              }, "Like!!");
               return "break";
             }
           };
@@ -1021,20 +1103,21 @@ function (_React$Component) {
           }
 
           if (likedButton === undefined) {
-            likedButton = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+            likedButton = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              className: "kix-lik-btn",
               onClick: function onClick() {
                 return _this2.props.createLike({
                   photo_id: _this2.props.photo.id,
                   photographer_id: _this2.props.currentUser
                 });
               }
-            }, "LIKE ME!");
+            }, "Like!!");
           }
         })();
       }
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "like-button-container"
+        className: "kix-like-btn-container"
       }, likedButton);
     }
   }]);
@@ -1388,6 +1471,7 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(PhotoForm).call(this, props));
     _this.state = {
       title: '',
+      body: '',
       photoFile: null,
       photoUrl: null
     };
@@ -1423,6 +1507,7 @@ function (_React$Component) {
       e.preventDefault();
       var formData = new FormData();
       formData.append('photo[title]', this.state.title);
+      formData.append('photo[description]', this.state.description);
       formData.append('photo[photo]', this.state.photoFile);
       formData.append('photo[photographer_id]', this.props.currentUser.id);
       this.props.uploadPhoto(formData).then(function () {
@@ -1485,6 +1570,14 @@ function (_React$Component) {
         onChange: this.update('title'),
         className: "photupload-title-input",
         placeholder: "Photo Title!"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+        name: "description",
+        cols: "30",
+        rows: "10",
+        value: this.state.description,
+        onChange: this.update('description'),
+        className: "photupload-description-input",
+        placeholder: "Photo Description Here"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "file",
         className: "photofile-upload-input",
@@ -2284,11 +2377,22 @@ var photosReducer = function photosReducer() {
     //     return [];
 
     case _actions_user_actions__WEBPACK_IMPORTED_MODULE_3__["RECEIVE_USER_PROFILE"]:
-      return action.payload.photos;
+      // debugger;
+      if (action.payload.photos === undefined) {
+        return state;
+      } else {
+        return action.payload.photos;
+      }
+
+    // return action.payload.photos;
     // return merge({}, state, { [action.payload.user.id]: action.payload.user })
 
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_4__["RECEIVE_CURRENT_USER"]:
-      return action.user.photos;
+      if (action.user.photos === undefined) {
+        return state;
+      } else {
+        return action.user.photos;
+      }
 
     default:
       return state;
@@ -2338,7 +2442,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchProfilePhotos", function() { return fetchProfilePhotos; });
 var fetchProfilePhotos = function fetchProfilePhotos(state, user) {
   // debugger;
-  return user ? user.photo_ids.map(function (id) {
+  return user.photo_ids ? user.photo_ids.map(function (id) {
     return state.entities.photos[id];
   }) : [];
 };

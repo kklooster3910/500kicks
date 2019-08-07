@@ -9,5 +9,3 @@ json.photos do
         end
     end
 end
-
-# json.extract! @user, :id, :username

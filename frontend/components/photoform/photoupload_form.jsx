@@ -4,7 +4,7 @@ import { withRouter } from 'react-router';
 class PhotoForm extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { title: '', photoFile: null, photoUrl: null }
+        this.state = { title: '', body: '', photoFile: null, photoUrl: null }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleFile = this.handleFile.bind(this);
     };
@@ -24,6 +24,7 @@ class PhotoForm extends React.Component {
         e.preventDefault();
         const formData = new FormData();
         formData.append('photo[title]', this.state.title);
+        formData.append('photo[description]', this.state.description);
         formData.append('photo[photo]', this.state.photoFile);
         formData.append('photo[photographer_id]', this.props.currentUser.id);
         this.props.uploadPhoto(formData).then( () => (
@@ -67,8 +68,15 @@ class PhotoForm extends React.Component {
                         <input type='text'
                             value={this.state.title}
                             onChange={this.update('title')}
-                        className='photupload-title-input'
-                        placeholder='Photo Title!'/>
+                            className='photupload-title-input'
+                            placeholder='Photo Title!'/>
+                        <textarea 
+                            name='description' cols='30' rows='10'
+                            value={this.state.description}
+                            onChange={this.update('description')}
+                            className='photupload-description-input'
+                            placeholder='Photo Description Here'>
+                        </textarea>
                         <input type='file'
                             className='photofile-upload-input'
                             onChange={this.handleFile}/>

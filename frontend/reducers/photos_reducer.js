@@ -37,10 +37,20 @@ const photosReducer = (state = {}, action) => {
         // case RECEIVE_RESET_ERRORS:
         //     return [];
         case RECEIVE_USER_PROFILE:
-            return action.payload.photos;
+            // debugger;
+            if (action.payload.photos === undefined) {
+                return state;
+            } else {
+                return action.payload.photos
+            }
+            // return action.payload.photos;
             // return merge({}, state, { [action.payload.user.id]: action.payload.user })
         case RECEIVE_CURRENT_USER:
-            return action.user.photos;
+            if (action.user.photos === undefined) {
+                return state;
+            } else {
+                return action.user.photos;
+            }
         default: 
             return state;
     };

@@ -14,7 +14,7 @@ class LikeButton extends React.Component {
         
         if (!this.props.currentUser) {
             
-            likedButton = <button onClick={() => alert('Please Login to Like a Photo')}>LIKE ME!</button>;
+            likedButton = <div className='kix-lik-btn' onClick={() => alert('Please Login to Like a Photo')}>Like!!</div>;
             
         } else {
             
@@ -22,20 +22,18 @@ class LikeButton extends React.Component {
             
             for (let i = 0; i < that.likesCount.length; i++) {               
                 if (that.likesCount[i].photographer_id === that.currentUser) {
-                    likedButton = <button onClick={() => that.removeLike(that.likesCount[i].id)}>LIKE ME!</button>;
+                    likedButton = <div className='kix-lik-btn' onClick={() => that.removeLike(that.likesCount[i].id)}>Like!!</div>;
                     break;
                 } 
             }
     
             if (likedButton === undefined) {
-                likedButton = <button onClick={() => this.props.createLike({photo_id: this.props.photo.id, photographer_id: this.props.currentUser})}>LIKE ME!</button>; 
+                likedButton = <div className='kix-lik-btn' onClick={() => this.props.createLike({photo_id: this.props.photo.id, photographer_id: this.props.currentUser})}>Like!!</div>; 
             }
         } 
 
         return (
-            <div className='like-button-container'>
-                {likedButton}
-            </div>
+            <div className='kix-like-btn-container'>{likedButton}</div>
         )
     }
   

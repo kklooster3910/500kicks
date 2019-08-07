@@ -55,7 +55,10 @@ class KixShow extends React.Component {
         // /> 
 
         let likeButton = <LikeButton likesCount={this.props.photoLikes}/>
-        // debugger;    
+        let uploadedTime = kix.created_at
+        uploadedTime = uploadedTime.split(':')[0].split('T')[0]
+        debugger;
+        // console.log(uploadedTime)   
         return (
             <div className='kix-show-page-container'>
                 <div className='kix-image-container'>
@@ -64,8 +67,10 @@ class KixShow extends React.Component {
                 </div>
                 <h4 className='kix-photo-title'>{kix.title}</h4>
                 <h5 className='kix-photographer-name'>photo by: <Link to={`/users/${this.props.photo.photographer_id}`} >{kix.photographer}</Link></h5>
-                {likesCount}
+                <div className='kix-likes-count'>Likes Count: {likesCount}</div>
                 {likeButton}
+                <div className='kix-upload-time'>Uploaded at: {uploadedTime}</div>
+                <div className='kix-photo-description'>{this.props.photo.description}</div>
                 <div className='possible-footer'> oi. </div>
             </div>
         );

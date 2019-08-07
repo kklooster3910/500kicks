@@ -7,6 +7,7 @@
 #  photographer_id :integer          not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  description     :text
 #
 
 class Photo < ApplicationRecord
