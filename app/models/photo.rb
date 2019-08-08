@@ -21,5 +21,9 @@ class Photo < ApplicationRecord
         class_name: 'Like',
         foreign_key: :photo_id,
         primary_key: :id
+    has_many :comments,
+        class_name: 'Comment',
+        foreign_key: :photograph_id,
+        primary_key: :id
     has_one_attached :photo
 end

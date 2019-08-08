@@ -6,7 +6,7 @@ import { ProtectedRoute } from '../util/route_util';
 import SignupContainer from './session/signup_container';
 import LoginContainer from './session/login_container';
 import NavBar from './navbar/navbar';
-import HomeContainer from './home/home_conatiner';
+import HomeContainer from './home/home_container';
 import DiscoverKixContainer from './kix/kix_container';
 import KixShowContainer from './kix/kix_show_container';
 import UserProfileContainer from './users/user_container';

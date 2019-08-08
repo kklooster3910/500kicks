@@ -25,6 +25,10 @@ class User < ApplicationRecord
         class_name: 'Photo',
         primary_key: :id,
         foreign_key: :photographer_id
+    has_many :comments,
+        class_name: 'Comment',
+        primary_key: :id,
+        foreign_key: :commentor_id
 
     def self.find_by_credentials(username, password)
         # debugger

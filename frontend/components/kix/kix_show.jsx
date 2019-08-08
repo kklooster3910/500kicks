@@ -2,13 +2,16 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import LikeButton from '../likes/like_button_container';
+import Comments from '../comments/comment_container';
 
 class KixShow extends React.Component {
     constructor(props) {
         super(props);
+        // debugger;
     };
 
     componentDidMount() {
+        // debugger;
         // this.props.fetchLikes();
         // this.props.resetErrors();
         this.props.fetchPhoto(this.props.match.params.photoId);
@@ -26,17 +29,20 @@ class KixShow extends React.Component {
     render() {
         const kix = this.props.photo
         // let likesCount = 0;
-        if (!kix || !kix.likes) {
+        // debugger;
+        if (!kix || !kix.like_ids) {
             return null;
         }
+   
         // debugger;
         // kix.likes.forEach (like => {
         //     if (this.props.allLikes[like.id]) {
         //         likesCount ++
         //     }
         // })
-        // let likesCount = kix.likes.length;
-        let likesCount = this.props.photoLikes.length;
+        // debugger;
+        let likesCount = kix.like_ids.length;
+        // let likesCount = this.props.photoLikes.length;
         // let likesCountNotUsed = Object.values(this.props.allLikes).length;
 
         // if (this.state) {
@@ -54,11 +60,11 @@ class KixShow extends React.Component {
         //     photoId={kix.id} 
         // /> 
 
-        let likeButton = <LikeButton likesCount={this.props.photoLikes}/>
         let uploadedTime = kix.created_at
         uploadedTime = uploadedTime.split(':')[0].split('T')[0]
         // debugger;
-        // console.log(uploadedTime)   
+        // console.log(uploadedTime) 
+        // debugger;  
         return (
             <div className='kix-show-page-container'>
                 <div className='kix-image-container'>
@@ -66,11 +72,12 @@ class KixShow extends React.Component {
                     <img className='kix-photo'src={kix.image_url}/>
                 </div>
                 <h4 className='kix-photo-title'>{kix.title}</h4>
-                <h5 className='kix-photographer-name'>photo by: <Link to={`/users/${this.props.photo.photographer_id}`} >{kix.photographer}</Link></h5>
+                <h5 className='kix-photographer-name'>photo by: <Link to={`/users/${kix.photographer_id}`} >{kix.photographer}</Link></h5>
                 <div className='kix-likes-count'>Likes Count: {likesCount}</div>
-                {likeButton}
+                <LikeButton />
                 <div className='kix-upload-time'>Uploaded at: {uploadedTime}</div>
-                <div className='kix-photo-description'>{this.props.photo.description}</div>
+                <div className='kix-photo-description'>{kix.description}</div>
+                <Comments />
                 <div className='possible-footer'> oi. </div>
             </div>
         );
