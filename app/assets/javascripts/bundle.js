@@ -133,6 +133,70 @@ document.addEventListener('DOMContentLoaded', function () {
 
 /***/ }),
 
+/***/ "./frontend/actions/comment_actions.js":
+/*!*********************************************!*\
+  !*** ./frontend/actions/comment_actions.js ***!
+  \*********************************************/
+/*! exports provided: RECEIVE_RESET_ERRORS, RECEIVE_COMMENT, RECEIVE_ALL_COMMENTS, RECEIVE_COMMENT_ERRORS, resetErrors, fetchComments, createComment */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_RESET_ERRORS", function() { return RECEIVE_RESET_ERRORS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_COMMENT", function() { return RECEIVE_COMMENT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_ALL_COMMENTS", function() { return RECEIVE_ALL_COMMENTS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_COMMENT_ERRORS", function() { return RECEIVE_COMMENT_ERRORS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "resetErrors", function() { return resetErrors; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchComments", function() { return fetchComments; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createComment", function() { return createComment; });
+/* harmony import */ var _util_comment_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/comment_api_util */ "./frontend/util/comment_api_util.js");
+
+var RECEIVE_RESET_ERRORS = 'RECEIVE_RESET_ERRORS';
+var RECEIVE_COMMENT = 'RECEIVE_COMMENT';
+var RECEIVE_ALL_COMMENTS = 'RECEIVE_ALL_COMMENTS';
+var RECEIVE_COMMENT_ERRORS = 'RECEIVE_COMMENT_ERRORS';
+var resetErrors = function resetErrors() {
+  // do I need to export
+  //or have this in every action file? wtf ken
+  return {
+    type: RECEIVE_RESET_ERRORS
+  };
+};
+var fetchComments = function fetchComments() {
+  return function (dispatch) {
+    return _util_comment_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchComments"]().then(function (comments) {
+      return dispatch({
+        type: RECEIVE_ALL_COMMENTS,
+        comments: comments
+      });
+    }, function (err) {
+      return dispatch({
+        type: RECEIVE_COMMENT_ERRORS,
+        err: err.responseJSON
+      });
+    });
+  };
+};
+var createComment = function createComment(comment) {
+  return function (dispatch) {
+    return _util_comment_api_util__WEBPACK_IMPORTED_MODULE_0__["createComment"](comment).then(function (comment) {
+      return dispatch({
+        type: RECEIVE_COMMENT,
+        comment: comment
+      });
+    }, function (err) {
+      return dispatch({
+        type: RECEIVE_COMMENT_ERRORS,
+        err: err.responseJSON
+      });
+    });
+  };
+};
+window.fetchComments = fetchComments;
+window.createComment = createComment;
+
+/***/ }),
+
 /***/ "./frontend/actions/like_actions.js":
 /*!******************************************!*\
   !*** ./frontend/actions/like_actions.js ***!
@@ -419,7 +483,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _session_signup_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./session/signup_container */ "./frontend/components/session/signup_container.js");
 /* harmony import */ var _session_login_container__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./session/login_container */ "./frontend/components/session/login_container.js");
 /* harmony import */ var _navbar_navbar__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./navbar/navbar */ "./frontend/components/navbar/navbar.jsx");
-/* harmony import */ var _home_home_conatiner__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./home/home_conatiner */ "./frontend/components/home/home_conatiner.js");
+/* harmony import */ var _home_home_container__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./home/home_container */ "./frontend/components/home/home_container.js");
 /* harmony import */ var _kix_kix_container__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./kix/kix_container */ "./frontend/components/kix/kix_container.js");
 /* harmony import */ var _kix_kix_show_container__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./kix/kix_show_container */ "./frontend/components/kix/kix_show_container.js");
 /* harmony import */ var _users_user_container__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./users/user_container */ "./frontend/components/users/user_container.js");
@@ -445,7 +509,7 @@ var App = function App() {
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     exact: true,
     path: "/",
-    component: _home_home_conatiner__WEBPACK_IMPORTED_MODULE_7__["default"]
+    component: _home_home_container__WEBPACK_IMPORTED_MODULE_7__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     exact: true,
     path: "/kix",
@@ -471,6 +535,280 @@ var App = function App() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_router__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(App));
+
+/***/ }),
+
+/***/ "./frontend/components/comments/comment_container.js":
+/*!***********************************************************!*\
+  !*** ./frontend/components/comments/comment_container.js ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var _actions_comment_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/comment_actions */ "./frontend/actions/comment_actions.js");
+/* harmony import */ var _comments__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./comments */ "./frontend/components/comments/comments.jsx");
+/* harmony import */ var _reducers_selectors__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../reducers/selectors */ "./frontend/reducers/selectors.js");
+
+
+
+
+
+
+var msp = function msp(state, ownProps) {
+  var photo = state.entities.photos[ownProps.match.params.photoId]; // debugger;
+
+  return {
+    photoComments: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_4__["fetchPhotoComments"])(state, photo),
+    photo: state.entities.photos[ownProps.match.params.photoId],
+    currentUser: state.entities.users[state.session.id],
+    errors: state.entities.errors
+  };
+};
+
+var mdp = function mdp(dispatch) {
+  return {
+    createComment: function createComment(comment) {
+      return dispatch(Object(_actions_comment_actions__WEBPACK_IMPORTED_MODULE_2__["createComment"])(comment));
+    },
+    resetErrors: function resetErrors() {
+      return dispatch(Object(_actions_comment_actions__WEBPACK_IMPORTED_MODULE_2__["resetErrors"])());
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(msp, mdp)(_comments__WEBPACK_IMPORTED_MODULE_3__["default"])));
+
+/***/ }),
+
+/***/ "./frontend/components/comments/comment_form.jsx":
+/*!*******************************************************!*\
+  !*** ./frontend/components/comments/comment_form.jsx ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+var CommentForm =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(CommentForm, _React$Component);
+
+  function CommentForm(props) {
+    var _this;
+
+    _classCallCheck(this, CommentForm);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(CommentForm).call(this, props));
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+
+    if (_this.props.currentUser) {
+      _this.state = {
+        body: '',
+        photograph_id: _this.props.match.params.photoId,
+        commentor_id: _this.props.currentUser.id
+      };
+    } else {
+      _this.state = {
+        body: '',
+        photograph_id: _this.props.match.params.photoId,
+        commentor_id: null
+      };
+    }
+
+    return _this;
+  }
+
+  _createClass(CommentForm, [{
+    key: "handleSubmit",
+    value: function handleSubmit(e) {
+      e.preventDefault();
+      this.props.createComment(this.state);
+      var blankState;
+      this.props.currentUser ? blankState = {
+        body: '',
+        photograph_id: this.props.match.params.photoId,
+        commentor_id: this.props.currentUser.id
+      } : blankState = {
+        body: '',
+        photograph_id: this.props.match.params.photoId,
+        commentor_id: null
+      };
+      this.setState(blankState);
+    }
+  }, {
+    key: "update",
+    value: function update(field) {
+      var _this2 = this;
+
+      return function (e) {
+        _this2.setState(_defineProperty({}, field, e.target.value));
+      };
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        onSubmit: this.handleSubmit
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+        className: "kix-comment-box",
+        onChange: this.update('body'),
+        value: this.state.body,
+        cols: "30",
+        rows: "10"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "post-comment-btn"
+      }, "Post Comment"));
+    }
+  }]);
+
+  return CommentForm;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+var msp = function msp(state, ownProps) {
+  return {
+    photo: state.entities.photos[ownProps.match.params.photoId],
+    currentUser: state.entities.users[state.session.id]
+  };
+};
+
+var mdp = function mdp(dispatch) {
+  return {
+    createComment: function (_createComment) {
+      function createComment(_x) {
+        return _createComment.apply(this, arguments);
+      }
+
+      createComment.toString = function () {
+        return _createComment.toString();
+      };
+
+      return createComment;
+    }(function (comment) {
+      return dispatch(createComment(comment));
+    })
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(msp, mdp)(CommentForm)));
+
+/***/ }),
+
+/***/ "./frontend/components/comments/comments.jsx":
+/*!***************************************************!*\
+  !*** ./frontend/components/comments/comments.jsx ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var _comment_form__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./comment_form */ "./frontend/components/comments/comment_form.jsx");
+/* harmony import */ var _util_route_util__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../util/route_util */ "./frontend/util/route_util.jsx");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+
+var Comments =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(Comments, _React$Component);
+
+  function Comments(props) {
+    _classCallCheck(this, Comments);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(Comments).call(this, props)); // debugger;
+  }
+
+  _createClass(Comments, [{
+    key: "handleSubmit",
+    value: function handleSubmit(e) {}
+  }, {
+    key: "update",
+    value: function update(field) {// console.log(this.state)
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var comments = this.props.photoComments.map(function (comment) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          key: comment.id,
+          className: "kix-single-comment"
+        }, comment.body);
+      }); // let errors;
+      // if ((this.props.errors.length > 0) && (typeof this.props.errors === 'array')) {
+      //     errors = this.props.errors;
+      // } 
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "kix-comments-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["CommentProtectedRoute"], {
+        component: _comment_form__WEBPACK_IMPORTED_MODULE_2__["default"]
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "kix-comments"
+      }, comments));
+    }
+  }]);
+
+  return Comments;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+;
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(Comments));
 
 /***/ }),
 
@@ -538,7 +876,7 @@ function (_React$Component) {
     key: "handleClick",
     value: function handleClick(e) {
       e.preventDefault();
-      this.props.demoLogin(this.props.demoUser).then(alert('Demo User Logged In - try uploading a photo!'));
+      this.props.demoLogin(this.props.demoUser); // .then(alert('Demo User Logged In - try uploading a photo!'))
     }
   }, {
     key: "render",
@@ -592,9 +930,9 @@ function (_React$Component) {
 
 /***/ }),
 
-/***/ "./frontend/components/home/home_conatiner.js":
+/***/ "./frontend/components/home/home_container.js":
 /*!****************************************************!*\
-  !*** ./frontend/components/home/home_conatiner.js ***!
+  !*** ./frontend/components/home/home_container.js ***!
   \****************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -832,6 +1170,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _likes_like_button_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../likes/like_button_container */ "./frontend/components/likes/like_button_container.js");
+/* harmony import */ var _comments_comment_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../comments/comment_container */ "./frontend/components/comments/comment_container.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -855,6 +1194,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var KixShow =
 /*#__PURE__*/
 function (_React$Component) {
@@ -863,12 +1203,13 @@ function (_React$Component) {
   function KixShow(props) {
     _classCallCheck(this, KixShow);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(KixShow).call(this, props));
+    return _possibleConstructorReturn(this, _getPrototypeOf(KixShow).call(this, props)); // debugger;
   }
 
   _createClass(KixShow, [{
     key: "componentDidMount",
     value: function componentDidMount() {
+      // debugger;
       // this.props.fetchLikes();
       // this.props.resetErrors();
       this.props.fetchPhoto(this.props.match.params.photoId);
@@ -886,8 +1227,9 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       var kix = this.props.photo; // let likesCount = 0;
+      // debugger;
 
-      if (!kix || !kix.likes) {
+      if (!kix || !kix.like_ids) {
         return null;
       } // debugger;
       // kix.likes.forEach (like => {
@@ -895,10 +1237,11 @@ function (_React$Component) {
       //         likesCount ++
       //     }
       // })
-      // let likesCount = kix.likes.length;
+      // debugger;
 
 
-      var likesCount = this.props.photoLikes.length; // let likesCountNotUsed = Object.values(this.props.allLikes).length;
+      var likesCount = kix.like_ids.length; // let likesCount = this.props.photoLikes.length;
+      // let likesCountNotUsed = Object.values(this.props.allLikes).length;
       // if (this.state) {
       //     let cLike = this.props.createLike
       //     this.setState({liked: true})   
@@ -913,12 +1256,10 @@ function (_React$Component) {
       //     photoId={kix.id} 
       // /> 
 
-      var likeButton = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_likes_like_button_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        likesCount: this.props.photoLikes
-      });
       var uploadedTime = kix.created_at;
       uploadedTime = uploadedTime.split(':')[0].split('T')[0]; // debugger;
-      // console.log(uploadedTime)   
+      // console.log(uploadedTime) 
+      // debugger;  
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "kix-show-page-container"
@@ -936,14 +1277,14 @@ function (_React$Component) {
       }, kix.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
         className: "kix-photographer-name"
       }, "photo by: ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-        to: "/users/".concat(this.props.photo.photographer_id)
+        to: "/users/".concat(kix.photographer_id)
       }, kix.photographer)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "kix-likes-count"
-      }, "Likes Count: ", likesCount), likeButton, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Likes Count: ", likesCount), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_likes_like_button_container__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "kix-upload-time"
       }, "Uploaded at: ", uploadedTime), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "kix-photo-description"
-      }, this.props.photo.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, kix.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_comments_comment_container__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "possible-footer"
       }, " oi. "));
     }
@@ -981,18 +1322,17 @@ __webpack_require__.r(__webpack_exports__);
 
 var msp = function msp(state, ownProps) {
   // debugger
-  var photoLikes;
-
-  if (state.entities.photos[ownProps.match.params.photoId]) {
-    photoLikes = state.entities.photos[ownProps.match.params.photoId].likes;
-  } else {
-    photoLikes = [];
-  }
-
+  // let photoLikes;
+  // if (state.entities.photos[ownProps.match.params.photoId]) {
+  //    photoLikes = state.entities.photos[ownProps.match.params.photoId].like_ids
+  // } else {
+  //     photoLikes = []
+  // }
+  // debugger;
   return {
-    photo: state.entities.photos[ownProps.match.params.photoId],
-    photoLikes: photoLikes,
-    allLikes: state.entities.likes
+    photo: state.entities.photos[ownProps.match.params.photoId] // photoLikes: photoLikes,
+    // allLikes: state.entities.likes 
+
   };
 };
 
@@ -1055,23 +1395,29 @@ function (_React$Component) {
   _inherits(LikeButton, _React$Component);
 
   function LikeButton(props) {
-    var _this;
-
     _classCallCheck(this, LikeButton);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(LikeButton).call(this, props));
-    _this.state = {
-      liked: true
-    };
-    return _this;
-  }
+    return _possibleConstructorReturn(this, _getPrototypeOf(LikeButton).call(this, props));
+  } // componentDidMount() {
+  //     // debugger;
+  //     this.props.fetchLikes();
+  // }
+  // componentDidUpdate() {
+  //     this.props.fetchLikes();
+  // }
+
 
   _createClass(LikeButton, [{
     key: "render",
     value: function render() {
-      var _this2 = this;
+      var _this = this;
 
-      var likedButton;
+      // const lEle = this.props.photoLikes.length - 1
+      // debugger;
+      // if (this.props.photoLikes[lEle] === undefined) {
+      //    return null
+      // }
+      var likedButton; // debugger;
 
       if (!this.props.currentUser) {
         likedButton = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1082,21 +1428,22 @@ function (_React$Component) {
         }, "Like!!");
       } else {
         (function () {
-          var that = _this2.props;
+          var that = _this.props; // debugger;
 
           var _loop = function _loop(i) {
-            if (that.likesCount[i].photographer_id === that.currentUser) {
+            // debugger;             
+            if (that.photoLikes[i].photographer_id === that.currentUser) {
               likedButton = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
                 className: "kix-lik-btn",
                 onClick: function onClick() {
-                  return that.removeLike(that.likesCount[i].id);
+                  return that.removeLike(that.photoLikes[i].id);
                 }
               }, "Like!!");
               return "break";
             }
           };
 
-          for (var i = 0; i < that.likesCount.length; i++) {
+          for (var i = 0; i < that.photo.like_ids.length; i++) {
             var _ret = _loop(i);
 
             if (_ret === "break") break;
@@ -1106,15 +1453,16 @@ function (_React$Component) {
             likedButton = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
               className: "kix-lik-btn",
               onClick: function onClick() {
-                return _this2.props.createLike({
-                  photo_id: _this2.props.photo.id,
-                  photographer_id: _this2.props.currentUser
+                return _this.props.createLike({
+                  photo_id: _this.props.photo.id,
+                  photographer_id: _this.props.currentUser
                 });
               }
             }, "Like!!");
           }
         })();
-      }
+      } // debugger;
+
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "kix-like-btn-container"
@@ -1143,23 +1491,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_like_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/like_actions */ "./frontend/actions/like_actions.js");
+/* harmony import */ var _reducers_selectors__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../reducers/selectors */ "./frontend/reducers/selectors.js");
+
 
 
 
 
 
 var msp = function msp(state, ownProps) {
+  // debugger;
+  var photo = state.entities.photos[ownProps.match.params.photoId];
   return {
-    // currentUser: state.entities.users[state.session.id],
     currentUser: state.session.id,
-    photo: state.entities.photos[ownProps.match.params.photoId] // allLikes: state.entities.likes
-
+    photo: state.entities.photos[ownProps.match.params.photoId],
+    photoLikes: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_4__["fetchPhotoLikes"])(state, photo)
   };
 };
 
 var mdp = function mdp(dispatch) {
   return {
-    // fetchLikes: () => dispatch(fetchLikes()),
+    fetchLikes: function fetchLikes() {
+      return dispatch(Object(_actions_like_actions__WEBPACK_IMPORTED_MODULE_3__["fetchLikes"])());
+    },
     removeLike: function removeLike(id) {
       return dispatch(Object(_actions_like_actions__WEBPACK_IMPORTED_MODULE_3__["removeLike"])(id));
     },
@@ -1912,7 +2265,7 @@ function (_React$Component) {
     key: "handleClick",
     value: function handleClick(e) {
       e.preventDefault();
-      this.props.demoLogin(this.props.demoUser).then(alert('Demo User Logged In - try uploading a photo!'));
+      this.props.demoLogin(this.props.demoUser); // .then(alert('Demo User Logged In - try uploading a photo!'))
     }
   }, {
     key: "render",
@@ -2192,6 +2545,55 @@ var mdp = function mdp(dispatch) {
 
 /***/ }),
 
+/***/ "./frontend/reducers/comments_reducer.js":
+/*!***********************************************!*\
+  !*** ./frontend/reducers/comments_reducer.js ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash/merge */ "./node_modules/lodash/merge.js");
+/* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash_merge__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _actions_comment_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/comment_actions */ "./frontend/actions/comment_actions.js");
+/* harmony import */ var _actions_photo_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/photo_actions */ "./frontend/actions/photo_actions.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+var commentsReducer = function commentsReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+
+  switch (action.type) {
+    case _actions_comment_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_ALL_COMMENTS"]:
+      return lodash_merge__WEBPACK_IMPORTED_MODULE_0___default()({}, state, action.comments);
+
+    case _actions_comment_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_COMMENT"]:
+      return lodash_merge__WEBPACK_IMPORTED_MODULE_0___default()({}, state, _defineProperty({}, action.comment.id, action.comment));
+
+    case _actions_photo_actions__WEBPACK_IMPORTED_MODULE_2__["RECEIVE_PHOTO"]:
+      // debugger;
+      // if (action.payload.photo.comment_ids.length < 1) {
+      //     return state
+      // } else {
+      //     return action.payload.commments
+      // }
+      return lodash_merge__WEBPACK_IMPORTED_MODULE_0___default()({}, state, action.payload.comments);
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (commentsReducer);
+
+/***/ }),
+
 /***/ "./frontend/reducers/entities_reducer.js":
 /*!***********************************************!*\
   !*** ./frontend/reducers/entities_reducer.js ***!
@@ -2205,6 +2607,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _photos_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./photos_reducer */ "./frontend/reducers/photos_reducer.js");
 /* harmony import */ var _users_prof_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./users_prof_reducer */ "./frontend/reducers/users_prof_reducer.js");
 /* harmony import */ var _likes_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./likes_reducer */ "./frontend/reducers/likes_reducer.js");
+/* harmony import */ var _comments_reducer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./comments_reducer */ "./frontend/reducers/comments_reducer.js");
+
 
 
 
@@ -2212,7 +2616,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   photos: _photos_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
   users: _users_prof_reducer__WEBPACK_IMPORTED_MODULE_2__["default"],
-  likes: _likes_reducer__WEBPACK_IMPORTED_MODULE_3__["default"]
+  likes: _likes_reducer__WEBPACK_IMPORTED_MODULE_3__["default"],
+  comments: _comments_reducer__WEBPACK_IMPORTED_MODULE_4__["default"]
 }));
 
 /***/ }),
@@ -2228,8 +2633,10 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/session_actions */ "./frontend/actions/session_actions.js");
 /* harmony import */ var _actions_photo_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/photo_actions */ "./frontend/actions/photo_actions.js");
-/* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash/merge */ "./node_modules/lodash/merge.js");
-/* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash_merge__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _actions_comment_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/comment_actions */ "./frontend/actions/comment_actions.js");
+/* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! lodash/merge */ "./node_modules/lodash/merge.js");
+/* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(lodash_merge__WEBPACK_IMPORTED_MODULE_3__);
+
 
 
 
@@ -2242,7 +2649,7 @@ var errorsReducer = function errorsReducer() {
 
   switch (action.type) {
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_SESSION_ERRORS"]:
-      return lodash_merge__WEBPACK_IMPORTED_MODULE_2___default()({}, state, action.errors);
+      return lodash_merge__WEBPACK_IMPORTED_MODULE_3___default()({}, state, action.errors);
 
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_RESET_ERRORS"]:
       return [];
@@ -2250,11 +2657,14 @@ var errorsReducer = function errorsReducer() {
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CURRENT_USER"]:
       return [];
 
+    case _actions_comment_actions__WEBPACK_IMPORTED_MODULE_2__["RECEIVE_COMMENT_ERRORS"]:
+      return [action.errors];
+
     case _actions_photo_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_CREATE_PHOTO_ERRORS"]:
       if (!action.errors) {
         return ["Please Choose a Photo First"];
       } else {
-        return lodash_merge__WEBPACK_IMPORTED_MODULE_2___default()({}, state, action.errors);
+        return lodash_merge__WEBPACK_IMPORTED_MODULE_3___default()({}, state, action.errors);
       }
 
     default:
@@ -2278,7 +2688,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash/merge */ "./node_modules/lodash/merge.js");
 /* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash_merge__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _actions_like_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/like_actions */ "./frontend/actions/like_actions.js");
+/* harmony import */ var _actions_photo_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/photo_actions */ "./frontend/actions/photo_actions.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -2293,7 +2705,12 @@ var likesReducer = function likesReducer() {
       return lodash_merge__WEBPACK_IMPORTED_MODULE_0___default()({}, state, action.likes);
 
     case _actions_like_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_LIKE"]:
-      return lodash_merge__WEBPACK_IMPORTED_MODULE_0___default()({}, state, _defineProperty({}, action.like.photo_id, action.like));
+      // debugger;
+      return lodash_merge__WEBPACK_IMPORTED_MODULE_0___default()({}, state, _defineProperty({}, action.like.id, action.like));
+
+    case _actions_photo_actions__WEBPACK_IMPORTED_MODULE_2__["RECEIVE_PHOTO"]:
+      // debugger;
+      return lodash_merge__WEBPACK_IMPORTED_MODULE_0___default()({}, state, action.payload.likes);
 
     case _actions_like_actions__WEBPACK_IMPORTED_MODULE_1__["REMOVE_LIKE"]:
       var oldLikes = lodash_merge__WEBPACK_IMPORTED_MODULE_0___default()({}, state, _defineProperty({}, action.like.id, action.like));
@@ -2324,7 +2741,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_like_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/like_actions */ "./frontend/actions/like_actions.js");
 /* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/user_actions */ "./frontend/actions/user_actions.js");
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../actions/session_actions */ "./frontend/actions/session_actions.js");
+/* harmony import */ var _actions_comment_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../actions/comment_actions */ "./frontend/actions/comment_actions.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -2338,31 +2757,35 @@ var photosReducer = function photosReducer() {
   var action = arguments.length > 1 ? arguments[1] : undefined;
   Object.freeze(state);
   var nLikes;
-  var newState; // debugger;
+  var newState;
+  var nComments; // debugger;
 
   switch (action.type) {
     case _actions_photo_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_ALL_PHOTOS"]:
       return lodash_merge__WEBPACK_IMPORTED_MODULE_1___default()({}, state, action.photos);
 
     case _actions_photo_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_PHOTO"]:
+      // debugger;
       return lodash_merge__WEBPACK_IMPORTED_MODULE_1___default()({}, state, _defineProperty({}, action.payload.photo.id, action.payload.photo));
 
     case _actions_photo_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_PHOTO_UPLOAD"]:
       return state;
 
     case _actions_like_actions__WEBPACK_IMPORTED_MODULE_2__["RECEIVE_LIKE"]:
+      // debugger;
       newState = lodash_merge__WEBPACK_IMPORTED_MODULE_1___default()({}, state);
-      nLikes = state[action.like.photo_id].likes;
-      nLikes.push(action.like);
-      newState[action.like.photo_id].likes = nLikes;
+      nLikes = state[action.like.photo_id].like_ids;
+      nLikes.push(action.like.id);
+      newState[action.like.photo_id].like_ids = nLikes;
       return newState;
 
     case _actions_like_actions__WEBPACK_IMPORTED_MODULE_2__["REMOVE_LIKE"]:
-      var oLikes = state[action.like.photo_id].likes;
+      // debugger;
+      var oLikes = state[action.like.photo_id].like_ids;
       nLikes = [];
 
       for (var i = 0; i < oLikes.length; i++) {
-        if (oLikes[i].photographer_id !== action.like.photographer_id) {
+        if (oLikes[i] !== action.like.id) {
           nLikes.push(oLikes[i]);
         }
 
@@ -2371,7 +2794,7 @@ var photosReducer = function photosReducer() {
 
       ;
       newState = lodash_merge__WEBPACK_IMPORTED_MODULE_1___default()({}, state);
-      newState[action.like.photo_id].likes = nLikes;
+      newState[action.like.photo_id].like_ids = nLikes;
       return newState;
     // case RECEIVE_RESET_ERRORS:
     //     return [];
@@ -2393,6 +2816,13 @@ var photosReducer = function photosReducer() {
       } else {
         return action.user.photos;
       }
+
+    case _actions_comment_actions__WEBPACK_IMPORTED_MODULE_5__["RECEIVE_COMMENT"]:
+      newState = lodash_merge__WEBPACK_IMPORTED_MODULE_1___default()({}, state);
+      nComments = state[action.comment.photograph_id].comment_ids;
+      nComments.push(action.comment.id);
+      newState[action.comment.photograph_id].comment_ids = nComments;
+      return newState;
 
     default:
       return state;
@@ -2434,16 +2864,39 @@ __webpack_require__.r(__webpack_exports__);
 /*!****************************************!*\
   !*** ./frontend/reducers/selectors.js ***!
   \****************************************/
-/*! exports provided: fetchProfilePhotos */
+/*! exports provided: fetchProfilePhotos, fetchPhotoLikes, fetchPhotoComments */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchProfilePhotos", function() { return fetchProfilePhotos; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchPhotoLikes", function() { return fetchPhotoLikes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchPhotoComments", function() { return fetchPhotoComments; });
 var fetchProfilePhotos = function fetchProfilePhotos(state, user) {
-  // debugger;
+  if (!user) {
+    return [];
+  }
+
+  ;
   return user.photo_ids ? user.photo_ids.map(function (id) {
     return state.entities.photos[id];
+  }) : [];
+};
+var fetchPhotoLikes = function fetchPhotoLikes(state, photo) {
+  var photoLikes;
+
+  if (photo.like_ids.length > 0) {
+    photoLikes = photo.like_ids.map(function (id) {
+      return state.entities.likes[id];
+    });
+  }
+
+  return photoLikes;
+};
+var fetchPhotoComments = function fetchPhotoComments(state, photo) {
+  // debugger;
+  return photo.comment_ids ? photo.comment_ids.map(function (id) {
+    return state.entities.comments[id];
   }) : [];
 };
 
@@ -2560,6 +3013,35 @@ var configureStore = function configureStore() {
 
 /***/ }),
 
+/***/ "./frontend/util/comment_api_util.js":
+/*!*******************************************!*\
+  !*** ./frontend/util/comment_api_util.js ***!
+  \*******************************************/
+/*! exports provided: fetchComments, createComment */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchComments", function() { return fetchComments; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createComment", function() { return createComment; });
+var fetchComments = function fetchComments() {
+  return $.ajax({
+    method: 'get',
+    url: '/api/comments'
+  });
+};
+var createComment = function createComment(comment) {
+  return $.ajax({
+    method: 'post',
+    url: '/api/comments',
+    data: {
+      comment: comment
+    }
+  });
+};
+
+/***/ }),
+
 /***/ "./frontend/util/like_api_util.js":
 /*!****************************************!*\
   !*** ./frontend/util/like_api_util.js ***!
@@ -2644,13 +3126,14 @@ var createPhoto = function createPhoto(formData) {
 /*!**************************************!*\
   !*** ./frontend/util/route_util.jsx ***!
   \**************************************/
-/*! exports provided: AuthRoute, ProtectedRoute */
+/*! exports provided: AuthRoute, ProtectedRoute, CommentProtectedRoute */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AuthRoute", function() { return AuthRoute; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProtectedRoute", function() { return ProtectedRoute; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CommentProtectedRoute", function() { return CommentProtectedRoute; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
@@ -2684,10 +3167,20 @@ var Protected = function Protected(_ref) {
   });
 };
 
-var Auth = function Auth(_ref2) {
+var CommentProtected = function CommentProtected(_ref2) {
   var loggedIn = _ref2.loggedIn,
-      path = _ref2.path,
       Component = _ref2.component;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+    render: function render(props) {
+      return loggedIn ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Component, props) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
+    }
+  });
+};
+
+var Auth = function Auth(_ref3) {
+  var loggedIn = _ref3.loggedIn,
+      path = _ref3.path,
+      Component = _ref3.component;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     path: path,
     render: function render(props) {
@@ -2700,6 +3193,7 @@ var Auth = function Auth(_ref2) {
 
 var AuthRoute = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(msp)(Auth));
 var ProtectedRoute = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(msp)(Protected));
+var CommentProtectedRoute = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(msp)(CommentProtected));
 
 /***/ }),
 

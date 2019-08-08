@@ -18,6 +18,12 @@ const Protected =({ loggedIn, path, component: Component}) => (
         render={props => (loggedIn ? <Component {...props} /> : <Redirect to='/signup'/>)}
     />
 );
+
+const CommentProtected =({ loggedIn, component: Component}) => (
+    <Route 
+        render={props => (loggedIn ? <Component {...props} /> : <div/>)}
+    />
+);
  
 const Auth = ({ loggedIn, path, component: Component }) => (
     <Route 
@@ -28,3 +34,4 @@ const Auth = ({ loggedIn, path, component: Component }) => (
 
 export const AuthRoute = withRouter(connect(msp)(Auth));
 export const ProtectedRoute = withRouter(connect(msp)(Protected))
+export const CommentProtectedRoute = withRouter(connect(msp)(CommentProtected))

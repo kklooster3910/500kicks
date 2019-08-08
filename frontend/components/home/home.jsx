@@ -18,7 +18,8 @@ class Home extends React.Component {
     
     handleClick (e) {
         e.preventDefault();
-        this.props.demoLogin(this.props.demoUser).then(alert('Demo User Logged In - try uploading a photo!'))
+        this.props.demoLogin(this.props.demoUser)
+        // .then(alert('Demo User Logged In - try uploading a photo!'))
     }
 
     render() {

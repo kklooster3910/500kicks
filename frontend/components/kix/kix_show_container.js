@@ -11,17 +11,18 @@ import { fetchLikes, removeLike, createLike } from '../../actions/like_actions'
 const msp = (state, ownProps) => {
     // debugger
 
-    let photoLikes;
-    if (state.entities.photos[ownProps.match.params.photoId]) {
-       photoLikes = state.entities.photos[ownProps.match.params.photoId].likes
-    } else {
-        photoLikes = []
-    }
+    // let photoLikes;
+    // if (state.entities.photos[ownProps.match.params.photoId]) {
+    //    photoLikes = state.entities.photos[ownProps.match.params.photoId].like_ids
+    // } else {
+    //     photoLikes = []
+    // }
 
+    // debugger;
     return {
         photo: state.entities.photos[ownProps.match.params.photoId],
-        photoLikes: photoLikes,
-        allLikes: state.entities.likes 
+        // photoLikes: photoLikes,
+        // allLikes: state.entities.likes 
     }
 
 }

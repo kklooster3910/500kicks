@@ -12,11 +12,11 @@
 class Like < ApplicationRecord
     validates :photographer_id, uniqueness: { scope: :photo_id }
 
-    belongs_to :photo, required: true,
+    belongs_to :photo,
         class_name: 'Photo',
         foreign_key: :photo_id,
         primary_key: :id
-    belongs_to :photographer, required: true,
+    belongs_to :photographer,
         class_name: 'User',
         foreign_key: :photographer_id,
         primary_key: :id
