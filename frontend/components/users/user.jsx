@@ -20,7 +20,9 @@ class UserProfile extends React.Component {
 
     render () {
         const cProfile = this.props.currentProfile
+        let possibleBannerPhoto;
         let kix;
+        let bannerImage;
         // debugger;
         if (!cProfile || !cProfile.photo_ids) {
             return null;
@@ -33,11 +35,16 @@ class UserProfile extends React.Component {
         } else {
             kix = <div></div>
         }
+        // debugger;
+        if ((this.props.photos.length > 0) && (possibleBannerPhoto === undefined)) {
+            possibleBannerPhoto = this.props.photos[Math.floor(Math.random() * this.props.photos.length)];
+            bannerImage = <img className='profile-banner-image' src={possibleBannerPhoto.image_url}/>
+        }
 
         return (
             <div className='users-profile-page-container'>
                 <div className='profile-banner-image-container'>
-                    {/* <img className='profile-banner-image' src={Object.values(cProfile.photos).first.image_url}/> //figure out how to select a user image if they have a pic */}
+                    {bannerImage}
                 </div>
                 <h4 className='profile-page-username'>{cProfile.username}</h4>
                 maybe Camera Info?: 'camera info here'
