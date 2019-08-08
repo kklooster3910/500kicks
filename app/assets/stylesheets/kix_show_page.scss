@@ -14,110 +14,182 @@
 //     content: '\2665';
 //     color: red;
 // }
-.kix-like-btn {
-    // font-family: 'Raleway', sans-serif; 
-    // width: 20px;
-    // height: 20px;
-    // border-radius: 50%;
-    // font-size: 12px;
-    // color: #CEECEF;
-    // line-height: 63px;
-    // text-align: center;
-    // background: #2C2F40;
-    // // position: absolute;
-    // // top: 90;
-    // // left: 1%;
-    // opacity: 0.4;
-    // transition: 0.8s;
+
+.kix-show-page-container {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    // flex-direction: row;
+    margin: auto;
+    align-items: center;
+    // width:
+    // align-content: center;
+    // transform: translate(-50%, -50%);
 }
 
-// .kix-like-btn :hover { opacity: 1.2 }
+.kix-like-btn {
+    background-color: #2C2F40;
+    padding: 9px;
+    text-align: center;
+    color: #CEECEF;
+    border: solid 2px;
+    border-color: #CEECEF;
+    border-radius: 26px;
+    font-size: 16px;
+    margin-left: 12px;
+    opacity: 1;
+    transition: 0.3s;
+    margin-top: 19px;
+}
+
+.kix-like-btn:hover { 
+    opacity: 0.7;
+    transform: scale(1.02)
+}
 
 // .kix-like-btn:before {
 //     content: '\2665';
 //     color: red;
 // }
 
+.kix-photo-info-container {
+    display: flex;
+    padding: 12px;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
 .kix-like-btn-container {
-    position: absolute;
-    top: 95%;
-    left: 57%;
+    // position: absolute;
+    // top: 95%;
+    // left: 57%;
     font-family: 'Raleway', sans-serif;
     font-size: 18px;
+    // width: 100%;
 }
 
 .kix-photo-description {
     font-family: 'Raleway', sans-serif;
-    position: absolute;
+    // position: absolute;
     font-size: 26px;
-    top: 107%;
-    left: 17%;
+    // top: 107%;
+    // left: 17%;
+    width: 100%;
 }
 
 
 
 .kix-upload-time {
     font-family: 'Raleway', sans-serif;
-    position: absolute;
+    // position: absolute;
     font-size: 22px;
-    top: 98%;
-    left: 16%;
+    // top: 98%;
+    // left: 16%;
+    width: 100%;
+    padding: 9px;
 }
 
 .kix-likes-count {
     font-family: 'Raleway', sans-serif;
-    position: absolute;
+    // position: absolute;
     font-size: 36px;
-    top: 94%;
-    left: 62%;
+    // top: 94%;
+    // left: 62%;
+    width: 100%;
 }
 
 .kix-photo-title {
     font-family: 'Raleway', sans-serif;
-    position: absolute;
-    font-size: 37px;
-    top: 94%;
-    left: 16%;
+    // position: absolute;
+    font-size: 39px;
+    padding: 9px;
+    // top: 94%;
+    // left: 16%;
+    width: 100%;
 }
 
 .kix-photographer-name {
     font-family: 'Raleway', sans-serif;
-    position: absolute;
+    // position: absolute;
     font-size: 21px;
-    top: 102%;
-    left: 16%;
+    // top: 102%;
+    // left: 16%;
+    width: 100%;
+    padding: 9px;
+}
+
+.kix-likes-count-and-button-container {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    margin-top: 42px;
+    // width: 100%;
+    justify-content: center;
+    font-family: 'Raleyway', sans-serif;
+    font-size: 26px;
+}
+
+.kix-photoinfo-and-comment-container {
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+    margin-top: 42px;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+// .kix-like-and-photo-info-container {
+//     padding: 20px;
+//     justify-content: center;
+//     text-align: center;
+//     // margin: auto;
+// }
+
+.comments-form {
+    padding: 20px;
+    // margin: auto;
 }
 
 .kix-image-container .kix-photo {
-    max-width: 640px;
-    max-height: 640px;
-    padding: 21px;
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    box-shadow: 9px 9px 26px 0px rgba(0, 200, 214, 0.3);
+    // position: absolute;
+    // transform: translate(-50%, -50%);
+    max-width: 700px;
+    max-height: 700px;
+    // height: auto;
+    // width: 100%;
+    // padding: 21px;
+    // margin: auto;
+    // top: 50%;
+    // left: 50%;
+    border-radius: 33px;
+    box-shadow: 16px 16px 33px 0px rgba(3, 3, 3, 0.3);
+    // width: 100%
+    // transform: translate(-50%, -50%);
 }
 
 //  weird shit happens with this .kix-photo:hover { transform: scale(1.03) }
 
 .possible-footer { // this is so I could scroll down on the show
     //page w/o having comments. need to fix.
-    position: absolute;
-    top: 150%
+    // position: absolute;
+    // top: 150%
 };
 
 .kix-image-container {
-    height: 663px;
+    height: auto;
     width: 100%;
-    position: relative;
+    // position: relative;
     align-content: center;
-    background: #CEECEF;
+    background: #404749;
     text-align: center;
-    display: inline-block;
-    vertical-align: middle;
-    box-shadow: 9px 9px 26px 0px rgba(0,0,0,0.3);
+    padding: 29px;
+    // display: inline-block;
+    // vertical-align: middle;
+    box-shadow: 29px 29px 54px 0px rgba(0, 0, 0, 0.3);
+    // width: 100%
+    // transform: translate(-50%, -50%);
+    justify-content: center;
 }
 
 
@@ -130,9 +202,9 @@
     line-height: 63px;
     text-align: center;
     background: #2C2F40;
-    position: absolute;
-    top: 14px;
-    left: 1%;
+    // position: absolute;
+    // top: 14px;
+    // left: 1%;
     opacity: 0.4;
     transition: 0.8s;
 }

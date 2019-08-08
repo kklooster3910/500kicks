@@ -71,14 +71,20 @@ class KixShow extends React.Component {
                     <Link to='/kix'><div className='discover-page-circle'>X</div></Link>
                     <img className='kix-photo'src={kix.image_url}/>
                 </div>
-                <h4 className='kix-photo-title'>{kix.title}</h4>
-                <h5 className='kix-photographer-name'>photo by: <Link to={`/users/${kix.photographer_id}`} >{kix.photographer}</Link></h5>
-                <div className='kix-likes-count'>Likes Count: {likesCount}</div>
-                <LikeButton />
-                <div className='kix-upload-time'>Uploaded at: {uploadedTime}</div>
-                <div className='kix-photo-description'>{kix.description}</div>
-                <Comments />
-                <div className='possible-footer'> oi. </div>
+                <div className='kix-photoinfo-and-comment-container'>
+                    <div className='kix-photo-info-container'>
+                        <h4 className='kix-photo-title'>{kix.title}</h4>
+                        <h5 className='kix-photographer-name'>photo by: <Link to={`/users/${kix.photographer_id}`} >{kix.photographer}</Link></h5>
+                        <div className='kix-photo-description'>{kix.description}</div>
+                        <div className='kix-upload-time'>Uploaded: {uploadedTime}</div>
+                    </div>
+                    <div className='kix-likes-count-and-button-container'>
+                        Likes: {likesCount}
+                        <LikeButton />
+                    </div>
+                    <Comments />
+                    {/* <div className='possible-footer'> oi. </div> */}
+                </div>
             </div>
         );
     };

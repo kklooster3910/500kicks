@@ -1,6 +1,52 @@
 .kix-comments-container {
-    position: absolute;
-    font-size: 26px;
-    top: 107%;
-    left: 17%; 
+    // position: absolute;
+    font-size: 21px;
+    // top: 105%;
+    // left: 57%; 
+    font-family: 'Raleway', sans-serif;
+    max-width: 470px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.kix-comments {
+    margin-top: 9px;
+}
+
+.kix-comment-box {
+    font: 'Raleway', sans-serif; 
+    font-size: 15px;
+    height: 82px;
+    width: 299px;
+    border-radius: 14px;
+    border: solid 2px;
+    border-color: #2C2F40;
+    box-shadow: 4px 4px 12px 1px rgba(0, 0, 0, 0.3);
+    margin-bottom: 16px;
+}
+
+.post-comment-btn {
+    background-color: #2C2F40;
+    padding: 9px;
+    text-align: center;
+    color: #CEECEF;
+    border: solid 2px;
+    border-color: #CEECEF;
+    border-radius: 26px;
+    font-size: 16px;
+    margin-left: 12px;
+    opacity: 1;
+    transition: 0.3s;
+}
+
+.post-comment-btn:hover {
+    opacity: 0.7;
+    transform: scale(1.02)
+}
+
+.kix-single-comment {
+    padding: 6px;
+    font-size: 18px;
 }

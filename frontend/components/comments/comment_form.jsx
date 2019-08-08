@@ -30,8 +30,8 @@ class CommentForm extends React.Component {
 
     render() { 
         return (
-            <form onSubmit={this.handleSubmit}>
-                <textarea className='kix-comment-box' onChange={this.update('body')} value={this.state.body} cols='30' rows='10'></textarea>
+            <form className='comments-form' onSubmit={this.handleSubmit}>
+                <textarea className='kix-comment-box' onChange={this.update('body')} value={this.state.body} cols='60' rows='2'></textarea>
                 <button className='post-comment-btn'>Post Comment</button>
             </form>
         ) 

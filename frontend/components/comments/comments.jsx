@@ -34,6 +34,7 @@ class Comments extends React.Component {
                 {/* <div className='kix-comment-errors'>{errors}</div> */}
                 <CommentProtectedRoute component={CommentForm} /> 
                 {/* <CommentForm /> */}
+                    Comments:
                     <ul className='kix-comments'>
                         {comments}
                     </ul>

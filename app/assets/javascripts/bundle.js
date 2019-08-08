@@ -681,13 +681,14 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        className: "comments-form",
         onSubmit: this.handleSubmit
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
         className: "kix-comment-box",
         onChange: this.update('body'),
         value: this.state.body,
-        cols: "30",
-        rows: "10"
+        cols: "60",
+        rows: "2"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "post-comment-btn"
       }, "Post Comment"));
@@ -798,7 +799,7 @@ function (_React$Component) {
         className: "kix-comments-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__["CommentProtectedRoute"], {
         component: _comment_form__WEBPACK_IMPORTED_MODULE_2__["default"]
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+      }), "Comments:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "kix-comments"
       }, comments));
     }
@@ -1272,21 +1273,23 @@ function (_React$Component) {
       }, "X")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: "kix-photo",
         src: kix.image_url
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "kix-photoinfo-and-comment-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "kix-photo-info-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
         className: "kix-photo-title"
       }, kix.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
         className: "kix-photographer-name"
       }, "photo by: ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
         to: "/users/".concat(kix.photographer_id)
       }, kix.photographer)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "kix-likes-count"
-      }, "Likes Count: ", likesCount), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_likes_like_button_container__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "kix-upload-time"
-      }, "Uploaded at: ", uploadedTime), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "kix-photo-description"
-      }, kix.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_comments_comment_container__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "possible-footer"
-      }, " oi. "));
+      }, kix.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "kix-upload-time"
+      }, "Uploaded: ", uploadedTime)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "kix-likes-count-and-button-container"
+      }, "Likes: ", likesCount, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_likes_like_button_container__WEBPACK_IMPORTED_MODULE_3__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_comments_comment_container__WEBPACK_IMPORTED_MODULE_4__["default"], null)));
     }
   }]);
 
@@ -1420,8 +1423,8 @@ function (_React$Component) {
       var likedButton; // debugger;
 
       if (!this.props.currentUser) {
-        likedButton = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "kix-lik-btn",
+        likedButton = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          className: "kix-like-btn",
           onClick: function onClick() {
             return alert('Please Login to Like a Photo');
           }
@@ -1433,8 +1436,8 @@ function (_React$Component) {
           var _loop = function _loop(i) {
             // debugger;             
             if (that.photoLikes[i].photographer_id === that.currentUser) {
-              likedButton = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-                className: "kix-lik-btn",
+              likedButton = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+                className: "kix-like-btn",
                 onClick: function onClick() {
                   return that.removeLike(that.photoLikes[i].id);
                 }
@@ -1450,8 +1453,8 @@ function (_React$Component) {
           }
 
           if (likedButton === undefined) {
-            likedButton = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-              className: "kix-lik-btn",
+            likedButton = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+              className: "kix-like-btn",
               onClick: function onClick() {
                 return _this.props.createLike({
                   photo_id: _this.props.photo.id,
