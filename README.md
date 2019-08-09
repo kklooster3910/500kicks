@@ -6,7 +6,7 @@ application up and running.
 Things you may want to cover:
 
 * Ruby version
-   ![Home Page][pic1]
+   ![Home Page](./pic1.png)
     <!-- Format: ![Alt Text](url) -->
 * System dependencies
 
