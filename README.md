@@ -38,25 +38,25 @@ end
 
 ### Photo Upload
 
-![Home Page](./pic2png)
+![Home Page](./pic2.png)
 
 Images are stored in the AWS database after a user uploads them from a local machine. Images have a photographer_id in the database to link them to a user/uploader. Users have the ability to upload photos from their local machines and they will be stored in my AWS bucket to hold the images. There is an image preview available before you actually upload the image.
 
 ### Discover Page
 
-![Home Page](./pic3png)
+![Home Page](./pic3.png)
 
 Users can view all the popular photos and all the photos uploaded from the discover page. I fet all the photos from the datbase that are to be displayed on the discover page. Filter options and infinite scroll coming soon, these two features will take me past the span of two weeks.
 
 ### Photo Show/Comments/Like
 
-![Home Page](./pic5png)
+![Home Page](./pic5.png)
 
 Each photo has the ability to be liked and commented on. In my model associations I create these by having a photo that has many likes and has many comments with the correlating belongs to relationships. The likes and comments component are protected routes and are only available when logged in, although you can see the comments and likes count while not being logged in.  
 
 ### Profile Page
 
-![Home Page](./pic4png)
+![Home Page](./pic4.png)
 
 A user has a profile page, when I make an ajax request to fetch the user, I also grab their photos from the backend with the same query. The profile page has all the users photos they have uploaded as well a banner image that chooses a photo a user has uploaded at random, or a gray banner if they've uploading nothing. User's camera information is also displayed here.
 
