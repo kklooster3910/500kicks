@@ -6,7 +6,7 @@ application up and running.
 Things you may want to cover:
 
 * Ruby version
-    app/assets/images/Screenshot from 2019-08-09 14-23-17.png
+   ![Home Page](./app/assets/images/pic1)
 * System dependencies
 
 * Configuration
