@@ -776,14 +776,12 @@ function (_React$Component) {
   }
 
   _createClass(Comments, [{
-    key: "handleSubmit",
-    value: function handleSubmit(e) {}
-  }, {
-    key: "update",
-    value: function update(field) {// console.log(this.state)
-    }
-  }, {
     key: "render",
+    // handleSubmit(e) {
+    // }
+    // update(field) {
+    //     // console.log(this.state)
+    // } 
     value: function render() {
       var comments = this.props.photoComments.map(function (comment) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
@@ -2430,14 +2428,21 @@ function (_React$Component) {
   _inherits(UserProfile, _React$Component);
 
   function UserProfile(props) {
+    var _this;
+
     _classCallCheck(this, UserProfile);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(UserProfile).call(this, props));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(UserProfile).call(this, props)); // this.state = { possibleBannerPhoto: undefined }
+
+    _this.possibleBannerPhoto = null;
+    _this.bannerImage = null;
+    return _this;
   }
 
   _createClass(UserProfile, [{
     key: "componentDidMount",
     value: function componentDidMount() {
+      // possibleBannerPhoto = undefined;
       this.props.fetchUser(this.props.match.params.userId);
       this.props.resetErrors();
     }
@@ -2453,14 +2458,14 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var cProfile = this.props.currentProfile;
-      var possibleBannerPhoto;
-      var kix;
-      var bannerImage; // debugger;
+      var cProfile = this.props.currentProfile; // let possibleBannerPhoto = undefined;
+
+      var kix; // let bannerImage;
+      // debugger;
 
       if (!cProfile || !cProfile.photo_ids) {
         return null;
-      } // debugger;
+      } // debugger; 
 
 
       if (cProfile.photo_ids.length > 0) {
@@ -2475,19 +2480,20 @@ function (_React$Component) {
       } // debugger;
 
 
-      if (this.props.photos.length > 0 && possibleBannerPhoto === undefined) {
-        possibleBannerPhoto = this.props.photos[Math.floor(Math.random() * this.props.photos.length)];
-        bannerImage = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+      if (this.props.photos.length > 0 && !this.possibleBannerPhoto) {
+        this.possibleBannerPhoto = this.props.photos[Math.floor(Math.random() * this.props.photos.length)];
+        this.bannerImage = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
           className: "profile-banner-image",
-          src: possibleBannerPhoto.image_url
+          src: this.possibleBannerPhoto.image_url
         });
       }
 
+      console.log(this.bannerImage);
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "users-profile-page-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "profile-banner-image-container"
-      }, bannerImage), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, this.bannerImage), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "profile-username-info-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
         className: "profile-page-username"
@@ -2832,7 +2838,7 @@ var photosReducer = function photosReducer() {
       if (action.payload.photos === undefined) {
         return state;
       } else {
-        return action.payload.photos;
+        return lodash_merge__WEBPACK_IMPORTED_MODULE_1___default()({}, state, action.payload.photos);
       }
 
     // return action.payload.photos;

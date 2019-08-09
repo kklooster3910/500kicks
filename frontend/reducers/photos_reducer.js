@@ -46,7 +46,7 @@ const photosReducer = (state = {}, action) => {
             if (action.payload.photos === undefined) {
                 return state;
             } else {
-                return action.payload.photos
+                return merge({}, state, action.payload.photos)
             }
             // return action.payload.photos;
             // return merge({}, state, { [action.payload.user.id]: action.payload.user })

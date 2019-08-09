@@ -4,10 +4,14 @@ import KixIndexItem from '../kix/kix_index_item'
 
 class UserProfile extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
+        // this.state = { possibleBannerPhoto: undefined }
+        this.possibleBannerPhoto = null;
+        this.bannerImage = null;
     };
 
     componentDidMount() {
+        // possibleBannerPhoto = undefined;
         this.props.fetchUser(this.props.match.params.userId)
         this.props.resetErrors();
     }
@@ -20,14 +24,14 @@ class UserProfile extends React.Component {
 
     render () {
         const cProfile = this.props.currentProfile
-        let possibleBannerPhoto;
+        // let possibleBannerPhoto = undefined;
         let kix;
-        let bannerImage;
+        // let bannerImage;
         // debugger;
         if (!cProfile || !cProfile.photo_ids) {
             return null;
         }
-        // debugger;
+        // debugger; 
         if (cProfile.photo_ids.length > 0) {
             kix = this.props.photos.map( photo => (
                 <KixIndexItem key={photo.id} photo={photo} />
@@ -36,15 +40,16 @@ class UserProfile extends React.Component {
             kix = <div></div>
         }
         // debugger;
-        if ((this.props.photos.length > 0) && (possibleBannerPhoto === undefined)) {
-            possibleBannerPhoto = this.props.photos[Math.floor(Math.random() * this.props.photos.length)];
-            bannerImage = <img className='profile-banner-image' src={possibleBannerPhoto.image_url}/>
+        
+        if ((this.props.photos.length > 0) && (!this.possibleBannerPhoto)) {
+            this.possibleBannerPhoto = this.props.photos[Math.floor(Math.random() * this.props.photos.length)];
+            this.bannerImage = <img className='profile-banner-image' src={this.possibleBannerPhoto.image_url}/>
         }
-
+        console.log(this.bannerImage)
         return (
             <div className='users-profile-page-container'>
                 <div className='profile-banner-image-container'>
-                    {bannerImage}
+                    {this.bannerImage}
                 </div>
                 <div className='profile-username-info-container'> 
                     <h4 className='profile-page-username'>{cProfile.username}</h4>

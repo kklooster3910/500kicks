@@ -11,14 +11,14 @@ class Comments extends React.Component {
     
     };
 
-    handleSubmit(e) {
+    // handleSubmit(e) {
 
-    }
+    // }
 
-    update(field) {
-        // console.log(this.state)
+    // update(field) {
+    //     // console.log(this.state)
   
-    } 
+    // } 
 
     render () {
         let comments = this.props.photoComments.map( comment => (
