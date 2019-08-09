@@ -51,11 +51,14 @@ class UserProfile extends React.Component {
                     <div className='camera-info-container'>
                         <i className="fas fa-camera-retro camera"></i>
                         <div className='camera'>Nikon D850</div>
+                        <div className='camera-info'>500mm ƒ/7.1 1/80s ISO 100</div>
                     </div>
                 </div>
                 <div className='profile-gallery'>
                     {kix}
                 </div>
+
+                <div className='maybe-footer'>oi.</div>
             </div>
         )
     }

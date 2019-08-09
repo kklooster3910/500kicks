@@ -2072,6 +2072,8 @@ function (_React$Component) {
 
       return function (e) {
         _this3.setState(_defineProperty({}, field, e.target.value));
+
+        _this3.props.resetErrors();
       };
     }
   }, {
@@ -2239,6 +2241,8 @@ function (_React$Component) {
 
       return function (e) {
         _this2.setState(_defineProperty({}, field, e.target.value));
+
+        _this2.props.resetErrors();
       };
     }
   }, {
@@ -2493,9 +2497,13 @@ function (_React$Component) {
         className: "fas fa-camera-retro camera"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "camera"
-      }, "Nikon D850"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Nikon D850"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "camera-info"
+      }, "500mm \u0192/7.1 1/80s ISO 100"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "profile-gallery"
-      }, kix));
+      }, kix), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "maybe-footer"
+      }, "oi."));
     }
   }]);
 

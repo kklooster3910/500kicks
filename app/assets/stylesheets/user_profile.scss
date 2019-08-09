@@ -47,7 +47,7 @@
     padding: 13px;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-evenly;
     width: 100%;
     margin-top: 50px;
 }
@@ -63,7 +63,7 @@
 }
 
 .profile-gallery {
-    margin-top: 310px;
+    margin-top: 220px;
     line-height: 0;
     -webkit-column-count: 3;
     -webkit-column-gap: 0px;
@@ -71,4 +71,8 @@
     -moz-column-gap: 0px;
     column-count: 3;
     column-gap: 0px;
+}
+
+.maybe-footer {
+    margin-top: 75px;
 }
