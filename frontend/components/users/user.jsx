@@ -47,7 +47,7 @@ class UserProfile extends React.Component {
             this.possibleBannerPhoto = this.props.photos[Math.floor(Math.random() * this.props.photos.length)];
             this.bannerImage = <img className='profile-banner-image' src={this.possibleBannerPhoto.image_url}/>
         }
-        console.log(this.bannerImage)
+        // console.log(this.bannerImage)
         return (
             <div className='users-profile-page-container'>
                 <div className='profile-banner-image-container'>

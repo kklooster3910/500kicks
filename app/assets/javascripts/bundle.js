@@ -2488,9 +2488,9 @@ function (_React$Component) {
           className: "profile-banner-image",
           src: this.possibleBannerPhoto.image_url
         });
-      }
+      } // console.log(this.bannerImage)
 
-      console.log(this.bannerImage);
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "users-profile-page-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
