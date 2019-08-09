@@ -6,7 +6,7 @@ application up and running.
 Things you may want to cover:
 
 * Ruby version
-   ![Home Page](./images/pic1)
+   ![Home Page](images/pic1)
 * System dependencies
 
 * Configuration
