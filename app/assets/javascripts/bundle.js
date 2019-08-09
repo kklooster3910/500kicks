@@ -1136,9 +1136,7 @@ var KixIndexItem = function KixIndexItem(_ref) {
     className: "kix-index-image-container"
   }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
     className: "kix-index-image-title"
-  }, photo.title, " ", photo.photographer), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
-    className: "kix-index-image-title"
-  }), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("img", {
+  }, photo.title, " ", photo.photographer), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("img", {
     className: "kix-index-item-image",
     src: photo.image_url
   })))));
@@ -2485,9 +2483,17 @@ function (_React$Component) {
         className: "users-profile-page-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "profile-banner-image-container"
-      }, bannerImage), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+      }, bannerImage), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "profile-username-info-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
         className: "profile-page-username"
-      }, cProfile.username), "maybe Camera Info?: 'camera info here'", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, cProfile.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "camera-info-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-camera-retro camera"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "camera"
+      }, "Nikon D850"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "profile-gallery"
       }, kix));
     }

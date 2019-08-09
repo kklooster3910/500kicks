@@ -11,9 +11,10 @@ export const KixIndexItem = ({ photo }) => {
         <div className='kix-index-item-image-container'>
             <Link to={`/kix/${photo.id}`}><div className='kix-index-item' key={photo.id}>
                 <div className='kix-index-image-container'>
-                    <div className='kix-index-image-title'>{photo.title} {photo.photographer}</div>
-                    <div className='kix-index-image-title'></div>
-                    
+                    {/* <div className='kix-index-image-and-photo-container'> */}
+                        <div className='kix-index-image-title'>{photo.title} {photo.photographer}</div>
+                        {/* <div className='kix-index-image-photographer'></div> */}
+                    {/* </div> */}
                     {/* <span className='kix-index-image-photographer'></span> */}
                     <img className='kix-index-item-image' src={photo.image_url} />
                 </div>

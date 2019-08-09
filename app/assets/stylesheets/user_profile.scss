@@ -1,45 +1,74 @@
 .users-profile-page-container {
-
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    margin: auto;
+    align-items: center;
 }
 
 .profile-banner-image-container {
-    height: 663px;
+    height: auto;
     width: 100%;
-    position: relative;
     align-content: center;
     background: #404749;
     text-align: center;
-    display: inline-block;
-    vertical-align: middle;
-    box-shadow: 9px 9px 26px 0px rgba(0,0,0,0.3);
+    padding: 29px;
+    box-shadow: 29px 29px 54px 0px rgba(0, 0, 0, 0.3);
+    justify-content: center;
+    min-height: 350px;
+    // height: 663px;
+    // width: 100%;
+    // position: relative;
+    // align-content: center;
+    // background: #404749;
+    // text-align: center;
+    // display: inline-block;
+    // vertical-align: middle;
+    // box-shadow: 9px 9px 26px 0px rgba(0,0,0,0.3);
 }
 
 .profile-banner-image-container .profile-banner-image {
-    max-width: 640px;
-    max-height: 640px;
-    padding: 21px;
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    box-shadow: 9px 9px 26px 0px rgba(0, 200, 214, 0.3);
+    max-width: 1000px;
+    max-height: 700px;
+    border-radius: 33px;
+    box-shadow: 16px 16px 33px 0px rgba(3, 3, 3, 0.3);
+    // padding: 21px;
+    // // margin: 0;
+    // position: absolute;
+    // top: 50%;
+    // left: 50%;
+    // transform: translate(-50%, -50%);
+    // box-shadow: 9px 9px 26px 0px rgba(0, 200, 214, 0.3);
+}
+
+.profile-username-info-container {
+    font-family: 'Raleway', sans-serif;
+    font-size: 29px;
+    padding: 13px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+    margin-top: 50px;
 }
 
 .profile-page-username {
+  
+}
+
+.camera-info-container {
     font-family: 'Raleway', sans-serif;
-    position: absolute;
     font-size: 21px;
-    top: 102%;
-    left: 16%;
+    padding: 9px;
 }
 
 .profile-gallery {
+    margin-top: 310px;
     line-height: 0;
     -webkit-column-count: 3;
     -webkit-column-gap: 0px;
     -moz-colummn-count: 4;
     -moz-column-gap: 0px;
-    column-count: 4;
+    column-count: 3;
     column-gap: 0px;
 }

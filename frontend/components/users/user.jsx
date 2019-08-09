@@ -46,8 +46,13 @@ class UserProfile extends React.Component {
                 <div className='profile-banner-image-container'>
                     {bannerImage}
                 </div>
-                <h4 className='profile-page-username'>{cProfile.username}</h4>
-                maybe Camera Info?: 'camera info here'
+                <div className='profile-username-info-container'> 
+                    <h4 className='profile-page-username'>{cProfile.username}</h4>
+                    <div className='camera-info-container'>
+                        <i className="fas fa-camera-retro camera"></i>
+                        <div className='camera'>Nikon D850</div>
+                    </div>
+                </div>
                 <div className='profile-gallery'>
                     {kix}
                 </div>
