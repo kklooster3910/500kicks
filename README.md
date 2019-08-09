@@ -7,6 +7,7 @@ Things you may want to cover:
 
 * Ruby version
    ![Home Page](images/pic1)
+    Format: ![Alt Text](url)
 * System dependencies
 
 * Configuration
