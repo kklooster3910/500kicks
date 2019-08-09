@@ -18,6 +18,8 @@ class UserProfile extends React.Component {
 
     componentDidUpdate(prevProps) {
         if(this.props.match.params.userId !== prevProps.match.params.userId) {
+            this.bannerImage = null;
+            this.possibleBannerPhoto = null
             this.props.fetchUser(this.props.match.params.userId)
         };
     }
