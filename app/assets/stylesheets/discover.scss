@@ -9,8 +9,9 @@
     -webkit-column-gap: 0px;
     -moz-colummn-count: 4;
     -moz-column-gap: 0px;
-    column-count: 3;
-    column-gap: 0px;
+    column-count: 0;
+    column-gap: 15px;
+    margin-top: 12px;
 }
 
 .kix-index-item-image-container {
@@ -29,7 +30,7 @@
     // width: 100%;
     // height: auto;
     // line-height: 0;
-    padding: 19px;
+    padding: 16px;
 }
 
 .kix-index-item-image {
