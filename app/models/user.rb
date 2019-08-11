@@ -31,8 +31,7 @@ class User < ApplicationRecord
         foreign_key: :commentor_id
 
     def self.find_by_credentials(username, password)
-        # debugger
-        # fail
+
         user = User.find_by(username: username) || User.find_by(email: username) 
         # if user.nil?
         #     user = User.find_by(email: username)

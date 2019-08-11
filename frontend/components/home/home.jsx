@@ -10,7 +10,6 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
-        // console.log(this.props.currentUser);
         if (this.props.currentUser) {
             this.props.fetchUser(this.props.currentUser)
         }

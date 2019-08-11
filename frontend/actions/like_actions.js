@@ -33,8 +33,3 @@ export const removeLike = id => dispatch => (
             err => dispatch({ type: RECEIVE_LIKE_ERRORS, errors: err.responseJSON})
     ))
 );
-
-
-window.fetchLikes = fetchLikes;
-window.createLike = createLike;
-window.removeLike = removeLike;

@@ -7,5 +7,3 @@ export const fetchUser = id => dispatch => {
         return dispatch({type: RECEIVE_USER_PROFILE, payload: payload})
     })
 }
-
-window.fetchUser = fetchUser

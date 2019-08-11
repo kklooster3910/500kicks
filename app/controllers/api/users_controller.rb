@@ -1,8 +1,6 @@
 class Api::UsersController < ApplicationController 
     def create
         @user = User.new(user_params)
-        # debugger
-        # fail
         if @user.save
             login(@user)
             render :show
@@ -15,10 +13,6 @@ class Api::UsersController < ApplicationController
         @user = User.includes(:photos).find(params[:id])
         render :show
     end    
-
-    # def destroy -- maybe implement this at some point in the future
-
-    # end
 
     private
 

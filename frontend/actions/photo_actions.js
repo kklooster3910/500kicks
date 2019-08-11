@@ -24,16 +24,10 @@ export const fetchPhoto = id => dispatch => {
 };
 
 export const createPhoto = formData => dispatch => {
-    // debugger;
     return APIReq.createPhoto(formData).then( payload => {
-        // debugger;
         return dispatch({type: RECEIVE_PHOTO_UPLOAD, payload})},
           err => {
-            //   debugger
             return dispatch({ type: RECEIVE_CREATE_PHOTO_ERRORS, errors: err.responseJSON })
         }  
     );
 };
-
-window.fetchPhotos = fetchPhotos;
-window.fetchPhoto = fetchPhoto

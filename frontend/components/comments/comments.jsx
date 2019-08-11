@@ -15,11 +15,6 @@ class Comments extends React.Component {
 
     // }
 
-    // update(field) {
-    //     // console.log(this.state)
-  
-    // } 
-
     render () {
         let comments = this.props.photoComments.map( comment => (
             <li key={comment.id} className='kix-single-comment'>{comment.body}</li>

@@ -62,9 +62,7 @@ class KixShow extends React.Component {
 
         let uploadedTime = kix.created_at
         uploadedTime = uploadedTime.split(':')[0].split('T')[0]
-        // debugger;
-        // console.log(uploadedTime) 
-        // debugger;  
+
         return (
             <div className='kix-show-page-container'>
                 <div className='kix-image-container'>

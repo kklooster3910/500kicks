@@ -39,7 +39,3 @@ export const logout = () => dispatch => (
         err => (dispatch({ type: RECEIVE_SESSION_ERRORS, errors: err.responseJSON }))
     )
 )
-
-window.signup = signup
-window.login = login
-window.logout = logout
