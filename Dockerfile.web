@@ -8,7 +8,6 @@ RUN apk add --no-cache --update build-base \
   nodejs \
   tzdata
 
-
 # environment vars must be included in our dockerfile
 ARG DATABASE_URL="postgres://postgres@db"
 ARG RAILS_ENV=production
