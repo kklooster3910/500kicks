@@ -17,3 +17,4 @@ RUN npm install --silent
 
 # Start application
 CMD ["npm", "start"]
+# CMD ["npm", "run", "postinstall"]

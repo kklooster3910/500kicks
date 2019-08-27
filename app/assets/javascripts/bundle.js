@@ -125,7 +125,6 @@ document.addEventListener('DOMContentLoaded', function () {
   ;
   delete window.currentUser;
   var dispatchedStore = Object(_store_store__WEBPACK_IMPORTED_MODULE_2__["default"])(preloadedState);
-  window.store = dispatchedStore;
   react_dom__WEBPACK_IMPORTED_MODULE_0___default.a.render(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_root__WEBPACK_IMPORTED_MODULE_3__["default"], {
     store: dispatchedStore
   }), root);
@@ -156,8 +155,6 @@ var RECEIVE_COMMENT = 'RECEIVE_COMMENT';
 var RECEIVE_ALL_COMMENTS = 'RECEIVE_ALL_COMMENTS';
 var RECEIVE_COMMENT_ERRORS = 'RECEIVE_COMMENT_ERRORS';
 var resetErrors = function resetErrors() {
-  // do I need to export
-  //or have this in every action file? wtf ken
   return {
     type: RECEIVE_RESET_ERRORS
   };
@@ -192,8 +189,6 @@ var createComment = function createComment(comment) {
     });
   };
 };
-window.fetchComments = fetchComments;
-window.createComment = createComment;
 
 /***/ }),
 
@@ -274,9 +269,6 @@ var removeLike = function removeLike(id) {
     });
   };
 };
-window.fetchLikes = fetchLikes;
-window.createLike = createLike;
-window.removeLike = removeLike;
 
 /***/ }),
 
@@ -332,15 +324,12 @@ var fetchPhoto = function fetchPhoto(id) {
 };
 var createPhoto = function createPhoto(formData) {
   return function (dispatch) {
-    // debugger;
     return _util_photo_api_util__WEBPACK_IMPORTED_MODULE_0__["createPhoto"](formData).then(function (payload) {
-      // debugger;
       return dispatch({
         type: RECEIVE_PHOTO_UPLOAD,
         payload: payload
       });
     }, function (err) {
-      //   debugger
       return dispatch({
         type: RECEIVE_CREATE_PHOTO_ERRORS,
         errors: err.responseJSON
@@ -348,8 +337,6 @@ var createPhoto = function createPhoto(formData) {
     });
   };
 };
-window.fetchPhotos = fetchPhotos;
-window.fetchPhoto = fetchPhoto;
 
 /***/ }),
 
@@ -432,9 +419,6 @@ var logout = function logout() {
     });
   };
 };
-window.signup = signup;
-window.login = login;
-window.logout = logout;
 
 /***/ }),
 
@@ -462,7 +446,6 @@ var fetchUser = function fetchUser(id) {
     });
   };
 };
-window.fetchUser = fetchUser;
 
 /***/ }),
 
@@ -779,9 +762,6 @@ function (_React$Component) {
     key: "render",
     // handleSubmit(e) {
     // }
-    // update(field) {
-    //     // console.log(this.state)
-    // } 
     value: function render() {
       var comments = this.props.photoComments.map(function (comment) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
@@ -866,7 +846,6 @@ function (_React$Component) {
   _createClass(Home, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      // console.log(this.props.currentUser);
       if (this.props.currentUser) {
         this.props.fetchUser(this.props.currentUser);
       }
@@ -1254,10 +1233,7 @@ function (_React$Component) {
       // /> 
 
       var uploadedTime = kix.created_at;
-      uploadedTime = uploadedTime.split(':')[0].split('T')[0]; // debugger;
-      // console.log(uploadedTime) 
-      // debugger;  
-
+      uploadedTime = uploadedTime.split(':')[0].split('T')[0];
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "kix-show-page-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2488,8 +2464,7 @@ function (_React$Component) {
           className: "profile-banner-image",
           src: this.possibleBannerPhoto.image_url
         });
-      } // console.log(this.bannerImage)
-
+      }
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "users-profile-page-container"
