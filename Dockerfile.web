@@ -18,7 +18,8 @@ COPY Gemfile /myapp/Gemfile
 COPY Gemfile.lock /myapp/Gemfile.lock
 # We gem install bundler for a specific issue with bundler 2.0
 # then we can bundle install
-RUN gem install bundler && bundle install
+ENV BUNDLER_VERSION 2.0.2
+RUN gem install bundler -v 2.0.2 && bundle install
 COPY . /myapp
 
 # Add a script to be executed every time the container starts.
