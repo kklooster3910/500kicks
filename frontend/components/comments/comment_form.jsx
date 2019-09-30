@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router'
+import { withRouter } from 'react-router';
+import { createComment } from '../../actions/comment_actions';
 
 class CommentForm extends React.Component {
     constructor(props) {
