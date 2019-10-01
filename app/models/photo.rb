@@ -27,3 +27,4 @@ class Photo < ApplicationRecord
         primary_key: :id
     has_one_attached :photo
 end
+
