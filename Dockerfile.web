@@ -11,7 +11,6 @@ RUN apk add --no-cache --update build-base \
 # environment vars must be included in our dockerfile
 ARG DATABASE_URL="postgres://postgres@db"
 ARG RAILS_ENV=production
-
 # copy over our Gemfile
 WORKDIR /myapp
 COPY Gemfile /myapp/Gemfile
@@ -25,7 +24,7 @@ COPY . /myapp
 # Add a script to be executed every time the container starts.
 COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
-
+RUN bundle exec rails assets:precompile && rm -rf /app/tmp/cache/assets
 EXPOSE 3000
 
 # Start the main process.
