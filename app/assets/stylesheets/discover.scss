@@ -12,6 +12,7 @@
     column-count: 0;
     column-gap: 15px;
     margin-top: 12px;
+    padding: 12px;
 }
 
 .kix-index-item-image-container {
@@ -22,7 +23,7 @@
     // max-height: 450px;
 }
 
-.kix-index-item-image-container:hover { transform: scale(1.03) }
+.kix-index-item-image-container:hover { transform: scale(1) }
 
 .kix-index-item-image-container:hover .kix-index-image-title { opacity: 1 }
 
