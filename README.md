@@ -2,6 +2,8 @@
 
 https://f500kicks.herokuapp.com/
 
+#### Technologies: Rails, React, Redux, Postgres SQL, AWS
+
 500kicks is a picture sharing website for photographers to upload pictures, it's a clone of 500px with a themed twist. The theme is that all the photos are images or shoes, or footware.
 
 ![Home Page](./pic1.png)
